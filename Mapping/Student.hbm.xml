@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <!--assembly="ProjectPortal"
+  namespace="ProjectPortal.App_Code">-->
+
+  <!-- more mapping info here -->
+  <joined-subclass name="Student, App_Code" table="STUDENT" extends="UserAccount">
+    <key column="USERID" />
+    <property name="ROLE" />
+    
+    <property name="FIRSTNAME" />
+    
+  </joined-subclass>
+</hibernate-mapping>

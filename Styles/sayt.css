@@ -1,0 +1,55 @@
+#searchResultCanvas {
+     z-index: 1000;
+	 right: 7px;
+	 width: 204px;
+}
+
+ #searchResultCanvas_course {
+     z-index: 1000;
+	 right: 7px;
+	 width: 209px;
+}
+
+#searchResultCanvas .murdoch_sayt,  #searchResultCanvas_course .murdoch_sayt{	
+	border: 1px solid #cfcfcf;
+	background-color: #ffffff;
+	width: 204px;
+	padding: 0px;
+	position: absolute;
+	z-index: 1000;	
+}
+
+#searchResultCanvas .murdoch_sayt h1 , #searchResultCanvas_course .murdoch_sayt h1{	
+	border-bottom: 1px solid #cfcfcf;			
+	color: #990000;
+	padding: 2px 2px 2px 6px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	background-color: #ffffff;
+	font-size: 10pt;
+	display: block;
+	text-decoration: none;
+	text-align: left;
+	margin: 0px;
+	width: 196px;
+}
+
+#searchResultCanvas .murdoch_sayt a, #searchResultCanvas_course	.murdoch_sayt a{			
+	border-bottom: 1px solid #cfcfcf;
+	color: #000000;
+	background-color: #ffffff;
+	padding: 6px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	display: block;
+	text-decoration: none;
+	text-align: left;
+}
+
+#searchResultCanvas .murdoch_sayt a:hover, #searchResultCanvas_course .murdoch_sayt a:hover {
+	background-color: #666666;
+	color: #ffffff;
+}
+
+.sayt_keydown {
+	background-color: #666666 !important; 
+	color: #ffffff !important;
+}

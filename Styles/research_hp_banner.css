@@ -1,0 +1,34 @@
+/*@import url(http://fast.fonts.com/cssapi/0525ae2c-c669-4532-b54d-cb65db727fe9.css);*/
+@import url(http://fonts.murdoch.edu.au/adelle/adelle.css);
+#banner-research2012{line-height:1.6em;font-family:sans-serif;color:#ffffff;font-size:13px;position:relative;display:block;width:960px;height:220px;overflow:hidden;margin:0px auto;background:url(images/ajax-loader.gif) no-repeat center center;font-family:"Adelle W01 Bold","Trebuchet MS",sans-serif;}#banner-research2012 p{margin:0 0 1em 0;line-height:1.3em;}
+#banner-research2012 ul{margin:0 0 1em 2em;padding:0;}
+#banner-research2012 ul li{margin:0 0 0.25em 0;}
+#banner-research2012 ul{list-style:disc outside;}
+#banner-research2012 ul ul{margin:0.25em 0 0.5em 1em;}
+#banner-research2012 .visual-hide{text-indent:-90000px;height:0;position:absolute;overflow:hidden;}
+#banner-research2012 .hide{display:none;}
+#banner-research2012 .clear{clear:both;display:block;}
+#banner-research2012 .clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+#banner-research2012 .clearfix{display:inline-block;}
+#banner-research2012 * html .clearfix{height:1%;}
+#banner-research2012 .clearfix{display:block;}
+#banner-research2012 .replaced{display:block;text-indent:-900000px;overflow:hidden;background-color:transparent;background-repeat:no-repeat;background-position:top left;}
+#banner-research2012 img{display:block;float:left;border:0;}
+#banner-research2012 a{color:#ffffff;text-decoration:none;}
+#banner-research2012 .read_more{position:absolute;display:block;z-index:15;bottom:20px;right:20px;background:#CE0000;color:#ffffff;text-transform:uppercase;text-align:center;text-decoration:none;line-height:2em;vertical-align:middle;padding:0 0.75em;margin:0;font-family:"Trebuchet MS",sans-serif;-webkit-transition:all 0.2s ease-in-out;-moz-transition:all 0.2s ease-in-out;-o-transition:all 0.2s ease-in-out;-ms-transition:all 0.2s ease-in-out;transition:all 0.2s ease-in-out;}
+#banner-research2012:hover .read_more{font-size:1.25em;}
+#banner-research2012 .banner-frames{display:block;list-style:none;padding:0;margin:0;border:0;z-index:1;width:960px;height:220px;overflow:hidden;}
+#banner-research2012 .bf-frame{display:block;position:absolute;top:0;left:0;display:none;}#banner-research2012 .bf-frame .sky{position:absolute;z-index:1;top:-70px;left:0;width:960px;height:290px;background:url(http://www.murdoch.edu.au/_image/Brand2013/research_hp_creative/clouds.jpg/) 0 0;}
+#banner-research2012 .bf-frame .copy{position:absolute;z-index:5;border:0;opacity:0;filter:alpha(opacity=0);}
+#banner-research2012 .bf-frame .building{position:absolute;z-index:1;top:0px;left:0;width:960px;height:350px;}
+#banner-research2012 #global-illness{position:absolute;top:0;left:0;width:960px;height:290px;}#banner-research2012 #global-illness .intro{position:absolute;top:0;left:0;width:460px;height:220px;display:block;background:url(http://www.murdoch.edu.au/_image/Brand2013/research_hp_creative/opacity55.png/) repeat;padding:80px 250px;text-transform:uppercase;color:#ffffff;line-height:30px;font-size:1.3em;z-index:5;position:relative;}
+#banner-research2012 #global-illness .copy{top:10px;left:60px;width:567px;height:199px;}
+#banner-research2012 #global-illness .building{height:350px;}
+#banner-research2012 #customs{width:960px;height:350px;top:0;left:0;}#banner-research2012 #customs .copy{top:0;left:500px;width:219px;height:220px;}
+#banner-research2012 #customs .building{height:390px;}
+#banner-research2012 #tv-networks{width:960px;height:350px;top:0;left:0;}#banner-research2012 #tv-networks .copy{top:0;left:290px;width:436px;height:219px;}
+#banner-research2012 #tv-networks .building{height:350px;}
+#banner-research2012 #coming-to-murdoch{width:960px;height:350px;top:0;left:0;}#banner-research2012 #coming-to-murdoch .copy{top:0;left:390px;width:324px;height:154px;}
+#banner-research2012 #coming-to-murdoch .building{height:290px;}
+#banner-research2012 #customs .intro{background:url(http://www.murdoch.edu.au/_image/Brand2013/research_hp_creative/opacity55.png/) repeat;padding:80px 250px;text-transform:uppercase;color:#ffffff;line-height:30px;font-size:1.3em;z-index:5;position:relative;}
+#banner-research2012 #tv-networks .intro{background:url(http://www.murdoch.edu.au/_image/Brand2013/research_hp_creative/opacity55.png/) repeat;padding:80px 250px;text-transform:uppercase;color:#ffffff;line-height:30px;font-size:1.3em;z-index:5;position:relative;}

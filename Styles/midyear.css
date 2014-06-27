@@ -1,0 +1,46 @@
+#midyear 
+{ 
+
+       background:url(	http://www.murdoch.edu.au/_image/Mid_Year-2012/mid_year_2012_rotating_ced_sprite_960x400.jpg/); 
+       width: 960px; height: 200px; position: relative;
+}
+
+#midyear li 
+{  
+       list-style:none; position: absolute; margin: 0; padding: 0;
+}
+					
+#midyear li, #midyear a 
+{
+       display: block;
+}
+
+#find_out_more, #find_out_more a
+{
+       top: 58px; left: 83px; width: 207px; height: 145px;
+}
+
+#choose_a_course, #choose_a_course a 
+{
+      top: 0px; left: 370px; width: 252px; height: 200px;
+}
+
+#apply_now, #apply_now a
+{
+      top: 0px; left: 680px; width: 250px; height: 200px; 
+}
+					
+#find_out_more a:hover
+{
+      background: transparent url(http://www.murdoch.edu.au/_image/Mid_Year-2012/mid_year_2012_rotating_ced_sprite_960x400.jpg/) -83px -258px no-repeat;
+}
+
+#choose_a_course a:hover
+{
+      background: transparent url(http://www.murdoch.edu.au/_image/Mid_Year-2012/mid_year_2012_rotating_ced_sprite_960x400.jpg/) -370px -200px; 
+}	
+
+#apply_now a:hover 
+{
+      background: transparent url(http://www.murdoch.edu.au/_image/Mid_Year-2012/mid_year_2012_rotating_ced_sprite_960x400.jpg/) -680px -200px;
+}

@@ -1,0 +1,1344 @@
+/* CSS Document */
+
+/*@import url(http://fast.fonts.com/cssapi/0525ae2c-c669-4532-b54d-cb65db727fe9.css);*/
+@import url(http://fonts.murdoch.edu.au/adelle/adelle.css);
+@import url("/_stylesheet/bloggers/bloggers.css");
+@import url("/_stylesheet/bloggers/future_student.css");
+
+body
+{
+    margin: 0px;
+    font-family: 'Trebuchet MS', Geneva, sans-serif;
+    font-size: 70%;
+    margin-bottom: 15px;
+}
+
+body.page
+{
+    background: #2C010A url('http://www.murdoch.edu.au/_image/navigation/bg_gradient_repeat.jpg/') repeat-x top left;
+}
+
+div#body
+{
+    width: 960px;
+    margin: 0px auto;
+	background-color: #FFFFFF;
+}
+
+.redlink
+{
+	color: #990000;
+	text-decoration: underline;
+}
+
+a.link_external{
+background: transparent url('/_image/navigation/external_link_icon.png') no-repeat scroll left center;
+padding-left: 20px;
+}
+
+a.link_internal{
+background: transparent url('/_image/navigation/internal_link_icon.png') no-repeat scroll left center;
+padding-left: 10px;
+}
+
+a.tan
+{
+background: url('/_image/microsite/icon_link-external.gif') no-repeat center left;
+}
+
+a.white
+{
+background: url('/_image/microsite/icon_link-white.gif') no-repeat center left;
+}
+
+
+
+/*--------------------------------------------*
+ *  Top navigation styles
+ *--------------------------------------------*/
+
+div#header 
+{
+	background: #E3CEA8 url('http://www.murdoch.edu.au/_image/HDR/murdoch_external_site/murdoch_external_header_gradient_1x117.jpg/?mode=s ') repeat-x top left;
+    width: 100%;
+    float: left;/**/
+    position: relative;
+    padding-bottom: 4px;
+	height: 108px;
+    z-index:1;
+}
+
+
+#header_link {
+	width: 339px;
+	float: left;
+	padding: 6px 10px 0px 20px
+}
+
+#header_link a{
+	color: #525252;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#murdoch_header_logo{
+	background: transparent url('http://www.murdoch.edu.au/_image/HDR/murdoch_external_site/murdoch_external_header_logo_146x34.png/?mode=s ') no-repeat top left;
+	top:35px;
+	left: 20px;
+	width: 146px;
+	height: 34px;
+	position: absolute;
+}
+
+div#header div#search_area
+{
+	float: right;
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	z-index: 20;
+}
+
+div#header img.language
+{
+    float: left;
+    padding-top:5px;
+    padding-right: 42px;    
+}
+/*---------------- Visitor type ---------------- */
+div#visitor_type
+{
+    clear: both;
+    float: right;
+    font-size: 0.8em;
+    color: #525252;
+    padding: 5px 0px 0px;
+}
+
+div#visitor_type img
+{
+    float: left;
+    display: block;
+}
+
+div#visitor_type span
+{
+    padding: 2px 0px;
+    display: block;
+    line-height: 1.2em;
+    width: 7em;
+    float: left;
+}
+
+/*---------------- Search area ----------------- */
+form#form_search
+{
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+form#form_search label
+{
+    position: absolute;
+    left: -999em;
+    top: -999em;
+}
+
+form#form_search .keyword_search_input
+{
+    width: 200px;
+}
+
+form#form_search input
+{
+    border: 1px solid #B7A88B;
+    background-color: #F1EDE3;
+    font-size: 0.9em;
+    padding: 2px;
+}
+
+form#form_search input.submit
+{
+    cursor:pointer;
+    color: white;
+    padding: 2px 5px;
+    background-color: #767676;
+	margin-left: 4px;
+    border: 0px;
+}
+
+.submit {
+    color: white !important;
+    padding: 2px 5px;
+    background-color: #767676;
+    margin-left: 4px;
+    border: 0px;
+    text-decoration:none;
+	cursor: pointer;
+}
+
+/*---------------- Navigation - Level 1 ----------------- */
+ul#main_navigation
+{
+	bottom: 0;
+	clear: left;
+	list-style-type: none;
+	margin: 0 0 -3px;
+	padding: 0 0 0 3px;
+	position: absolute;
+        left: 0;
+}
+
+ul#main_navigation li {
+    background-color: #F6EEDD;
+    color: #333333;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1em;
+    margin-bottom: 2px;
+    margin-right: 2px;
+    padding: 7px 15px;
+}
+
+ul#main_navigation li:hover {
+	background-color: #ECDDBE;	
+}
+
+ul#main_navigation li.selected
+{
+    text-decoration: none;				
+	background-color: #ECDDBE; 		   
+    margin-bottom: 0px;
+    border-bottom: 5px solid #ECDDBE; 					
+}
+
+ul#main_navigation li.selected a:active, ul#main_navigation li.selected a:visited, ul#main_navigation li.selected a:link
+{
+	color: #000000;
+}
+
+/*---------------- Navigation - Level 2 ----------------- */
+
+div#sub_navigation
+{
+    background-color: #ECDDBE; 
+    float: left;
+    width: 100%;
+    overflow: hidden;
+	padding: 6px 0px;  
+}
+
+div#sub_navigation ul {
+ 	margin: 0px 0px 0px 16px;
+ 	padding: 0px;
+ 	overflow: hidden;
+	padding: 0px 0px;
+	top: 4px;
+}
+
+div#sub_navigation li {
+    border-left: 1px dotted #555555;
+    display: inline;
+    font-weight: bold;
+    line-height: 1em;
+	margin: -5px;
+    padding: 0px 15px 0px 6px;
+}
+
+div#sub_navigation li a.home, div#sub_navigation li:hover a{
+	color: #000000 !important;
+	text-decoration: none !important;
+}
+
+div#sub_navigation li a{
+	color: #555555 !important;
+}
+
+/*---------------- Breadcrumb ----------------- */
+div#breadcrumb
+{
+    clear: left;
+    background-color: white;
+    padding: 8px 0px;
+    float: left;
+    width: 100%;
+    font-size: 0.85em;
+}
+
+div#breadcrumb ul.breadcrumb
+{
+    list-style-type: none;
+    line-height: 1.2em;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 18px;
+    float: left;
+	width: 627px;
+}
+
+div#breadcrumb ul.breadcrumb li
+{
+    display: inline;
+}
+
+div#breadcrumb ul.links
+{
+    list-style-type: none;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+div#breadcrumb ul.links li
+{
+    float: left;
+    line-height: 1.2em;
+    border-left: 1px solid #990000;
+    padding: 0px 17px 0px 5px;
+    margin: 0px -6px;
+}
+	
+div#breadcrumb	ul.social_media {
+	list-style-type: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+	margin-top: -2px;
+}
+div#breadcrumb ul.social_media li{
+		margin: 0 -6px;
+}
+	
+div#breadcrumb ul.social_media li img{
+	padding-left: 4px;
+	border: none;
+	vertical-align: middle;
+}
+
+
+/*--------------------------------------------*
+ *  Side navigation styles
+ *--------------------------------------------*/
+
+div#course_left 
+{
+float: left;
+width: 228px;
+padding-bottom: 10px;
+}
+
+div#side_navigation
+{
+    width: 228px;
+    float: left;
+    background: #EFE5C9 url('http://www.murdoch.edu.au/_image/navigation/nav_left_bottom.gif/?mode=s') no-repeat bottom left;
+    padding-bottom: 30px;
+   /*background-color: #EFE5C9;*/
+}
+
+div#side_navigation ul
+{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+div#side_navigation ul.tabs
+{
+    margin-right: -1px;
+    width: 228px;
+    overflow: auto;
+}
+
+ul.tabs li
+{
+    display: block;
+    float: left;
+    background-color: #EADCBA;
+    color: #525252;
+    font-weight: bold;
+}
+
+div#side_navigation ul.tabs li
+{
+    width: 50%;
+}
+
+ul.tabs li span
+{
+    display: block;
+    padding: 3px 0px;
+    text-align: center;
+
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+ul.tabs li span.selected
+{
+    background-color: #EFE5C9;
+    border-bottom: 1px solid #EFE5C9;
+    text-decoration: underline;
+}
+
+div#side_navigation ul.content
+{
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+div#side_navigation ul.content li
+{
+    border-bottom: 1px solid white;
+    padding: 2px 10px;
+}
+
+div#side_navigation ul.content li
+{
+    padding: 2px 0;
+}
+
+div#side_navigation ul.content a
+{
+    display: block;
+    margin-left: 5px;
+}
+
+div#side_navigation ul.content li li
+{
+    padding-left: 0;
+    border-bottom: 1px solid white;
+}
+
+body#courses div#side_navigation ul.content li.last
+{
+    border-bottom: 0 none;
+    padding-bottom: 0;
+}
+
+div#side_navigation ul.content li li.last
+{
+    border-bottom: 0 none;
+    padding-bottom: 0;
+}
+
+div#side_navigation ul.content li li.first
+{
+    border-top: 1px solid white;
+}
+
+div#side_navigation ul.content li li li, 
+body#courses div#side_navigation ul.content li li li li
+{
+    padding-left: 14px;
+}
+
+body#courses div#side_navigation ul.content li li li
+{
+    padding-left: 0;
+}
+
+body#courses div#side_navigation ul.content li li li a,
+div#side_navigation ul.content li li a
+{
+    padding-left: 14px;
+    background: transparent url(/_image/navigation/arrow.gif/) no-repeat scroll 0 5px;
+}
+
+body#courses div#side_navigation ul.content li li a
+{
+    padding-left: 0;
+    background: transparent none;
+}
+
+div#side_navigation ul.content li a, div#side_navigation ul.content li span
+{
+   margin-bottom: 1px;
+}
+
+div#side_navigation ul.content li a, div#side_navigation ul.content li span
+{
+    font-weight: bold;
+}
+
+div#side_navigation ul.content li.selected span
+{
+    color: #990000;
+}
+
+div#side_navigation ul.content li.selected span
+{
+    text-decoration: underline;
+}
+
+div#side_navigation ul.content li.selected ul
+{
+    margin: 2px -10px -2px;
+}
+
+div#side_navigation ul.content li.selected ul li
+{
+    border-bottom: 0px;
+    border-top: 1px solid white;
+    margin: 0px;
+    padding: 2px;
+    padding-left: 25px;
+    text-decoration: none !important;
+    background: url('http://www.murdoch.edu.au/_image/navigation/arrow.gif/?mode=s') no-repeat 10px 7px;
+}
+
+
+/*--------------------------------------------*
+ *  Content area styles
+ *--------------------------------------------*/
+
+div#content
+{
+    width: 100%;
+	clear: left;
+    overflow:hidden;
+   /*padding-top: 0px !important;*/
+}
+
+/*--------------------------------------------*
+ *  Main content area styles
+ *--------------------------------------------*/
+
+body#homepage div#main_content
+{
+    padding: 20px 60px;
+    width: 900px;
+}
+
+body#homepage div#main_content div.column
+{
+    float: left;
+    width: 380px;
+    padding-right: 60px;
+}
+
+body#main div#full_content
+{
+    padding: 0px 25px 0px 25px;
+    float: left;
+
+    width: 900px;
+    line-height: 1.5em;
+}
+
+body#no_left_menu-main_content-right_region div#main_content
+{
+     width: 675px;
+     padding: 0px 10px 0px 15px;
+}
+
+body#no_left_menu_main_content-right_region div#right_module
+{
+  width: 260px;
+  clear:both;
+}	
+
+body#main div#main_content
+{
+    padding: 0px 20px;
+    float: left;
+    width: 692px;
+    line-height: 1.5em;
+}
+
+div#main_content
+{
+    padding: 0px 10px;
+    float: left;
+    width: 444px;
+    line-height: 1.5em;
+}
+
+div#main_content p
+{
+    margin: 0px;
+    margin-bottom: 12px;
+}
+
+div#main_content table.shaded_cells
+{
+	margin-bottom: 10px;	
+}
+
+
+div#main_content table.shaded_cells td
+{
+	background-color:#FAF3DF;
+	border-bottom:1px solid white;
+	padding:4px 10px;
+}
+
+div#main_content table.shaded_cells td.header {
+	background-color:#E4CFA8;
+}
+
+
+div#main_content table.shaded_cells td.key {
+	background-color:#F5EDD5;
+}
+
+body#homepage h1
+{
+
+    width: 600px;
+    margin-bottom: 12px;
+}
+
+body#homepage h2
+{
+	padding: 10px;
+padding-bottom: 0px;
+}
+
+div#main_content h3
+{
+    font-size: 1.0em;
+    color: #333333;
+}
+
+
+
+
+
+/*--------------------------------------------*
+ * General heading styles
+ *--------------------------------------------*/
+
+h1
+{
+    font-size: 1.2em;
+    margin-bottom: 12px;
+}
+
+h2
+{
+    font-size: 1.2em;
+    color: #990000;
+    margin-bottom: 12px;
+}
+
+h3
+{
+    margin: 0px;
+}
+
+/* Added by Chris for headings on the news page */
+.heading {
+    font-size: 1.3em;
+    width: 300px;
+    color: #000000;
+    padding-left: 14px;
+    padding-bottom: 12px;
+    padding-top: 8px;
+    font-weight: bold;
+}
+
+.subheading {
+    font-size: 1.1em;
+    width: 300px;
+    color: #AA0000;
+}
+
+/*--------------------------------------------*
+ * Sidebar styles
+ *--------------------------------------------*/
+
+div#sidebar
+{
+    float: right;
+    margin-right: 0px;
+    display: inline;
+    width: 260px;
+}
+
+
+/*--------------------------------------------*
+ *  Footer area styles
+ *--------------------------------------------*/
+
+div#footer
+{
+border-top: 10px solid #ffffff;
+    background-color: #F1EDE3;
+    float: left;
+    width: 100%;
+}
+
+div.banner
+{
+    background-color: #EFE5C9;
+    text-align: center;
+    color: #666666;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+    clear: left;
+    padding-bottom: 1px;
+}
+
+div.banner img
+{
+    vertical-align: middle;
+    margin-right: 30px;
+}
+
+div#footer div.links
+{
+    float: left;
+    font-size: 0.9em;
+    padding: 0px;
+}
+
+div#footer div.links img.logo
+{
+    float: left;
+}
+
+div#footer div.select_site
+{
+    float: left;
+    padding: 10px 0px;
+    width: 170px;
+    position: relative;
+}
+
+/* Outer footer list */
+div#footer div.links ul
+{
+    list-style-type: none;
+    margin: 0px;
+    float: left;
+    width: 692px;
+    padding: 7px 0px;
+    border-left: 1px dashed #999999;
+    border-right: 1px dashed #999999;
+}
+
+div#footer div.links ul li
+{
+    min-height: 0px;
+    float: left;
+    overflow: hidden;
+    clear: both;
+    padding-left: 10px;
+}
+
+div#footer div.links ul li.inline
+{
+    clear: none;
+    padding-left: 20px;
+}
+
+div#footer div.links ul li.full
+{
+    width: 100%;
+}
+
+/* Inner footer list */
+div#footer div.links ul ul
+{
+    border-left: 0px;
+    border-right: 0px;
+    margin: 0px;
+    padding: 6px 0px;
+    width: auto;
+    overflow: hidden;
+}
+
+div#footer div.links ul ul li
+{
+    border-left: 1px solid #000000;
+    padding: 0px 4px;
+    clear: none;
+    margin-left: -1px;
+    line-height: 1.1em;
+}
+
+div#footer div.links li.full li
+{
+    border-left-color: #666666;
+}
+
+div.select_site p
+{
+    padding: 0px 10px 0px 20px;
+    margin: 0px;
+}
+
+div.select_site strong
+{
+    color: #990000;
+}
+
+div.select_site div
+{
+    display: block;
+    padding: 0px;
+    margin-left: 12px;
+    z-index: 100;
+    position: relative;
+}
+
+div.select_site div.active
+{
+    color: white;
+}
+
+/* Javascript popup to show other sites in the Murdoch family */
+div#footer div#other_sites
+{
+    display: none;
+    float: left;
+    padding: 0px;
+    position: absolute;
+    bottom: 13px;
+    right: 0px;
+    background-color: #8e8e8e;
+color: #ffffff;
+z-index: 1001;
+
+}
+
+div#footer div#other_sites a {
+color: #ffffff;
+font-size: 9pt;
+}
+
+div#footer div#other_sites a:hover {
+font-size: 9pt;
+}
+
+div#footer div#other_sites ul
+{
+    width: 225px;
+    padding: 0px;
+    border: 0px;
+    z-index: 1001;
+    padding-bottom: 2em;
+    overflow: hidden;
+    margin-top: -1px;
+}
+
+div#footer div#other_sites ul li
+{
+list-style-image: url('/_image/plus.gif/');
+    border-top: 1px solid white;
+    width: 225px;
+padding: 5px;
+    display: block;
+color: #ffffff;
+}
+
+
+
+/*--------------------------------------------*
+ *  Link styles
+ *--------------------------------------------*/
+
+/* Generic links are Murdoch red: #990000 */
+a:link, a:visited, a:active, a:hover
+{
+    color: #990000;
+}
+
+/* Top navigation */
+ul#main_navigation a:link, ul#main_navigation a:visited, ul#main_navigation a:active
+{
+    color: #000000;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+ul#main_navigation a:hover
+{
+    color: #000000;
+}
+
+/* Sub navigation */
+div#sub_navigation a.home:link, div#sub_navigation a.home:visited, div#sub_navigation a.home:active
+{
+    color: #990000;
+    text-decoration: underline;
+}
+
+/* for courses */
+div#side_navigation a.selected:link, div#side_navigation a.selected:visited, div#side_navigation a.selected:active
+{
+	color: #990000;
+	text-decoration: underline;
+}
+
+div#sub_navigation a:link, div#sub_navigation a:visited, div#sub_navigation a:active
+{
+    color: #000000;
+    text-decoration: none;
+}
+
+div#sub_navigation a:hover
+{
+    color: #990000;
+}
+
+/* Side navigation */
+
+div#side_navigation a:link, div#side_navigation a:visited, div#side_navigation a:active
+{
+    color: #000000;
+    text-decoration: none;
+}
+
+div#side_navigation a:hover
+{
+    color: #990000;
+}
+
+/* Breadcrumb area */
+div#breadcrumb ul.links a:link, div#breadcrumb ul.links a:visited, div#breadcrumb ul.links a:active
+{
+    color: #666666;
+    text-decoration: none;
+}
+
+div#breadcrumb ul.links a:hover
+{
+    color: #990000;
+}
+
+/* Promo box list links */
+div.promo li a:link, div.promo li a:visited, div.promo li a:active
+{
+    color: #333333;
+}
+
+div.promo li a:hover
+{
+    color: #990000;
+}
+
+/* Footer links */
+div.links li a:link, div.links li a:visited, div.links li a:active
+{
+    color: #000000;
+    text-decoration: none;
+}
+
+div.links li.full a:link, div.links li.full a:visited, div.links li.full a:active
+{
+    color: #666666;
+}
+
+div.links li a:hover, div.links li.full a:hover
+{
+    color: #990000;
+}
+
+div#other_sites a:link, div#other_sites a:visited, div#other_sites a:hover, div#other_sites a:active
+{
+    color: #444444;
+    font-size: 1.1em;
+}
+
+a.rss:link, a.rss:visited, a.rss:active
+{
+    background: url('http://www.murdoch.edu.au/_image/misc/logo_rss_15x15.gif/?mode=s') no-repeat center left;
+    padding-left: 20px;
+    color: #666666;
+    float: left;
+}
+a.rss:hover
+{
+    color: #990000;
+}
+
+div#skiplink
+{
+    position: absolute;
+    top: -999em;
+    left: -999em;
+}
+
+/* LOADER */
+.loader {
+background: url('http://www.murdoch.edu.au/_image/ajax-loader.gif/?mode=s') no-repeat;
+}
+
+
+/* Red Bullet Points - ChrisD */
+
+ul.redbullets li
+{
+   color: #aa0000;  
+}
+
+.steps {
+padding-right: 15px;
+padding-left: 15px;
+color: #aaaaaa;
+display: inline;
+}
+
+.stepssel {
+padding-right: 15px;
+padding-left: 15px;
+color: #333333;
+font-weight: bold;
+font-size: 11pt;
+display: inline;
+}
+
+.news_photo{
+ padding-right: 10px;
+ padding-left: 10px;
+ padding-bottom: 10px;
+}
+
+
+div#flash {
+   margin-bottom: 10px;
+}
+
+#switching-flash-banner-top
+{
+ /* position: absolute; */
+  display: none; 
+  position: absolute;
+  /*top: 170px;*/
+  top: 170px;
+  left: 1;
+  /*z-index: 10;*/
+  height: 45px;
+  overflow: hidden;
+}
+
+#switching-flash-banner-bottom
+{
+   /*position: absolute;*/
+   display:none;
+	/*height: 240px;
+	overflow: hidden;
+	/*position: relative;*/
+	/*left: 0;*/
+	/*top: 5px;*/
+        /*top: -822px !important;
+	z-index: 5;*/
+      position: absolute;
+      top: 193px !important;
+      /*z-index: 10;*/
+}
+
+div#flash div img{
+ /*  position: relative;
+   z-index: 10;*/
+}
+
+#courses #content
+{
+	position: relative;
+}
+#courses #flash
+{
+}
+
+/*--------------------------------------------*
+ * New stylesheet added for apply online from here
+ *--------------------------------------------*/
+
+body#homepage div#apply_online_main_content
+{
+    padding: 20px 60px;
+    width: 900px;
+}
+
+body#homepage div#apply_online_main_content div.column
+{
+    float: left;
+    width: 380px;
+    padding-right: 60px;
+}
+
+
+
+body#no_left_menu-main_content-right_region div#apply_online_main_content
+{
+     width: 675px;
+     padding: 0px 10px 0px 15px;
+}
+
+
+body#main div#apply_online_main_content
+{
+    padding: 0px 1px;
+    float: left;
+    width: 730px;
+    line-height: 1.5em;
+}
+
+div#apply_online_main_content
+{
+    padding: 0px 10px;
+    float: left;
+    width: 444px;
+    line-height: 1.5em;
+}
+
+div#apply_online_main_content p
+{
+    margin: 0px;
+    margin-bottom: 12px;
+}
+
+div#apply_online_main_content table.shaded_cells
+{
+	margin-bottom: 10px;	
+}
+
+
+div#apply_online_main_content table.shaded_cells td
+{
+	background-color:#FAF3DF;
+	border-bottom:1px solid white;
+	padding:4px 10px;
+}
+
+div#apply_online_main_content table.shaded_cells td.header {
+	background-color:#E4CFA8;
+}
+
+
+div#apply_online_main_content table.shaded_cells td.key {
+	background-color:#F5EDD5;
+}
+
+
+
+div#apply_online_main_content h3
+{
+    font-size: 1.0em;
+    color: #333333;
+}
+
+.degree_changing_style {
+    background: none repeat scroll 0 0 #CC0000;
+    color: #FFFFFF;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    font-weight:bold;
+}
+
+.how_to_apply p {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555;
+  
+}
+
+.getting_recognition p {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555; 
+}
+
+.getting_recognition ul {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555; 
+}
+
+.how_to_apply_big_heading {
+margin-top: 10px;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family: "Adelle W01 Bold", "Trebuchet MS", serif;
+font-weight: normal;
+font-size:28px;
+color:#CC0000;
+line-height:28px;
+}
+
+
+.how_to_apply_med_heading {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: #E3D3B1;
+border-image: none;
+border-style: solid none;
+border-width: 1px medium;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+font-size:21px;
+color:#CC0000;
+line-height:26px;
+}
+
+.how_to_apply_med_heading1 {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: #E3D3B1 -moz-use-text-color;
+border-image: none;
+border-style: solid none;
+border-width: 1px medium;
+margin-top: 10px;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+font-size:24px;
+color:#CC0000;
+line-height:24px;
+}
+
+
+.how_to_apply_small_heading {
+margin-top: 10px;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family:Trebuchet MS;
+font-weight:bold;
+font-size:12px;
+color:#000000;
+}
+
+.how_to_apply_body_med {
+font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+font-size:16px;
+color:#AA9774;
+line-height:21px;
+}
+
+.how_to_get_in_uni p {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555;
+  
+}
+
+.awards_financial p {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555;
+  
+}
+
+.how_to_apply_med_heading_diff_color {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: #E3D3B1;
+border-image: none;
+border-style: solid none;
+border-width: 1px medium;
+margin-top: 10px;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+font-size:21px;
+color:#AA9774;
+line-height:24px;
+}
+
+.how_to_apply_med_heading_diff_color1 {
+-moz-border-bottom-colors: none;
+-moz-border-left-colors: none;
+-moz-border-right-colors: none;
+-moz-border-top-colors: none;
+border-color: #E3D3B1 -moz-use-text-color;
+border-image: none;
+border-style: solid none;
+border-width: 1px medium;
+margin-top: 10px;
+padding: 0.25em 0 0.2em;
+text-transform:uppercase;
+font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+font-size:24px;
+color:#BFB299;
+line-height:24px;
+}
+
+.how_to_apply_footer_bold {
+  font-family:Trebuchet MS;
+  font-size:14px;
+  font-weight:bold;
+  color:#000000;
+}
+
+.how_to_apply_footer {
+  font-family:Trebuchet MS;
+  font-size:12px;
+  color:#555555;
+}
+
+.how_to_apply_banner_text {
+  font-family: "Adelle W01 Bold","Trebuchet MS",serif;
+  font-size:17px;
+  color:#FFFFFF;
+  line-height:24px;
+}
+
+div#apply_online_main_content table{
+        background-color:#ffffff;
+        width: 100%;
+}
+
+div#apply_online_main_content td.key{
+        width: 100px;
+        background-color:#ffffff;
+        font-weight: bold; 
+        border-right: 1px solid white;
+text-align: right;
+vertical-align: top;
+}
+
+div#apply_online_main_content td{
+   border-bottom: 1px solid white;
+   padding:0px 5px 20px;
+   vertical-align:top;
+}
+
+/* === Table what to do next ===*/
+div#apply_online_main_content table.what_next
+{
+	border-collapse: collapse;
+	padding: 0px; 
+	margin: 0px;
+}
+
+div#apply_online_main_content table.what_next td.header
+{
+	padding: 4px 10px 4px 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #990000;
+	background-color: #E4CFA8;
+}
+
+div#apply_online_main_content table.what_next td
+{
+        background-color: #FAF3DF;
+	padding: 14px 25px;
+}
+
+div#apply_online_main_content table.what_next li
+{
+	text-decoration: underline;
+	padding-bottom: 4px;
+}
+
+.new_content {
+ margin:-1;
+ padding:0;
+}

@@ -1,0 +1,155 @@
+@import url(http://www.murdoch.edu.au/Ccpr/font/Adelle/adelle.css);
+
+
+body {
+	margin:0;	
+	background:#fff;
+}
+img {border-style:none;}
+a {
+	text-decoration:none;
+	color:#000;
+}
+a:hover {text-decoration:underline;}
+a:active {background-color: transparent;}
+input,
+textarea,
+select {
+	font:100% Arial, Helvetica, sans-serif;
+	vertical-align:middle;
+	color:#000;
+}
+form, fieldset {
+	margin:0;
+	padding:0;
+	border-style:none;
+}
+#wrapper{
+	width:960px;
+	margin:0 auto;
+	font:23px/47px 'Adelle W01 Bold', sans-serif;
+	color:#efe1c5;
+        position: relative;
+        z-index:2;
+
+}
+
+div#header {
+   
+    z-index: 3;
+}
+
+.slideshow {
+	position: relative;
+	width:960px;
+	height: 240px;
+
+	background: #c00;
+}
+.slideshow .slide {
+	position: absolute;
+	
+	width:100%;
+        display: none;
+}
+.slideshow .slide.active {}
+.slide-holder{
+	overflow:hidden;
+	padding:5px 0 4px 23px;
+}
+.slide-holder .text-box{
+	font-size:27px;
+	line-height:40px;
+	padding:73px 0 0;
+	width: 582px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+.slide-holder  .slide02{
+	padding:75px 0 0;
+	line-height:37px;
+}
+.slide-holder  .slide03{
+	padding:51px 0 0;
+	line-height:42px;
+}
+.slide03 .line strong{font-size:54px;}
+.slide03 .item{padding:0 0 0 30px;}
+.slide-holder .img-box{
+	float:right;
+	margin:0 0 0 -130px;
+	z-index:2;
+	position:relative;
+}
+
+.slide-holder .img-box-first{
+	float:right;
+	margin:0 0 0 -130px;
+	z-index:2;
+	position:relative;
+}
+
+
+.slide-holder .img-box img{
+	display:inline-block;
+	vertical-align:top;
+	margin:0 3px;
+}
+
+.slide-holder .img-box-first img{
+	display:inline-block;
+	vertical-align:top;
+	margin:0 3px;
+}
+.slide-holder .img-box .alt{
+	margin:0 5px 0 5px;
+	vertical-align:bottom;
+}
+.slide-holder .img-box-first .alt{
+	margin:0 5px 0 5px;
+	vertical-align:bottom;
+}
+.line{
+	display:block;
+	text-transform:uppercase;
+	position:relative;
+}
+.line strong{font-size:50px;}
+.line span{font-size:33px;}
+.line .big{font-size:41px;}
+.btn-find{
+	display:inline-block;
+	vertical-align:top;
+	font-size:22px;
+	line-height:24px;
+	position:relative;
+	color:#fff !important;
+	text-transform:uppercase;
+	padding:4px 38px 2px 12px;
+	background:#b4a989;
+	margin:10px 0 0 218px;
+	word-spacing:-2px;
+}
+.btn-find:hover{
+	text-decoration:none;
+	background:#747474 ;
+}
+.btn-find:after{
+	content:"";
+	position:absolute;
+	right:12px;
+	top:5px;
+	background: url(http://www.murdoch.edu.au/_image/Semester-1-2014/btn-find.png/) no-repeat;
+	width:13px;
+	height:20px;
+	color: #FFFFFF !important;
+}
+.shadow{
+	position:absolute;
+	background: url(http://www.murdoch.edu.au/_image/Semester-1-2014/bg-shadow.png/) no-repeat 0 100%;
+	height:52px;
+	width:1063px;
+	left:0;
+	bottom:0;
+}

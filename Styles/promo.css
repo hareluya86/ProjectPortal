@@ -1,0 +1,900 @@
+/* CSS Document */
+
+@import url(http://www.murdoch.edu.au/_stylesheet/End-of-year-2011/promo.css/);
+
+/*--------------------------------------------*
+ *  Promo area and promo box styles
+ *--------------------------------------------*/
+
+/*----- Promo area - found on the homepage -----*/
+/*----- All homepage-specific promo styles -----*/
+/*----- should be wrapped in this tag ----------*/
+
+div#promo_area
+{
+    float: left;
+    width: 976px;
+    margin-right: -16px;
+}
+
+div#promo_area div.promo
+{
+    margin-right: 16px;
+    min-height: 222px;
+    width: 228px;
+    margin-bottom: 0px;
+}
+
+div#promo_area div.promo h2
+{
+    padding-top: 10px;
+}
+
+div#promo_area div.promo div
+{
+    width: 228px;
+}
+
+* html div#promo_area div.promo
+{
+    height: 228px;
+}
+
+div#promo_area p
+{
+    border-bottom: 1px solid white;
+}
+
+div#promo_area p.link
+{
+    width: 215px;
+}
+
+/* Block list styles: ie. news articles with thumbnails */
+div#promo_area ul.blocks li
+{
+    width: 215px;
+}
+
+div#promo_area ul.blocks li a
+{
+    width: 160px;
+    padding-left: 5px;
+}
+
+
+/*----- More general promo styles, including sidebar styles -----*/
+
+/* Basic promo styles with inner divs, images, and paragraphs */
+div.promo
+{
+    float: left;
+    display: block;
+    width: 260px;
+    background-color: #EFE5C9;
+    margin-bottom: 20px;
+}
+
+div.feature
+{
+    width: 228px;
+    margin-right: 16px;
+}
+
+div.feature span
+{
+    padding: 10px 0 0 0;
+    display: block;
+    height: 67px;
+}
+
+.right {
+    text-align: right;
+}
+
+div.promo h2
+{
+    background-color: #E4CFA8;
+    font-size: 1.2em;
+    color: #333333;
+    margin: 0px;
+    padding: 7px 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+
+div.promo h3
+{
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+div.promo img
+{
+    border-bottom: 1px solid white;
+    display: block;
+}
+
+div.promo div
+{
+    padding: 0px;
+    margin: 0px;
+margin-right: 0px;
+    clear: left;
+}
+
+div.promo div ul
+{
+    width: 205px;
+}
+
+div.promo p
+{
+    margin: 0px;
+    padding: 5px;
+    line-height: 1.2em;
+    color: #333333;
+}
+
+div.promo p.link
+{
+    border-bottom: 0px !important;
+    text-align: right;
+    clear: both;
+}
+
+/* Basic list styles */
+div.promo ul
+{
+    margin: 0px;
+padding-left: 20px;
+margin-right: 0px;
+padding-right: 0px;
+display: block;
+}
+
+div.promo ul li
+{
+    margin-right: 0px;
+padding-right: 0px;
+padding-top: 4px;
+padding-bottom: 4px;
+}
+
+/* Tabbed mini-navigation for promo boxes */
+div.promo ul.tabs
+{
+    width: 261px;
+    margin-right: -1px;
+    padding: 0px;
+display: block;
+}
+
+div.promo ul.tabs li
+{
+    width: 87px;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 0px;
+}
+
+
+/* Block list styles: ie. news articles with thumbnails */
+div.promo ul.blocks
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px 5px 0px 5px;
+    float: left;
+    width: 100%;
+    overflow: auto;
+}
+
+div.promo ul.blocks h3
+{
+    float: left;
+    padding-left: 20px;
+    font-size: 1.2em;
+}
+
+div.promo ul.blocks li a
+{
+    width: 228px;
+}
+
+div.promo ul.blocks li
+{
+    padding: 3px 0px 4px 0px;
+    margin: 0px;
+    border-bottom: 1px solid white;
+    display: block;
+    position: relative;
+    overflow: auto;
+    vertical-align: top;
+    width: 250px;
+}
+
+div.promo ul.blocks li a
+{
+    float: left;
+    line-height: 1.2em;
+    padding-bottom: 2px;
+    padding-left: 20px;
+}
+
+div.promo ul.blocks li.first a
+{
+    width: 120px;
+}
+
+div.promo ul.blocks li img
+{
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 0px;
+}
+
+div.whatpromo {
+    float: left;
+    display: block;
+    width: 300px;
+    background-color: #faf3df;
+    margin-bottom: 10px;
+padding-bottom: 10px;
+}
+
+div.whatpromo h2
+{
+font-weight: bold;
+    color: #aa0000;
+    margin: 0px;
+padding: 5px;
+background-color: #EFE5C9;
+    border-bottom: 1px solid white;
+}
+
+div.whatpromo ol
+{
+    margin: 0px;
+padding-left: 28px;
+margin-right: 0px;
+padding-right: 0px;
+display: block;
+width: 272px;
+}
+
+div.whatpromo ul
+{
+    margin: 0px;
+padding-left: 28px;
+margin-right: 0px;
+padding-right: 0px;
+display: block;
+}
+
+div.whatpromo ul li
+{
+    margin-right: 0px;
+padding-right: 0px;
+padding-top: 4px;
+padding-bottom: 4px;
+
+}
+
+div.whatpromo ol li
+{
+    margin-right: 0px;
+padding-right: 0px;
+padding-top: 4px;
+padding-bottom: 4px;
+
+}
+
+div.whatpromo ul li li
+{
+    margin-right: 0px;
+padding-right: 0px;
+padding-top: 4px;
+padding-bottom: 4px;
+
+}
+
+
+/* Specific table styles for promo boxes */
+div.promo table
+{/*--------------------------------------------*
+ *  Promo area and promo box styles
+ *--------------------------------------------*/
+
+/*----- Promo area - found on the homepage -----*/
+/*----- All homepage-specific promo styles -----*/
+/*----- should be wrapped in this tag ----------*/
+
+div#promo_area
+{
+    float: left;
+    width: 976px;
+    margin-right: -16px;
+}
+
+div#promo_area div.promo
+{
+    margin-right: 16px;
+    min-height: 222px;
+    width: 228px;
+    margin-bottom: 0px;
+}
+
+div#promo_area div.promo h2
+{
+    padding-top: 10px;
+}
+
+div#promo_area div.promo div
+{
+    width: 228px;
+}
+
+* html div#promo_area div.promo
+{
+    height: 228px;
+}
+
+div#promo_area p
+{
+    border-bottom: 1px solid white;
+}
+
+div#promo_area p.link
+{
+    width: 228px;
+}
+
+/* Block list styles: ie. news articles with thumbnails */
+div#promo_area ul.blocks li
+{
+    width: 215px;
+}
+
+div#promo_area ul.blocks li a
+{
+    width: 160px;
+    padding-left: 5px;
+}
+
+
+/*----- More general promo styles, including sidebar styles -----*/
+
+/* Basic promo styles with inner divs, images, and paragraphs */
+div.promo
+{
+    float: right;
+    display: block;
+    width: 260px;
+    background-color: #EFE5C9;
+    margin-bottom: 20px;
+}
+
+div.promo h2
+{
+    background-color: #efe6c9;
+    font-size: 1.2em;
+    color: #333333;
+    margin: 0px;
+    padding: 7px 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid white;
+}
+
+div.promo h3
+{
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+div.promo img
+{
+    border-bottom: 1px solid white;
+    display: block;
+}
+
+div.promo div
+{
+    padding: 5px;
+    margin: 0px;
+    clear: left;
+}
+
+div.promo div ul
+{
+    width: 205px;
+}
+
+div.promo p
+{
+    margin: 0px;
+    padding: 5px;
+    line-height: 1.2em;
+}
+
+div.promo p.link
+{
+    border-bottom: 0px !important;
+    text-align: right;
+    clear: both;
+}
+
+/* Basic list styles */
+div.promo ul
+{
+    margin: 0px;
+    padding-left: 25px;
+    padding-right: 0px;
+margin-right: 0px;
+}
+
+div.promo ul li
+{
+    margin-right: 0px;
+padding-right: 0px;
+padding-top: 4px;
+padding-bottom: 4px;
+}
+
+/* Tabbed mini-navigation for promo boxes */
+div.promo ul.tabs
+{
+    width: 261px;
+    margin-right: -1px;
+    padding: 0px;
+}
+
+div.promo ul.tabs li
+{
+    width: 87px;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 0px;
+}
+
+
+/* Block list styles: ie. news articles with thumbnails */
+div.promo ul.blocks
+{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: -5px;
+    float: left;
+    width: 100%;
+    overflow: auto;
+}
+
+div.promo ul.blocks h3
+{
+    float: left;
+    padding-left: 20px;
+    font-size: 1.2em;
+}
+
+div.promo ul.blocks li a
+{
+    width: 228px;
+}
+
+div.promo ul.blocks li
+{
+    padding: 3px 0px 4px 0px;
+    margin: 0px;
+    border-bottom: 1px solid white;
+    display: block;
+    position: relative;
+    overflow: auto;
+    vertical-align: top;
+    width: 250px;
+}
+
+div.promo ul.blocks li a
+{
+    float: left;
+    line-height: 1.2em;
+    padding-bottom: 2px;
+    padding-left: 20px;
+}
+
+div.promo ul.blocks li.first a
+{
+    width: 120px;
+}
+
+div.promo ul.blocks li img
+{
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 0px;
+}
+
+/* Specific table styles for promo boxes */
+div.promo table
+{
+    margin: 0px;
+    width: 100%;
+    background-color: #faf3df;
+}
+
+div.promo td
+{
+    width: 50%;
+    padding: 4px 10px;
+    border-bottom: 1px solid white;
+}
+
+div.promo td.key
+{
+    border-right: 1px solid white;
+    background-color: #f5edd5;
+}
+
+div.promo .rss_logo
+{
+	float:right;	
+}
+
+div.promo .similar_course_container
+{
+ 	float:right; 
+ 	width:140px;
+}
+
+div.promo .similar_course_img
+{
+	width:105px; 
+	padding:0px;
+}
+
+.promo_container{
+	background-color:#EFE5C9;
+	display:block;
+	float:left;
+	margin-bottom:20px;
+	margin-right: 16px;
+	width:228px;
+}
+
+.promo_img_container
+{
+	float: left;
+	width: 105px;
+	padding:0px	
+}
+
+.promo_text_container
+{
+	margin-left: 5px;
+	float: left;
+	width: 117px;
+}
+
+div.facebook
+{
+	float: left;
+    display: block;
+    width: 260px;
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+div.facebook h2 
+{
+	padding: 10px 0 0 10px;
+	color: #FFFFFF;
+	height: 26px;
+	background-image: url('../_image/student_profile/facebook_top.gif');	
+}
+
+div.facebook ul
+{
+	margin: 0px;
+	padding: 0 5px 0 27px;
+}
+
+div.facebook li
+{
+	color: #3D5B97;
+	padding: 0;
+	list-style-image: url('../_image/student_profile/arrow.gif');			
+	margin-bottom: 10px;
+}
+
+div.facebook li a
+{
+	color: #3D5B97;
+	text-decoration:none;	
+}
+    margin: 0px;
+    width: 100%;
+    background-color: #faf3df;
+}
+
+div.promo td
+
+
+
+{
+    width: 50%;
+    padding: 4px 10px;
+    border-bottom: 1px solid white;
+}
+
+div.promo td.key
+{
+    border-right: 1px solid white;
+    background-color: #f5edd5;
+}
+
+div.promo .rss_logo
+{
+	float:right;	
+}
+
+div.promo .similar_course_container
+{
+ 	float:right; 
+ 	width:140px;
+}
+
+div.promo .similar_course_img
+{
+	width:88px; 
+	padding:0px;
+}
+
+.promo_container{
+	background-color:#EFE5C9;
+	display:block;
+	float:left;
+	margin-bottom:20px;
+	margin-right: 16px;
+	width:228px;
+}
+
+.promo_img_container
+{
+	float: left;
+	width: 105px;
+	padding:0px	
+}
+
+.promo_text_container
+{
+	margin-left: 5px;
+	float: left;
+	width: 117px;
+}
+
+div.facebook
+{
+	float: left;
+    display: block;
+    width: 260px;
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+div.facebook h2 
+{
+	padding: 10px 0 0 10px;
+	color: #FFFFFF;
+	height: 26px;
+	background-image: url('../_image/student_profile/facebook_top.gif');	
+}
+
+div.facebook ul
+{
+	margin: 0px;
+	padding: 0 5px 0 27px;
+}
+
+div.facebook li
+{
+	color: #3D5B97;
+	padding: 0;
+	list-style-image: url('../_image/student_profile/arrow.gif');			
+	margin-bottom: 10px;
+}
+
+div.facebook li a
+{
+	color: #3D5B97;
+	text-decoration:none;	
+}
+
+/*----- HOMEPAGE SUBSITE STYLES -----*/
+
+#content_subsite
+{
+        padding-top:0px;
+	float: left;
+	padding: 0 10px 0 10px;
+	width: 740px;
+	line-height: 1.5em;
+	margin-right: -16px;
+}
+
+#content_subsite ul, ol
+{
+        width: 660px;
+}
+			
+#content_subsite p
+{
+	margin-bottom: 10px;
+	margin-top: 0px;
+        width: 680px;
+}
+		
+#promo_area_subsite 
+{
+	margin-right: -16px;
+}
+			
+#promo_area_subsite .promo
+{
+	margin-bottom: 0px;
+	width: 228px;
+	margin-right:16px;
+}	
+			
+#promo_area_subsite .promo p
+{				
+	width: 212px;	
+}
+			
+#quick_links 
+{
+	float: left;
+	width: 500px;
+	margin-top:0px;
+	margin-bottom: 20px;
+}
+			
+#quick_links h2
+{
+	color: #990000;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#quick_links ul{
+        margin-top: 0px;
+}
+
+div.miniaz span.seeList
+{
+	float: right;
+	margin-right: 7px;
+	margin-top: 7px;
+}
+
+div.miniaz
+{
+	width: 232px;
+        margin-top:10px;
+}
+
+.evtable {
+padding: 0px;
+margin: 0px;
+    background-color: #ffffff;
+border: 0px;
+
+}
+
+.evtd {
+padding: 0px;
+margin: 0px;
+    background-color: #ffffff;
+border: 0px;
+}
+
+.evtr {
+padding: 0px;
+margin: 0px;
+    background-color: #ffffff;
+border: 0px;
+}
+.eventlink {
+text-decoration: underline;
+color: #aa0000;
+width: 148px;
+display: inline;
+}
+
+/*=== Modules ===*/
+div.module
+{
+	float: right;
+        margin-bottom: 20px;
+        background-color:#F9F5EB;
+        width: 260px;
+        height: 128px;
+}
+
+div.module h2
+{
+	display: block;
+	padding: 4px 10px;
+	margin: 0px;
+	color: #333333;
+	font-size: 1.2em;
+	background-color: #e4cfa8;
+	border-bottom: solid 1px #FFFFFF;
+}
+
+div.module p
+{
+	margin:0px;
+        padding: 0 10px 6px;
+}
+
+div.module a img
+{
+	border: 0px;
+}
+
+div.module p.link
+{
+	padding-right: 8px;
+	text-align: right;
+}
+
+div#YMAL {
+    float: left;
+    width: 230px;
+    background-color: #F1EDE3;	
+}
+
+div#YMAL h2 {
+    background-color: #E4CFA8;
+    border-bottom: 1px solid white;
+    color: #333333;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 7px 10px 5px;
+}
+
+div#YMAL .promo {
+    width: 230px;
+background-color: #FAF3DF;
+}
+
+/*=== TABLE PROMO ===*/
+div#main_content table.promo {
+    border-collapse: collapse;
+    margin-bottom: 20px;	
+}
+					
+div#main_content table.promo th{
+    background-color: #EFE5C9;							
+    text-align: left;
+    padding: 5px 0px 5px 10px;
+    border: 1px solid #EFE5C9;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+					
+div#main_content table.promo td{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #EFE5C9;
+}
+					
+div#main_content table.promo td ul{
+     padding-left: 15px;
+}
+					
+div#main_content table.promo td li {
+    margin-bottom: 10px;	
+}

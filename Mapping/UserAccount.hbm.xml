@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <!--assembly="ProjectPortal"
+  namespace="ProjectPortal.App_Code">-->
+
+  <!-- more mapping info here -->
+  <class name="UserAccount, App_Code" abstract="true" table="USERACCOUNT">
+    <id name="USERID">
+      <generator class="increment"/>
+    </id>
+    <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
+    <property name="ROLE" />
+    <property name="PASSWORD" />
+  </class>
+
+</hibernate-mapping>

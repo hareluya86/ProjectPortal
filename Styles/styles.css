@@ -1,0 +1,1058 @@
+@import url(http://fonts.murdoch.edu.au/adelle/adelle.css);
+
+@import url(http://fonts.murdoch.edu.au/intro/intro.css);
+
+/*!
+ *	Empty-coop:
+ *  A front-end starting point from the team at Hatchd
+ *
+ *	@Author Hatchd Digital
+ *
+ *  ...HHH...........................................HH ................DDD....
+ *  ...HHH.......................TT .................HH.................DDD....
+ *  ...HHH.......................TT..................HH.................DDD....
+ *  ...HHHHHHHH..... AAAAAA......TTTTTT....CCCCCC....HHHHHHHN..... DDDDDDDD....
+ *  ...HHHHHHHHH ...AAAAAAAAA....TTTTTT...CCCCCCCC...HHHHHHHHH... DDDDDDDDD....
+ *  ...HHH... HH..........AAA....TTT..... CCC........HH....HHH....DD....DDD....
+ *  ...HHH... HH.....AAAAAAAA....TTT......CC.........HH....HHH...DDD....DDD....
+ *  ...HHH... HH....AAA...AAA....TTT......CC ........HH....HHH...DDD....DDD....
+ *  ...HHH... HH....AAA...AAA....TTT..... CCC........HH....HHH....DD....DDD....
+ *  ...HHH... HH....AAA..AAAA....TTT..... CCCC..CC...HH....HHH....DDD..DDDD....
+ *  ...HHH... HH.....AAAAAAAA....TTTTTT....CCCCCCC...HH....HHH.... DDDDDDD.....
+ *
+ */
+
+/**
+ * Settings
+ *
+ * Define colours, text sizes etc... before any styles are pulled in
+ * Also, establish grid type and settings
+ */
+
+/**
+ * Global settings
+ *
+ * Use this file to set custom colours, and to set
+ * the base text size / line height value
+ * More settings can be added here, the sky is the limit!
+ */
+
+/**
+ * Grid
+ */
+
+/**
+     * Grid config
+     *
+     * @raw width:     target container width (px);
+     * @total-columns: number of grid columns;
+     * @gutter:        column gutter (px);
+     */
+
+/**
+     * Grid type
+     */
+
+/**
+ * Fluid grid
+ * All units in percent
+*/
+
+/**
+ * Calculated widths
+ *
+ * @rounded-width: @raw-width
+ * @gutter: @raw-gutter converted to a percentage value;
+ */
+
+/**
+ * Ensure gutter doesn't get thinner as grid units are nested
+ */
+
+/**
+ * Mixin
+ */
+
+#grid {
+  /**
+     * Grid unit:
+     * Right-hand gutter
+     */
+  /**
+     * Grid unit:
+     * No gutter
+     * Note: Should be used for last unit in a row
+     */
+  /**
+     * Grid unit:
+     * Equal gutter on both sides
+     */
+  /**
+     * Grid unit:
+     * Width only
+     */
+}
+
+/**
+ * Responsive design
+ */
+
+/**
+     * Breakpoints
+     * Figure no need to prefix these!
+     */
+
+/**
+     * Detect high-density (retina) devices
+     */
+
+/**
+ * Eggbox
+ */
+
+/**
+     * Fallback settings
+     */
+
+/**
+ * Typography
+ */
+
+/**
+     * Define the size of an em (base font size)
+     */
+
+/**
+     * Set Text sizes
+     */
+
+/**
+     * Project font famillies
+     */
+
+/**
+       * Basic font famillies
+       * Note: Altering left-hand variable name will affect other LESS files
+       */
+
+/**
+ * Colour swatches
+ */
+
+/**
+     * Project colours
+     */
+
+/**
+     * Basic colours
+     * Note: Altering left-hand variable name will affect other LESS files
+     */
+
+/**
+ * Mixins
+ *
+ * Define predefined mixins, and custom mixins (optional) that can be
+ * set on a per-project basis
+ */
+
+/**
+ * Predefined mixins
+ *
+ * A set of LESS mixins to make common css tasks that little bit easier
+ *
+ */
+
+/**
+ * Make an element square
+ * Automagically set the same width/height for a block-level element
+ *
+ * @param size: size in chosen unit
+ */
+
+/**
+ * Set width and height
+ * Automagically set the width/height for a block-level element
+ *
+ * @param width: width in chosen unit
+ * @param height: height in chosen unit
+ */
+
+/**
+ * Evenly distribute items
+ * Automagically set items evenly in a line
+ *
+ * @param item-number: number of items to distribute
+ */
+
+/**
+ * CSS triangles
+ * Make pure CSS triangles
+ * Useful for pointers and tooltips
+ */
+
+/**
+ * Style placeholder text
+ */
+
+/**
+ * Global custom mixins
+ *
+ * Mixins that can be set on a per-project basis
+ */
+
+/**
+ * Establish any resource using an @rule
+ *
+ * Set rules for any CSS resource requiring an @ prefix,
+ * such as @animate rules or @font-face fonts
+ */
+
+/**
+ * Webfonts
+ *
+ * Reference webfonts with an @font-face rule
+ */
+
+#eoybanner2013 {
+  /**
+     * Create a clean slate
+     *
+     * Ensure we level any browser differences, so we can build any
+     * subsequent declarations on level ground
+     */
+  /**
+ * normalize.css v2.1.3
+ * MIT License
+ * @src git.io/normalize
+ *
+ * All unneeded components, and ones addressing presentation that are
+ * handled elsewhere have been stripped out. (With a // LESS comment)
+ */
+  /**
+ * HTML5 display definitions
+ *
+ */
+  /**
+    * Corrects `block` display not defined in IE6/7/8/9 & FF3.
+    */
+  /**
+     * Correct `inline-block` display not defined in IE 8/9.
+     */
+  /**
+     * Prevents modern browsers from displaying `audio` without controls.
+     * Remove excess height in iOS5 devices.
+     */
+  /**
+     * Address `[hidden]` styling not present in IE 8/9.
+     * Hide the `template` element in IE, Safari, and Firefox < 22.
+     */
+  /**
+     * Remove list-style and margin on nav
+     *
+     * Added by the Hatchd team
+     *
+     */
+  /**
+ * Base
+ *
+ */
+  /**
+     * 1. Set default font family to sans-serif.
+     * 2. Prevent iOS text size adjust after orientation change, without disabling
+     *    user zoom.
+     */
+  /**
+     * Remove default margin.
+     */
+  /**
+ * Links
+ *
+ */
+  /**
+     * Remove the gray background color from active links in IE 10.
+     */
+  /**
+     * Address `outline` inconsistency between Chrome and other browsers.
+     */
+  /**
+     * Improve readability when focused and also mouse hovered in all browsers.
+     */
+  /**
+ * Typography
+ */
+  /**
+     * Address variable `h1` font-size and margin within `section` and `article`
+     * contexts in Firefox 4+, Safari 5, and Chrome.
+     */
+  /**
+     * Address styling not present in IE 8/9, Safari 5, and Chrome.
+     */
+  /**
+     * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+     */
+  /**
+     * Address styling not present in Safari 5 and Chrome.
+     */
+  /**
+     * Address differences between Firefox and other browsers.
+     */
+  /**
+     * Address styling not present in IE 8/9.
+     */
+  /**
+     * Correct font family set oddly in Safari 5 and Chrome.
+     */
+  /**
+     * Improve readability of pre-formatted text in all browsers.
+     */
+  /**
+     * Set consistent quote types.
+     */
+  /**
+     * Address inconsistent and variable font size in all browsers.
+     */
+  /**
+     * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+     */
+  /**
+ * Embedded content
+ */
+  /**
+     * Remove border when inside `a` element in IE 8/9.
+     */
+  /**
+     * Correct overflow displayed oddly in IE 9.
+     */
+  /**
+ * Figures
+ */
+  /**
+     * Address margin not present in IE 8/9 and Safari 5.
+     */
+  /**
+ * Forms
+ *
+ */
+  /**
+     * Define consistent border, margin, and padding.
+     */
+  /**
+     * 1. Correct `color` not being inherited in IE 8/9.
+     * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+     */
+  /**
+     * 1. Correct font family not being inherited in all browsers.
+     * 2. Correct font size not being inherited in all browsers.
+     * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+     */
+  /**
+     * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+     * the UA stylesheet.
+     */
+  /**
+     * Address inconsistent `text-transform` inheritance for `button` and `select`.
+     * All other form control elements do not inherit `text-transform` values.
+     * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+     * Correct `select` style inheritance in Firefox 4+ and Opera.
+     */
+  /**
+     * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+     *    and `video` controls.
+     * 2. Correct inability to style clickable `input` types in iOS.
+     * 3. Improve usability and consistency of cursor style between image-type
+     *    `input` and others.
+     */
+  /**
+     * Re-set default cursor for disabled elements.
+     */
+  /**
+     * 1. Address box sizing set to `content-box` in IE 8/9/10.
+     * 2. Remove excess padding in IE 8/9/10.
+     */
+  /**
+     * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+     * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+     *    (include `-moz` to future-proof).
+     */
+  /**
+     * Remove inner padding and search cancel button in Safari 5 and Chrome
+     * on OS X.
+     */
+  /**
+     * Remove inner padding and border in Firefox 4+.
+     */
+  /**
+     * 1. Remove default vertical scrollbar in IE 8/9.
+     * 2. Improve readability and alignment in all browsers.
+     */
+  /**
+ * Tables
+ *
+ */
+  /**
+     * Remove most spacing between table cells.
+     */
+  /**
+ * For mobile, remove text-size adjust on webkit-based browsers
+ */
+  /**
+     * Set base rules that can apply site-wide
+     *
+     * These should apply to naked elements, no classes should be defined here
+     */
+  /**
+ * Base link and text selection styles
+ */
+  /**
+ * Link styles
+ */
+  /**
+     * Define display fixes
+     *
+     * non-presentational classes, used to achieve functional things like
+     * clearing floats, visually hiding elements etc...
+     */
+  /**
+ * Display fixes
+ */
+  /**
+ * Clearfix
+ * @src http://css-tricks.com/snippets/css/clear-fix
+ */
+  /**
+ * Hide a text element but ensure it is still readable via assistive technology
+ */
+  /**
+ * Completely hide an element
+ */
+  /**
+ * Set an element to clear the element above it
+ */
+  /**
+ * Set text to be replaced by an image
+ */
+  /**
+     * Define modular components
+     *
+     * Reusable components, called with a class (or classes)
+     * that can exist anywhere in the site
+     */
+  /**
+ * The Hatchd Eggbox icon-font set
+ *
+ * Generated by grunt-webfont
+ */
+  /**
+     * LESS Mixins
+     */
+  /**
+     * Fallbacks for browsers that don't support
+     * @font-face and generated content
+     *
+     * Set fallback variables in settings.less
+     */
+  /**
+* Main banner styles
+*
+*/
+  /**
+ * Init
+ *
+ * Define variables, helper mixins and animations
+ * local to this component
+ */
+  /**
+ * Component classes
+ */
+  /**
+ * Outer banner styles
+ * Wrapper class defined in styles.less
+ */
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+  background: url('http://www.murdoch.edu.au/_image/End-of-Year-2013/hompage960x240.jpg/') repeat top left;
+  font-size: 100%;
+  /**
+ * Mask
+ */
+  /**
+ * Header
+ */
+  /**
+ * Nav
+ */
+  /**
+ * Footer
+ */
+  /**
+ * Modernizr hooks
+ */
+  /**
+ * Media queries
+ */
+  /**
+ * IE overrides
+ */
+}
+
+#eoybanner2013 article,
+#eoybanner2013 aside,
+#eoybanner2013 details,
+#eoybanner2013 figcaption,
+#eoybanner2013 figure,
+#eoybanner2013 footer,
+#eoybanner2013 header,
+#eoybanner2013 hgroup,
+#eoybanner2013 main,
+#eoybanner2013 nav,
+#eoybanner2013 section,
+#eoybanner2013 summary {
+  display: block;
+}
+
+#eoybanner2013 audio,
+#eoybanner2013 canvas,
+#eoybanner2013 video {
+  display: inline-block;
+}
+
+#eoybanner2013 audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+#eoybanner2013 [hidden],
+#eoybanner2013 template {
+  display: none;
+}
+
+#eoybanner2013 nav ul,
+#eoybanner2013 nav ol {
+  margin: 0;
+  list-style: none;
+}
+
+#eoybanner2013 nav li {
+  margin: 0;
+}
+
+#eoybanner2013 html {
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+#eoybanner2013 body {
+  margin: 0;
+}
+
+#eoybanner2013 a {
+  background: transparent;
+}
+
+#eoybanner2013 a:focus {
+  outline: thin dotted;
+}
+
+#eoybanner2013 a:active,
+#eoybanner2013 a:hover {
+  outline: 0;
+}
+
+#eoybanner2013 abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+#eoybanner2013 hr {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+#eoybanner2013 code,
+#eoybanner2013 kbd,
+#eoybanner2013 pre,
+#eoybanner2013 samp {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+
+#eoybanner2013 pre {
+  white-space: pre-wrap;
+}
+
+#eoybanner2013 q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+#eoybanner2013 small {
+  font-size: 80%;
+}
+
+#eoybanner2013 sub,
+#eoybanner2013 sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+#eoybanner2013 sup {
+  top: -0.5em;
+}
+
+#eoybanner2013 sub {
+  bottom: -0.25em;
+}
+
+#eoybanner2013 svg:not(:root) {
+  overflow: hidden;
+}
+
+#eoybanner2013 figure {
+  margin: 0;
+}
+
+#eoybanner2013 fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+#eoybanner2013 legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+#eoybanner2013 button,
+#eoybanner2013 input,
+#eoybanner2013 select,
+#eoybanner2013 textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+#eoybanner2013 button,
+#eoybanner2013 input {
+  line-height: normal;
+}
+
+#eoybanner2013 button,
+#eoybanner2013 select {
+  text-transform: none;
+}
+
+#eoybanner2013 button,
+#eoybanner2013 html input[type="button"],
+#eoybanner2013 input[type="reset"],
+#eoybanner2013 input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+#eoybanner2013 button[disabled],
+#eoybanner2013 html input[disabled] {
+  cursor: default;
+}
+
+#eoybanner2013 input[type="checkbox"],
+#eoybanner2013 input[type="radio"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+#eoybanner2013 input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  /* 2 */
+}
+
+#eoybanner2013 input[type="search"]::-webkit-search-cancel-button,
+#eoybanner2013 input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+#eoybanner2013 button::-moz-focus-inner,
+#eoybanner2013 input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+#eoybanner2013 textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+}
+
+#eoybanner2013 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@media (max-width:600px) {
+  #eoybanner2013 html {
+    -webkit-text-size-adjust: none;
+  }
+}
+
+#eoybanner2013 a,
+#eoybanner2013 a:link,
+#eoybanner2013 a:visited {
+  color: #ca0813;
+  text-decoration: underline;
+}
+
+#eoybanner2013 a:hover,
+#eoybanner2013 a:active {
+  color: #ca0813;
+  text-decoration: none;
+}
+
+#eoybanner2013 :focus {
+  outline: none;
+}
+
+#eoybanner2013 a[href^="tel"] {
+  color: inherit;
+}
+
+#eoybanner2013 .clearfix,
+#eoybanner2013 #eoybanner2013 .eoybanner2013-nav {
+  /**
+        * IE7
+        */
+}
+
+#eoybanner2013 .clearfix:after,
+#eoybanner2013 #eoybanner2013 .eoybanner2013-nav:after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  content: " ";
+  height: 0;
+  font-size: 0;
+}
+
+*:first-child + html #eoybanner2013 .clearfix,
+*:first-child + html #eoybanner2013 #eoybanner2013 .eoybanner2013-nav {
+  zoom: 1;
+}
+
+#eoybanner2013 .visual-hide {
+  position: absolute;
+  text-indent: -90000px;
+  text-align: left !important;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#eoybanner2013 .hide,
+#eoybanner2013 .state-hide {
+  display: none;
+}
+
+#eoybanner2013 .clear {
+  clear: both;
+  display: block;
+}
+
+#eoybanner2013 .replaced {
+  display: block;
+  text-indent: -900000px;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+
+@font-face {
+  font-family: "eggbox";
+  src: url("//fonts.murdoch.edu.au/eggbox/eggbox.eot");
+  src: url("//fonts.murdoch.edu.au/eggbox/eggbox.eot?#iefix") format("embedded-opentype"), url("//fonts.murdoch.edu.au/eggbox/eggbox.woff") format("woff"), url("//fonts.murdoch.edu.au/eggbox/eggbox.ttf") format("truetype"), url("//fonts.murdoch.edu.aueggbox/eggbox.svg?#eggbox") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+#eoybanner2013.state-active .eoybanner2013-mask {
+
+  display: block;
+}
+
+#eoybanner2013 .eoybanner2013-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: none;
+  width: 100%;
+  height: 240px;
+  background: #000000;
+  opacity: .7;
+}
+
+#eoybanner2013 .eoybanner2013-header {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  max-height: 150px;
+  margin: 0;
+  padding: 12px 25px;
+  background: #ffffff;
+  color: #ca0813;
+  font-family: "Intro-Black-Inline", sans-serif;
+  font-size: 26px;
+  line-height: 1em;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+#eoybanner2013 .eoybanner2013-header > span {
+  display: block;
+}
+
+#eoybanner2013 .eoybanner2013-header > span:first-child {
+  color: #b2a388;
+}
+
+#eoybanner2013 .eoybanner2013-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 40px;
+  background: #ca0813;
+}
+
+#eoybanner2013 .nav-openinghours {
+  display: inline-block;
+  margin: 0 0 0 45px;
+  color: #e4cfa8;
+  font-family: "Adelle-Bold", sans-serif;
+  font-size: 13px;
+  line-height: 40px;
+}
+
+#eoybanner2013 .nav-linkgroup {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 245px;
+}
+
+#eoybanner2013 .nav-linkgroup-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 195px;
+  margin: 0;
+  padding: 0 25px;
+  border-left: 1px solid #99060e;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: "Adelle-Bold", sans-serif;
+  line-height: 40px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#eoybanner2013 .nav-linkgroup-header:after {
+  content: "\f113";
+  font-family: "eggbox";
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eoybanner2013 .nav-linkgroup-header:after {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  display: block;
+}
+
+#eoybanner2013 .nav-linkgroup-header:hover {
+  background: #b10711;
+}
+
+#eoybanner2013 .nav-linkgroup-links {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  display: none;
+  width: 235px;
+  margin: 0;
+  padding: 0 5px 5px;
+  background: #e4cfa8;
+  list-style: none;
+}
+
+#eoybanner2013 .nav-linkgroup-links li {
+  font-size: 13px;
+  line-height: 1.5em;
+  font-family: "Adelle-Bold", sans-serif;
+}
+
+#eoybanner2013 .nav-linkgroup-links a {
+  position: relative;
+  display: block;
+  margin-top: 5px;
+  padding: 10px 15px;
+  background-color: #eadabb;
+}
+
+#eoybanner2013 .nav-linkgroup-links a:after {
+  content: "\f113";
+  font-family: "eggbox";
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eoybanner2013 .nav-linkgroup-links a:link,
+#eoybanner2013 .nav-linkgroup-links a:visited {
+  text-decoration: none;
+}
+
+#eoybanner2013 .nav-linkgroup-links a:hover,
+#eoybanner2013 .nav-linkgroup-links a:active {
+  color: #ffffff;
+  background: #dec495;
+}
+
+#eoybanner2013 .nav-linkgroup-links a:after {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  display: block;
+  margin-top: -0.5em;
+}
+
+#eoybanner2013 .nav-linkgroup--courses {
+  right: 245px;
+}
+
+#eoybanner2013 .nav-linkgroup--help {
+  right: 0;
+}
+
+#eoybanner2013 .nav-linkgroup.state-active .nav-linkgroup-header {
+  top: -5px;
+  width: 185px;
+  border: 5px solid #e4cfa8;
+  color: #000000;
+  background-color: #f0e4cf;
+}
+
+#eoybanner2013 .nav-linkgroup.state-active .nav-linkgroup-header:after {
+  content: "\f114";
+  font-family: "eggbox";
+  display: inline-block;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#eoybanner2013 .nav-linkgroup.state-active .nav-linkgroup-header:hover {
+  background-color: #d8ba81;
+}
+
+#eoybanner2013 .nav-linkgroup.state-active .nav-linkgroup-links {
+  display: block;
+}
+
+#eoybanner2013 .eoybanner2013-footer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 0;
+  padding: 20px;
+  background: #e4cfa8;
+}
+
+#eoybanner2013 .eoybanner2013-footer p {
+  margin: 0;
+  font-family: "Adelle-Bold", sans-serif;
+  font-size: 13px;
+  line-height: 1.5em;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+#eoybanner2013 .eoybanner2013-footer a {
+  display: block;
+}
+
+#eoybanner2013.lt-ie9 .eoybanner2013-mask {
+  background: transparent url('http://www.murdoch.edu.au/_image/End-of-Year-2013/mask-bg.png/') repeat top left;
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup-links a {
+  background-image: url('http://www.murdoch.edu.au/_image/End-of-Year-2013/arrow-right-red.png/');
+  background-position: 98% center;
+  background-repeat: no-repeat;
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup-links a:after {
+  display: none;
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup-links a:hover {
+  background-image: url('http://www.murdoch.edu.au/_image/End-of-Year-2013/arrow-right-white.png/');
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup-header {
+  background-image: url('http://www.murdoch.edu.au/_image/End-of-Year-2013/arrow-right-white.png/');
+  background-position: 98% center;
+  background-repeat: no-repeat;
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup-header:after {
+  display: none;
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup.state-active .nav-linkgroup-header {
+  background-image: url('http://www.murdoch.edu.au/_image/End-of-Year-2013/arrow-top-black.png/');
+}
+
+#eoybanner2013.lt-ie9 .nav-linkgroup.state-active .nav-linkgroup-header:after {
+  display: none;
+}
