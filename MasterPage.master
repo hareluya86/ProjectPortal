@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,6 +19,7 @@
     <!--<link rel="stylesheet" type="text/css" href="~/Styles/research_hp_banner.css" content_id="33822" />//-->
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/semester1_2014_v2.css">
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/styles.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/Custom.css">
     <style><!--should be in some css file-->
             .mboxDefault
             {
@@ -49,7 +51,7 @@ mais.group=staff(current),other(current)">
 </head>
 <body id="homepage" class="page">
     <form id="Form1" runat="server">
-            
+        <ajaxControl:ToolkitScriptManager ID="ScriptManager1" runat="server" />
     <div id="body">
         <!--Start Murdoch header-->
         <div id="header">

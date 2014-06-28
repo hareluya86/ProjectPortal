@@ -5,6 +5,6 @@
         <siteMapNode url="~/Students.aspx" title="Students"  description="" />
         <siteMapNode url="~/UC.aspx" title="Unit Coordinators"  description="" />
         <siteMapNode url="~/Administrator.aspx" title="Administrators"  description="" />
-        <siteMapNode url="~/Tests/TestHibernate.aspx" title="Test Hibernate"  description="" />
+        <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />
     </siteMapNode>
 </siteMap>
