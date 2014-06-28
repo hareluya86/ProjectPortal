@@ -20,7 +20,7 @@ public class UserModule
         hibernate = new Hibernate();
 	}
 
-    public void login(string userid, string password)
+    public UserAccount login(string userid, string password)
     {
         if (userid == null || userid.Length <= 0)
             throw new LoginException("Please enter userid.");
@@ -31,6 +31,7 @@ public class UserModule
         if (!Int64.TryParse(userid, out convertedUserid))
             throw new LoginException("Userid is invalid.");
 
+        //find user
         UserAccount user = this.getUsersByUserId(convertedUserid);
         if (user == null)
             throw new LoginException("Invalid credentials");
@@ -41,6 +42,8 @@ public class UserModule
         {
             throw new LoginException("Invalid credentials");
         }
+
+        return user;
 
     }
 
@@ -92,13 +95,13 @@ public class UserModule
             }
             else if (i % 4 == 1)
             {
-                Administrator admin = new Administrator();
+                Admin admin = new Admin();
                 user = admin;
 
             }
             else
             {
-                user = new Administrator(); //default
+                user = new Admin(); //default
             }
 
             //save

@@ -82,8 +82,10 @@ mais.group=staff(current),other(current)">
         <!--End Murdoch header-->
 
         <!--Start Project Banner-->
-        <div id="promo_area">
-            <div class="promo">fiejgi</div>
+        <div id="promo_area" style="width: 100%;">
+            <div class="jumbotron">
+                <h2>This is the project banner</h2>
+            </div>
         </div>
         <!--End Project Banner-->
 

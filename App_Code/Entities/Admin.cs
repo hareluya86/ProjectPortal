@@ -6,9 +6,9 @@ using System.Web;
 /// <summary>
 /// Summary description for Administrator
 /// </summary>
-public class Administrator : UserAccount
+public class Admin : UserAccount
 {
-	public Administrator()
+	public Admin()
 	{
         ROLE = "ADMINISTRATOR";
 	}

@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Administrator.aspx.cs" Inherits="Administrator" MasterPageFile="~/MasterPage.master" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -10,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Administrator Authentication</div>
+                        <div class="panel-heading">User Authentication</div>
                         <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="AdminLoginPanel">
                             <ProgressTemplate>
                                 <div class="overlay">
@@ -26,15 +27,18 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <asp:Label Text="Admin ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label"></asp:Label>
+                                            <asp:Label Text="User ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label"></asp:Label>
                                             <div class="col-sm-6">
                                                 <asp:TextBox ID="input_userid" runat="server" CssClass="form-control"></asp:TextBox>
+                                                <ajaxControl:FilteredTextBoxExtender ID="FilterUserid" runat="server"
+                                                                        TargetControlID="input_userid"
+                                                                        FilterType="Numbers" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 5px;">
                                         <div class="form-group">
-                                            <asp:Label Text="Admin Password: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label"></asp:Label>
+                                            <asp:Label Text="Password: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label"></asp:Label>
                                             <div class="col-sm-6">
                                                 <asp:TextBox ID="input_password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                             </div>

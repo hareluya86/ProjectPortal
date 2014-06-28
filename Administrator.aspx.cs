@@ -21,15 +21,24 @@ public partial class Administrator : System.Web.UI.Page
 
     protected void Login(object sender, EventArgs e)
     {
+        System.Threading.Thread.Sleep(5000);
         UserModule userModule = new UserModule();
+        string userid = input_userid.Text;
+        string password = input_password.Text;
 
         try
         {
-            userModule.login(input_userid.Text, input_password.Text);
-            login_message.Controls.Add(new LiteralControl(
+            UserAccount authenticatedUser = userModule.login(userid, password);
+            //Check user role
+            //Not yet implemented
+
+            Session["User"] = userid;
+            /*login_message.Controls.Add(new LiteralControl(
                 "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
                     + "Login successful!"
                     + "</div>"));
+             */
+
         }
         catch (LoginException lex)
         {
