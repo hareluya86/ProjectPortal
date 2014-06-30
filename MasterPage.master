@@ -58,16 +58,12 @@ mais.group=staff(current),other(current)">
             <div id="murdoch_header_logo" onclick="document.location.href='/'">
             </div>
             
-            <div id="visitor_type">
-                <div id="geotarget">
-                </div>
-            </div>
-            <ul id="main_navigation">
+            <ul id="main_navigation"><!--dynamic menu-->
 
-                <!--test dynamic menu-->
-
-                <li><asp:HyperLink runat="server" ID="home" NavigateUrl="~/Home.aspx">Home</asp:HyperLink></li>
-                <asp:Repeater runat="server" ID="menu" DataSourceID="nav1">
+                <li><asp:HyperLink runat="server" ID="home" NavigateUrl="~/Default.aspx">Home</asp:HyperLink></li>
+                <% if(Session["Userid"] == null){ %>
+                <asp:SiteMapDataSource ID="Menu_Public" runat="server" ShowStartingNode="false" />
+                <asp:Repeater runat="server" ID="menu_public_repeater" DataSourceID="Menu_Public">
                     <ItemTemplate>
                         <li>
                             <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
@@ -76,8 +72,30 @@ mais.group=staff(current),other(current)">
                         </li>
                     </ItemTemplate>
                 </asp:Repeater>
-                 <asp:SiteMapDataSource ID="nav1" runat="server" ShowStartingNode="false" />
+                 
+                <%} else { 
+                       //if("ADMINISTRATOR".Equals(Session["UserRole"]){ %>
+                <asp:SiteMapDataSource ID="Menu_Administrator" runat="server" 
+                    ShowStartingNode="false" StartingNodeUrl="~/MemberPage/Administrator/Administrator.aspx" />
+                <asp:Repeater runat="server" ID="menu_administrator_repeater" DataSourceID="Menu_Administrator">
+                    <ItemTemplate>
+                        <li>
+                            <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
+                                <%# Eval("Title") %>
+                            </asp:HyperLink>
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <%} %>
             </ul>
+
+            <!--Authenticated user panel-->
+            <% if(Session["Userid"] != null){ %>
+            <div class="auth-panel">
+                <span><%= Session["Username"] %> , </span>
+                <a href="/">logout</a>
+            </div>
+            <% } %>
         </div>
         <!--End Murdoch header-->
 

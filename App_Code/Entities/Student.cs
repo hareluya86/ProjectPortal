@@ -8,7 +8,8 @@ using System.Web;
 /// </summary>
 public class Student : UserAccount
 {
-    public virtual string FIRSTNAME { get; set; }
+    public virtual string FIRSTNAME { get; set; } //Firstname
+    public virtual string LASTNAME { get; set; } //Lastname
 
     public Student(){
         ROLE = "STUDENT"; //Workaround for Hibernate's limitation

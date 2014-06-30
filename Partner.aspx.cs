@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Partners : BasePage
+public partial class Partners : BaseMemberPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
+
+    
 }

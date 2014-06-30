@@ -13,6 +13,7 @@
       </generator>
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
+    <property name="USERNAME" />
     <property name="ROLE" />
     <property name="PASSWORD" />
   </class>

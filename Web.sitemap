@@ -1,10 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
-    <siteMapNode title="Home" url="~/Default.aspx"  description="">
-        <!--<siteMapNode url="~/Partners.aspx" title="Partners"  description="" />
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode title="Home" url="~/Default.aspx"  description="" >
+    <!--<siteMapNode url="~/Partners.aspx" title="Partners"  description="" />
         <siteMapNode url="~/Students.aspx" title="Students"  description="" />
         <siteMapNode url="~/UC.aspx" title="Unit Coordinators"  description="" />-->
-        <siteMapNode url="~/Administrator.aspx" title="Access Project Portal"  description="" />
-        <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />
+    <siteMapNode url="~/LoginPage.aspx" title="Access Project Portal"  description="Access Project Portal by loggin in">
+      <siteMapNode url="~/MemberPage/Administrator/Administrator.aspx" title="Administrator" >
+        <siteMapNode url="~/MemberPage/Administrator/ManagePartners.aspx" title="Manage Partners" />
+        <siteMapNode title="Manage Students" />
+        <siteMapNode title="Manage Unit Coordinators" />
+      </siteMapNode>
     </siteMapNode>
+    <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />
+  </siteMapNode>
 </siteMap>

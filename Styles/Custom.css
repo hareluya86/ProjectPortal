@@ -17,3 +17,11 @@
     left: 50%;
     margin-left: -109px;
 }
+
+.auth-panel {
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: 12px;
+    font-weight: bold;
+}

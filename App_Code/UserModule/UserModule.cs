@@ -85,23 +85,30 @@ public class UserModule
         for (int i = 0; i < numUsers; i++)
         {
             UserAccount user;
-            if (i % 4 == 0)
+            if (i % 4 == 1)
             {
                 Student student = new Student();
                 student.FIRSTNAME = "Student " + i;
+                student.USERNAME = student.FIRSTNAME;
                 student.PASSWORD = this.encodePassword("password"+i);
 
                 user = student;
             }
-            else if (i % 4 == 1)
+            else if (i % 4 == 0)
             {
                 Admin admin = new Admin();
+                admin.PASSWORD = this.encodePassword("password" + i);
+                admin.USERNAME = "admin" + i;
                 user = admin;
 
             }
             else
             {
-                user = new Admin(); //default
+                Student student = new Student();
+                student.FIRSTNAME = "Student " + i;
+                student.PASSWORD = this.encodePassword("password" + i);
+
+                user = student;
             }
 
             //save
