@@ -19,7 +19,7 @@
     <!--<link rel="stylesheet" type="text/css" href="~/Styles/research_hp_banner.css" content_id="33822" />//-->
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/semester1_2014_v2.css">
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/styles.css">
-    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/Custom.css">
+    
     <style><!--should be in some css file-->
             .mboxDefault
             {
@@ -43,6 +43,8 @@
     <meta name="access_preview" content="mais=1
 mais.group=staff(current),other(current)">
 
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/Custom.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/flat-ui.css">
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/bootstrap.css">
     <!--additional stylesheets-->
     <asp:ContentPlaceHolder ID="Head" runat="server">

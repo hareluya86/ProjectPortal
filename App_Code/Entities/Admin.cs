@@ -8,6 +8,8 @@ using System.Web;
 /// </summary>
 public class Admin : UserAccount
 {
+    public virtual string FAX { get; set; }
+
 	public Admin()
 	{
         ROLE = "ADMINISTRATOR";

@@ -4,9 +4,10 @@
   namespace="ProjectPortal.App_Code">-->
 
   <!-- more mapping info here -->
-  <joined-subclass name="Admin, App_Code" table="ADMINISTRATOR" extends="UserAccount">
+  <joined-subclass name="Partner, App_Code" table="PARTNER" extends="UserAccount">
     <key column="USERID" />
     <property name="ROLE" />
+    <property name="COMPANY_REG_NUM" />
     <property name="FAX" />
 
   </joined-subclass>

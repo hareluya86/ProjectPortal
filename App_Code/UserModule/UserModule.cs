@@ -102,6 +102,13 @@ public class UserModule
                 user = admin;
 
             }
+            else if (i % 4 == 2)
+            {
+                Partner partner = new Partner();
+                partner.PASSWORD = this.encodePassword("password" + i);
+                partner.USERNAME = "company " + i;
+                user = partner;
+            }
             else
             {
                 Student student = new Student();

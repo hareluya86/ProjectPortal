@@ -5,11 +5,9 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <ajaxControl:TabContainer runat="server">
-        <ajaxControl:TabPanel HeaderText="Partner Details" runat="server">
-            <ContentTemplate>
-                <h2>This is where you manage the partners</h2>
-            </ContentTemplate>
-        </ajaxControl:TabPanel>
-    </ajaxControl:TabContainer>
+    <div class="row">
+        <div class="col-lg-2">
+            This is the list of partners
+        </div>
+    </div>
 </asp:Content>
