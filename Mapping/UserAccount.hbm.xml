@@ -13,9 +13,9 @@
       </generator>
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
-    <property name="PASSWORD" />
     <property name="USERNAME" />
     <property name="ROLE" />
+    <property name="PASSWORD" />
     <property name="EMAIL" />
     <property name="PHONE" />
     <property name="ADDRESS1" />
@@ -24,7 +24,6 @@
     <property name="STATE" />
     <property name="ZIP_CODE" />
     <property name="COUNTRY" />
-
   </class>
 
 </hibernate-mapping>

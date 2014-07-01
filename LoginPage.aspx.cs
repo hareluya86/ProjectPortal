@@ -15,13 +15,15 @@ public partial class LoginPage : System.Web.UI.Page
         if (!IsPostBack)
         {
             //Show "Please log in" message if it is a redirect from any of the member pages
-            if (Session["previous_url"] != null)
+            if (Session["previous_url"] != null && "true".Equals(Session["first_timeout"]))
             {
                 string previous_url = Session["previous_url"].ToString();
                 login_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
                         + "Your session has ended, please log in again."
                         + "</div>"));
+                //clear away "first_timeout" flag so that user won't see this message all the tiime
+                Session["first_timeout"] = null;
             }
         }
         

@@ -1,4 +1,9 @@
-﻿.overlay {
+﻿.main-content {
+    padding: 0 20px;
+}
+
+
+.overlay {
     position: absolute;
     background-color: white;
     top: 0px;

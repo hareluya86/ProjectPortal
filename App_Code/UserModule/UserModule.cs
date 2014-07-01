@@ -32,7 +32,7 @@ public class UserModule
             throw new LoginException("Userid is invalid.");
 
         //find user
-        UserAccount user = this.getUsersByUserId(convertedUserid);
+        UserAccount user = this.getUserByUserId(convertedUserid);
         if (user == null)
             throw new LoginException("Invalid credentials");
 
@@ -59,7 +59,7 @@ public class UserModule
         return BCrypt.Net.BCrypt.Verify(rawPassword+mySalt, hash);
     }
 
-    public UserAccount getUsersByUserId(Int64 userid)
+    public UserAccount getUserByUserId(Int64 userid)
     {
         if (session == null || !session.IsOpen)
         {
@@ -69,6 +69,21 @@ public class UserModule
             .Add(Restrictions.Eq("USERID", userid))
             .UniqueResult<UserAccount>();
         return user;
+    }
+
+    public IList<UserAccount> getUsersByRole(string role, int start, int limit)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        var users = session.CreateCriteria<UserAccount>()
+            .Add(Restrictions.Eq("ROLE", role))
+            .SetFirstResult(0)
+            .SetMaxResults(limit)
+            .List<UserAccount>();
+        
+        return users;
     }
 
     /* Testing method */

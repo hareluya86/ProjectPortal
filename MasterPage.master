@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -19,13 +20,12 @@
     <!--<link rel="stylesheet" type="text/css" href="~/Styles/research_hp_banner.css" content_id="33822" />//-->
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/semester1_2014_v2.css">
     <link media="all" type="text/css" rel="stylesheet" href="~/Styles/styles.css">
-    
-    <style><!--should be in some css file-->
-            .mboxDefault
-            {
-                visibility: hidden;
-            }
-        </style>
+
+    <style>
+        <!-- should be in some css file-- > .mboxDefault {
+            visibility: hidden;
+        }
+    </style>
     <meta name="keywords" content="Homepage">
     <meta name="access_live" content="">
     <meta name="title" content="Murdoch University in Perth Australia">
@@ -54,76 +54,82 @@ mais.group=staff(current),other(current)">
 <body id="homepage" class="page">
     <form id="Form1" runat="server">
         <ajaxControl:ToolkitScriptManager ID="ScriptManager1" runat="server" />
-    <div id="body">
-        <!--Start Murdoch header-->
-        <div id="header">
-            <div id="murdoch_header_logo" onclick="document.location.href='/'">
-            </div>
-            
-            <ul id="main_navigation"><!--dynamic menu-->
+        <div id="body">
+            <!--Start Murdoch header-->
+            <div id="header">
+                <div id="murdoch_header_logo" onclick="document.location.href='/'">
+                </div>
 
-                <li><asp:HyperLink runat="server" ID="home" NavigateUrl="~/Default.aspx">Home</asp:HyperLink></li>
-                <% if(Session["Userid"] == null){ %>
-                <asp:SiteMapDataSource ID="Menu_Public" runat="server" ShowStartingNode="false" />
-                <asp:Repeater runat="server" ID="menu_public_repeater" DataSourceID="Menu_Public">
-                    <ItemTemplate>
-                        <li>
-                            <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
+                <ul id="main_navigation">
+                    <!--dynamic menu-->
+
+                    <li>
+                        <asp:HyperLink runat="server" ID="home" NavigateUrl="~/Default.aspx">Home</asp:HyperLink></li>
+                    <% if (Session["Userid"] == null)
+                       { %>
+                    <asp:SiteMapDataSource ID="Menu_Public" runat="server" ShowStartingNode="false" />
+                    <asp:Repeater runat="server" ID="menu_public_repeater" DataSourceID="Menu_Public">
+                        <ItemTemplate>
+                            <li>
+                                <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
                                 <%# Eval("Title") %>
-                            </asp:HyperLink>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-                 
-                <%} else { 
-                       //if("ADMINISTRATOR".Equals(Session["UserRole"]){ %>
-                <asp:SiteMapDataSource ID="Menu_Administrator" runat="server" 
-                    ShowStartingNode="false" StartingNodeUrl="~/MemberPage/Administrator/Administrator.aspx" />
-                <asp:Repeater runat="server" ID="menu_administrator_repeater" DataSourceID="Menu_Administrator">
-                    <ItemTemplate>
-                        <li>
-                            <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
+                                </asp:HyperLink>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <%}
+                       else
+                       {
+                           //if("ADMINISTRATOR".Equals(Session["UserRole"]){ %>
+                    <asp:SiteMapDataSource ID="Menu_Administrator" runat="server"
+                        ShowStartingNode="false" StartingNodeUrl="~/MemberPage/Administrator/Administrator.aspx" />
+                    <asp:Repeater runat="server" ID="menu_administrator_repeater" DataSourceID="Menu_Administrator">
+                        <ItemTemplate>
+                            <li>
+                                <asp:HyperLink runat="server" NavigateUrl='<%# Eval("Url")  %>'>
                                 <%# Eval("Title") %>
-                            </asp:HyperLink>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-                <%} %>
-            </ul>
+                                </asp:HyperLink>
+                            </li>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <%} %>
+                </ul>
 
-            <!--Authenticated user panel-->
-            <% if(Session["Userid"] != null){ %>
-            <div class="auth-panel">
-                <span><%= Session["Username"] %> , </span>
-                <a href="/">logout</a>
+                <!--Authenticated user panel-->
+                <% if (Session["Userid"] != null)
+                   { %>
+                <div class="auth-panel">
+                    <span><%= Session["Username"] %> , </span>
+                    <a href="/">logout</a>
+                </div>
+                <% } %>
             </div>
-            <% } %>
-        </div>
-        <!--End Murdoch header-->
+            <!--End Murdoch header-->
 
-        <!--Start Project Banner-->
-        <div id="promo_area" style="width: 100%;">
-            <div class="jumbotron">
-                <h2>This is the project banner</h2>
+            <!--Start Project Banner-->
+            <div id="promo_area" style="width: 100%;">
+                <div class="jumbotron">
+                    <h2>This is the project banner</h2>
+                </div>
             </div>
-        </div>
-        <!--End Project Banner-->
+            <!--End Project Banner-->
 
-        <!--Main content-->
-        <div class="content">
-            <div id="main-content">
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
+            <!--Main content-->
+            <div id="content">
+                <div id="main_content">
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <div id="footer">
+                <div class="links">
+                    These are the links
+                </div>
             </div>
         </div>
-        <div id="footer">
-            <div class="links">
-                These are the links
-            </div>
-        </div>
-    </div>
-    <!--All Scripts-->
-    <!--<script type="text/javascript" src="/_javascript/s_code.js/" xml:space="preserve">
+        <!--All Scripts-->
+        <!--<script type="text/javascript" src="/_javascript/s_code.js/" xml:space="preserve">
     </script>
     <script type="text/javascript" src="/_javascript/omniture/mbox.js/" xml:space="preserve">
     </script>
@@ -136,9 +142,10 @@ mais.group=staff(current),other(current)">
     <script src="http://www.murdoch.edu.au/_javascript/jquery.form.js/" type="text/javascript"
         xml:space="preserve">
     </script>-->
-    <asp:ContentPlaceHolder ID="Scripts" runat="server">
-    </asp:ContentPlaceHolder>
-    <!--All Scripts-->
+        <script type="text/javascript" src="/Scripts/jquery-1.8.3.min.js" ></script>
+        <asp:ContentPlaceHolder ID="Scripts" runat="server">
+        </asp:ContentPlaceHolder>
+        <!--All Scripts-->
     </form>
 </body>
 </html>
