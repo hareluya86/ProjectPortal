@@ -7,37 +7,120 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div style="">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-lg-2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Company Name</div>
-                    <div class="panel-body" style="overflow: auto">
+                    <div class="panel-body" style="overflow: auto; height: 500px;">
                         <!--dynamically add datasource from codeBehind-->
                         <asp:Repeater runat="server" ID="company_list">
                             <ItemTemplate>
-                                <button type="button" class="btn btn-default truncate" style="width: 100%; text-align: left; overflow: hidden;"
-                                    value="">
-                                    <%# Eval("USERNAME") %>
-                                </button>
+                                <asp:Button CssClass="btn truncate company-button" 
+                                    runat="server" Text='<%# Eval("USERNAME") %>' 
+                                    CommandArgument='<%# Eval("USERID") %>' OnClick="loadPartner"/>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Company Contacts</div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="company_name">Company Name: </label>
+            <div class="col-lg-5 myforms">
+                <div class="row">
+                    <h2>Company Contacts</h2>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="company_name" Text="Company Name: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
                             <asp:TextBox ID="company_name" CssClass="form-control" runat="server"></asp:TextBox>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="company_reg_no" Text="Company Reg No: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="email" Text="Email: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="email" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="phone" Text="Phone: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="phone" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="fax" Text="Fax: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="fax" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h2>Company Address</h2>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="address1" Text="Address Line 1: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="address1" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="address2" Text="Address Line 2: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="address2" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="city_town" Text="City/Town: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="city_town" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="state" Text="State: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="state" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="zipcode" Text="Zip Code: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="zipcode" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <asp:Label AssociatedControlID="country" Text="Country: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                        <div class="col-sm-8">
+                            <asp:TextBox ID="country" CssClass="form-control" runat="server"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-5">
-                This are their projects
-            </div>
+            <div class="col-lg-4"
         </div>
+
     </div>
 </asp:Content>
 
@@ -46,9 +129,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.truncate').each(function () {
-                var button_text = $(this).text().trim();
-                if (button_text.length > 20) {
-                    $(this).text(button_text.substring(0, 20)+'...');
+                var button_text = $(this).val().trim();
+                if (button_text.length > 12) {
+                    $(this).val(button_text.substring(0, 12) + '...');
                 }
             })
         })

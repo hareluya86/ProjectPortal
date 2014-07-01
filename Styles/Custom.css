@@ -30,3 +30,17 @@
     font-size: 12px;
     font-weight: bold;
 }
+
+.myforms div.row{
+    margin-bottom: 5px;
+}
+
+.myforms span.control-label{
+    
+}
+
+input.truncate {
+    width:100%;
+    text-align:left;
+    margin-top:4px;
+}
