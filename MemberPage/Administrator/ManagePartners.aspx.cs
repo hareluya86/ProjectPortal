@@ -25,6 +25,7 @@ public partial class ManagePartners : BaseMemberPage
 
     protected void loadPartner(object sender, EventArgs e)
     {
+        System.Threading.Thread.Sleep(3000);
         Button partnerButton = (Button)sender;
         string userid = partnerButton.CommandArgument;
         long convertedUserid;
@@ -37,7 +38,7 @@ public partial class ManagePartners : BaseMemberPage
             if (partner != null)
             {
                 loadPartner(partner);
-                switchPartner(partner);
+                //switchPartner(partner);
             }
         }
     }
