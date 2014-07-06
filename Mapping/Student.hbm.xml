@@ -5,7 +5,7 @@
 
   <!-- more mapping info here -->
   <joined-subclass name="Student, App_Code" table="STUDENT" extends="UserAccount">
-    <key column="USERID" />
+    <key column="USER_ID" />
     <property name="ROLE" />
     
     <property name="FIRSTNAME" />

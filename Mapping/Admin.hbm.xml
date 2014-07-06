@@ -5,7 +5,7 @@
 
   <!-- more mapping info here -->
   <joined-subclass name="Admin, App_Code" table="ADMINISTRATOR" extends="UserAccount">
-    <key column="USERID" />
+    <key column="USER_ID" />
     <property name="ROLE" />
     <property name="FAX" />
 

@@ -97,4 +97,27 @@ public partial class Tests_Default : System.Web.UI.Page
         input_userid.Text = "";
         input_password.Text = "";
     }
+
+    protected void TestCreateProjects(object sender, EventArgs e)
+    {
+        ProjectModule projectModule = new ProjectModule();
+
+        long partnerIdLong = Convert.ToInt64(partnerIdTextbox.Text);
+        int numProjectsInt = Convert.ToInt32(numProjectsTextbox.Text);
+        IList<Project> projects = projectModule.createRandomProjects(partnerIdLong, numProjectsInt);
+
+        Session["projects"] = projects;
+        CreatedProjectsTable.DataSource = Session["projects"];
+        CreatedProjectsTable.DataBind();
+    }
+
+    protected void CreatedProjectsTable_PageIndexChanging(object sender, DataGridPageChangedEventArgs e)
+    {
+        if (sender != null)
+        {
+            CreatedProjectsTable.CurrentPageIndex = e.NewPageIndex;
+            CreatedProjectsTable.DataSource = Session["projects"];
+            CreatedProjectsTable.DataBind();
+        }
+    }
 }

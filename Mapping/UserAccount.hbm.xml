@@ -5,10 +5,10 @@
 
   <!-- more mapping info here -->
   <class name="UserAccount, App_Code" abstract="true" table="USERACCOUNT">
-    <id name="USERID" type="Int64">
+    <id name="USER_ID" type="Int64">
       <generator class="NHibernate.Id.Enhanced.TableGenerator">
         <param name="table_name">SEQUENCE</param>
-        <param name="segment_value">USERID</param>
+        <param name="segment_value">USER_ID</param>
         <param name="initial_value">10000</param>
       </generator>
     </id>

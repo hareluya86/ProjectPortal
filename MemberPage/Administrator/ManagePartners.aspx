@@ -6,28 +6,22 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div>
-        <asp:UpdatePanel ID="EntireManagePartnerPage" runat="server">
+        <asp:UpdatePanel ID="EntireManagePartnerPage" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="panel panel-primary">
                             <div class="panel-heading">Company Name</div>
-                            <div class="panel-body" style="overflow: auto; height: 500px;">
+                            <div class="panel-body" style="overflow: auto; height: 550px;">
                                 <!--dynamically add datasource from codeBehind-->
-                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel">
-                                    <ProgressTemplate>
-                                        <div class="overlay">
-                                            <img src="../Images/ajax-loader.gif" />
-                                        </div>
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server">
+                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:Repeater runat="server" ID="company_list">
                                             <ItemTemplate>
                                                 <asp:Button CssClass="btn truncate company-button"
                                                     runat="server" Text='<%# Eval("USERNAME") %>'
-                                                    CommandArgument='<%# Eval("USERID") %>' OnClick="loadPartner" />
+                                                    CommandArgument='<%# Eval("USER_ID") %>' OnClick="loadPartner" />
+
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </ContentTemplate>
@@ -43,8 +37,10 @@
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server">
+                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" UpdateMode="Conditional" 
+                            ChildrenAsTriggers="true">
                             <ContentTemplate>
+                                <asp:HiddenField ID="company_id" runat="server" />
                                 <div class="row">
                                     <h2>Company Contacts</h2>
                                 </div>
@@ -60,7 +56,7 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="company_reg_no" Text="Company Reg No: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
-                                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server" Text></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -142,20 +138,72 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-                    <div class="col-lg-5">
-                        Projects on Portal
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <h2>Projects on Portal</h2>
+                        </div>
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_list_panel">
+                            <ProgressTemplate>
+                                <div class="overlay">
+                                    <img src="../Images/ajax-loader.gif" />
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                        <asp:UpdatePanel runat="server" ID="project_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                            <ContentTemplate>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="well well-sm" style="height: 300px; overflow:auto;">
+
+                                            <asp:Repeater runat="server" ID="project_list">
+                                                <ItemTemplate>
+                                                    <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;"
+                                                        value="">
+                                                        <%# Eval("PROJECT_TITLE") %>
+                                                    </button>
+                                                    <input type="hidden" runat="server"
+                                                        value='<%# Eval("PROJECT_ID") %>' />
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-lg-offset-8">
+                                        <asp:Button ID="delete_project_button" runat="server" CssClass="btn btn-default" Text="Delete" OnClick="Delete_Projects" />
+                                        <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
+                                            PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
+                                            CancelControlID="cancelButton">
+                                        </ajaxControl:ModalPopupExtender>
+                                        <asp:HiddenField runat="server" ID="hiddenModalTarget" />
+                                        <asp:Panel runat="server" ID="delete_projects_error">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">Message</div>
+                                                <div class="panel-body" style="overflow: auto; height: 500px;">
+                                                    <asp:Label runat="server" ID="delete_projects_error_message"></asp:Label>
+                                                    <asp:Button runat="server" ID="cancelButton" />
+                                                </div>
+                                            </div>
+
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
 
-
 </asp:Content>
 
 
 <asp:Content ContentPlaceHolderID="Scripts" runat="server">
-    <script type="text/javascript">
+    <!--for truncating longer partner names-->
+    <script id="truncate-button-script" type="text/javascript">
         $(document).ready(function () {
             $('.truncate').each(function () {
                 var button_text = $(this).val().trim();
@@ -164,5 +212,37 @@
                 }
             })
         })
+    </script>
+    <!--for changing the selected button-->
+    <script id="change-button-script" type="text/javascript">
+        $(document).ready(function () {
+            $('.company-button').click(function () {
+                $('.company-button').each(function () {
+                    $(this).removeClass('btn-primary');
+                })
+                $(this).addClass('btn-primary');
+                //$('#company_list_updatePanel').block('<div class="overlay"><img src="../Images/ajax-loader.gif" /></div>');
+            })
+            $('.company-button').ajaxComplete(function () {
+                //$('#company_list_updatePanel').unblockUI();
+            })
+            return false;
+        })
+    </script>
+    <!--for toggling the project button-->
+    <script id="toggle-project-button-script" type="text/javascript">
+
+        $(document).on('click', ".project-button", function () {
+
+            if ($(this).hasClass('btn-danger')) {
+                $(this).removeClass('btn-danger');
+            } else {
+
+                $(this).addClass('btn-danger');
+                $(this).next().attr('name', 'selected')
+                window.alert($(this).val());
+            }
+            return false; //very important! if not the container will refresh!
+        });
     </script>
 </asp:Content>

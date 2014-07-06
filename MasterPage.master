@@ -101,7 +101,7 @@ mais.group=staff(current),other(current)">
                    { %>
                 <div class="auth-panel">
                     <span><%= Session["Username"] %> , </span>
-                    <a href="/">logout</a>
+                    <a href="Logout.aspx">logout</a>
                 </div>
                 <% } %>
             </div>

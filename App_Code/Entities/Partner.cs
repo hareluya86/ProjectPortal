@@ -12,8 +12,11 @@ public class Partner : UserAccount
     public virtual string COMPANY_REG_NUM { get; set; }
     public virtual string FAX { get; set; }
 
+    public virtual IList<Project> PROJECTS { get; set; }
+
 	public Partner()
 	{
         ROLE = "PARTNER";
+        PROJECTS = new List<Project>();
 	}
 }

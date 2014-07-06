@@ -66,7 +66,7 @@ public class UserModule
             session = hibernate.getSession();
         }
         var user = session.CreateCriteria<UserAccount>()
-            .Add(Restrictions.Eq("USERID", userid))
+            .Add(Restrictions.Eq("USER_ID", userid))
             .UniqueResult<UserAccount>();
         return user;
     }

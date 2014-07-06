@@ -8,8 +8,6 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-lg-12">
-            
-
             <ajaxControl:TabContainer runat="server">
                 <ajaxControl:TabPanel runat="server" HeaderText="Hibernate setup">
                     <ContentTemplate>
@@ -74,9 +72,9 @@
                                                             <asp:DataGrid ID="InsertedUserTable" runat="server" CssClass="table"
                                                                 AllowPaging="true" PageSize="10"
                                                                 OnPageIndexChanged="InsertedUserTable_PageIndexChanging"
-                                                                DataKeyField="USERID">
+                                                                DataKeyField="USER_ID">
                                                                 <Columns>
-                                                                    <asp:BoundColumn DataField="USERID" />
+                                                                    <asp:BoundColumn DataField="USER_ID" />
                                                                     <asp:BoundColumn DataField="PASSWORD" />
                                                                 </Columns>
                                                                 <PagerStyle Position="Bottom" CssClass="pagination" />
@@ -185,10 +183,70 @@
                                 </div>
                             </div>
                         </div>
-
                     </ContentTemplate>
                 </ajaxControl:TabPanel>
+                <ajaxControl:TabPanel runat="server" HeaderText="Test Projects">
+                    <ContentTemplate>
+                        <div class="row">
+                            <!--Test create project-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Test creation of projects</div>
+                                    <div class="panel-body">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress4" AssociatedUpdatePanelID="TestCreateProjectsPanel">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="TestCreateProjectsPanel" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+
+                                                        <asp:Label ID="numProjectsLabel" runat="server" Text="Num of Projects: " />&nbsp;
+                                                        <asp:TextBox ID="numProjectsTextbox" runat="server" Width="50" />
+                                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
+                                                            TargetControlID="numProjectsTextbox"
+                                                            FilterType="Numbers" />
+                                                        <asp:Label ID="partnerIdLabel" runat="server" Text="Id of partner: " />&nbsp;
+                                                        <asp:TextBox ID="partnerIdTextbox" runat="server" Width="50" />
+                                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server"
+                                                            TargetControlID="partnerIdTextbox"
+                                                            FilterType="Numbers" />
+
+                                                        <asp:Button ID="createProjectButton" runat="server" Text="Insert"
+                                                            OnClick="TestCreateProjects" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="panel panel-default">
+                                                            <asp:DataGrid ID="CreatedProjectsTable" runat="server" CssClass="table"
+                                                                AllowPaging="true" PageSize="10"
+                                                                OnPageIndexChanged="CreatedProjectsTable_PageIndexChanging"
+                                                                DataKeyField="PROJECT_ID">
+                                                                <Columns>
+                                                                    <asp:BoundColumn DataField="PROJECT_ID" />
+                                                                    <asp:BoundColumn DataField="PROJECT_TITLE" />
+                                                                </Columns>
+                                                                <PagerStyle Position="Bottom" CssClass="pagination" />
+                                                            </asp:DataGrid>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </ajaxControl:TabPanel>
+
             </ajaxControl:TabContainer>
+            
         </div>
     </div>
 

@@ -5,10 +5,18 @@
 
   <!-- more mapping info here -->
   <joined-subclass name="Partner, App_Code" table="PARTNER" extends="UserAccount">
-    <key column="USERID" />
+    <key column="USER_ID" />
     <property name="ROLE" />
     <property name="COMPANY_REG_NUM" />
     <property name="FAX" />
+
+    <bag name="PROJECTS" cascade="none">
+      <cache usage="read-write"/>
+      <key column="USER_ID" not-null="true"></key>
+      <!--<list-index column="PROJECTS_LIST_POSITION"></list-index>-->
+      <one-to-many class="Project" />
+      
+    </bag>
 
   </joined-subclass>
 </hibernate-mapping>
