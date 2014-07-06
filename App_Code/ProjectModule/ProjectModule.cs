@@ -1,4 +1,5 @@
 ﻿using NHibernate;
+using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,19 @@ public class ProjectModule
 	{
         hibernate = new Hibernate();
 	}
+
+    public IList<Project> getProjectsByIds(List<Int64> projectIds)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        var projects = session.CreateCriteria<Project>()
+            .Add(Restrictions.In("PROJECT_ID", projectIds))
+            .List<Project>();
+
+        return projects;
+    }
 
     public void deleteProjects(IList<Int64> projectIds)
     {

@@ -13,8 +13,19 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading">Company Name</div>
                             <div class="panel-body" style="overflow: auto; height: 550px;">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel"
+                                    >
+                                    <ProgressTemplate>
+                                        <div class="overlay">
+                                            <img src="../Images/ajax-loader.gif" />
+                                        </div>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                                 <!--dynamically add datasource from codeBehind-->
-                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
+                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional" >
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="delete_project_button" />
+                                    </Triggers>
                                     <ContentTemplate>
                                         <asp:Repeater runat="server" ID="company_list">
                                             <ItemTemplate>
@@ -38,7 +49,8 @@
                             </ProgressTemplate>
                         </asp:UpdateProgress>
                         <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" UpdateMode="Conditional" 
-                            ChildrenAsTriggers="true">
+                            >
+                            
                             <ContentTemplate>
                                 <asp:HiddenField ID="company_id" runat="server" />
                                 <div class="row">
@@ -135,6 +147,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-sm-3 col-sm-offset-8">
+                                            <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
+                                                Text="Update" />
+                                        </div>
+                                    </div>
+                                </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -175,13 +195,13 @@
                                         <asp:Button ID="delete_project_button" runat="server" CssClass="btn btn-default" Text="Delete" OnClick="Delete_Projects" />
                                         <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
                                             PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
-                                            CancelControlID="cancelButton">
+                                            CancelControlID="cancelButton" BackgroundCssClass="overlay">
                                         </ajaxControl:ModalPopupExtender>
                                         <asp:HiddenField runat="server" ID="hiddenModalTarget" />
                                         <asp:Panel runat="server" ID="delete_projects_error">
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">Message</div>
-                                                <div class="panel-body" style="overflow: auto; height: 500px;">
+                                                <div class="panel-body" style="overflow: auto;">
                                                     <asp:Label runat="server" ID="delete_projects_error_message"></asp:Label>
                                                     <asp:Button runat="server" ID="cancelButton" />
                                                 </div>
@@ -240,9 +260,22 @@
 
                 $(this).addClass('btn-danger');
                 $(this).next().attr('name', 'selected')
-                window.alert($(this).val());
             }
             return false; //very important! if not the container will refresh!
         });
+    </script>
+    <script id="test-blocking" type="text/javascript">
+        var uiId = '';
+
+        function PageRequestManager_beginRequest(sender, args) {
+            var postbackElem = args.get_postBackElement();
+            uiId = postbackElem.id;
+            postbackElem.disabled = true;
+        }
+
+
+        function PageRequestManager_endRequest(sender, args) {
+            $get(uiId).disabled = false;
+        }
     </script>
 </asp:Content>

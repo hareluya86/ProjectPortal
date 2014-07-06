@@ -90,7 +90,8 @@ public partial class ManagePartners : BaseMemberPage
         ProjectModule projectModule = new ProjectModule();
         projectModule.deleteProjects(projects);
         error_modal_control.Show();
-        delete_projects_error_message.Text = "Success!";
+        cancelButton.Text = "Ok";
+        delete_projects_error_message.Text = projects.Count+" projects deleted successfully!";
 
         long partnerid;
         if (Session["partnerid"] != null &&
@@ -106,6 +107,11 @@ public partial class ManagePartners : BaseMemberPage
             error_modal_control.Show();
             delete_projects_error_message.Text = ex.Message;
         }*/
+
+    }
+
+    protected void UpdateCompanyContacts(object sender, EventArgs e)
+    {
 
     }
 }
