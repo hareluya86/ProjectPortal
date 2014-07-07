@@ -86,6 +86,30 @@ public class UserModule
         return users;
     }
 
+    public void updateUser(UserAccount user)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        session.BeginTransaction();
+        session.Update(user);
+        session.Transaction.Commit();
+    }
+
+    public void validateEmail(string email)
+    {
+        string[] checkAt = email.Split('@');
+        if (checkAt.Length < 2)
+            throw new InvalidEmailAddressException("Email address does not contain @");
+
+        if(checkAt.Length > 2)
+            throw new InvalidEmailAddressException("Email address contains more than one @");
+
+        if(email.Contains('/') || email.Contains('\\') || email.Contains('*') || email.Contains('\''))
+            throw new InvalidEmailAddressException("Email address contains illegal characters.");
+    }
+
     /* Testing method */
     public IList<UserAccount> insertUserAccount(int numUsers)
     {

@@ -49,7 +49,7 @@
                             </ProgressTemplate>
                         </asp:UpdateProgress>
                         <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" UpdateMode="Conditional" 
-                            >
+                            ChildrenAsTriggers="true">
                             
                             <ContentTemplate>
                                 <asp:HiddenField ID="company_id" runat="server" />
@@ -68,7 +68,10 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="company_reg_no" Text="Company Reg No: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
-                                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server" Text></asp:TextBox>
+                                            <ajaxControl:FilteredTextBoxExtender ID="companyRegNoFilter" runat="server"
+                                                            TargetControlID="company_reg_no" 
+                                                            FilterType="Numbers" />
+                                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +79,7 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="email" Text="Email: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
+                                            
                                             <asp:TextBox ID="email" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -84,6 +88,9 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="phone" Text="Phone: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
+                                            <ajaxControl:FilteredTextBoxExtender ID="phoneFilter" runat="server"
+                                                            TargetControlID="phone" 
+                                                            FilterType="Numbers" />
                                             <asp:TextBox ID="phone" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -92,6 +99,9 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="fax" Text="Fax: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
+                                            <ajaxControl:FilteredTextBoxExtender ID="faxFilter" runat="server"
+                                                            TargetControlID="fax" 
+                                                            FilterType="Numbers" />
                                             <asp:TextBox ID="fax" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -133,6 +143,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
+                                        <ajaxControl:FilteredTextBoxExtender ID="zipcodeFilter" runat="server"
+                                                            TargetControlID="zipcode" 
+                                                            FilterType="Numbers" />
                                         <asp:Label AssociatedControlID="zipcode" Text="Zip Code: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
                                             <asp:TextBox ID="zipcode" CssClass="form-control" runat="server"></asp:TextBox>
@@ -151,7 +164,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-3 col-sm-offset-8">
                                             <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
-                                                Text="Update" />
+                                                Text="Update" CssClass="btn btn-default" />
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +215,7 @@
                                             <div class="panel panel-primary">
                                                 <div class="panel-heading">Message</div>
                                                 <div class="panel-body" style="overflow: auto;">
-                                                    <asp:Label runat="server" ID="delete_projects_error_message"></asp:Label>
+                                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
                                                     <asp:Button runat="server" ID="cancelButton" />
                                                 </div>
                                             </div>
