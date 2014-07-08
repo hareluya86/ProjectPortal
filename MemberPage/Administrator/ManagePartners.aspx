@@ -9,7 +9,7 @@
         <asp:UpdatePanel ID="EntireManagePartnerPage" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3"><!--company list panel-->
                         <div class="panel panel-primary">
                             <div class="panel-heading">Company Name</div>
                             <div class="panel-body" style="overflow: auto; height: 550px;">
@@ -17,7 +17,7 @@
                                     >
                                     <ProgressTemplate>
                                         <div class="overlay">
-                                            <img src="../Images/ajax-loader.gif" />
+                                            <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                         </div>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
@@ -40,17 +40,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 myforms">
+                    <div class="col-lg-5 myforms"><!--update company contacts panel-->
                         <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="company_contacts_updatePanel">
                             <ProgressTemplate>
                                 <div class="overlay">
-                                    <img src="../Images/ajax-loader.gif" />
+                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" UpdateMode="Conditional" 
-                            ChildrenAsTriggers="true">
-                            
+                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" 
+                            >
                             <ContentTemplate>
                                 <asp:HiddenField ID="company_id" runat="server" />
                                 <div class="row">
@@ -162,9 +161,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
-                                        <div class="col-sm-3 col-sm-offset-8">
+                                        <div class="col-sm-2 col-sm-offset-10">
                                             <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
-                                                Text="Update" CssClass="btn btn-default" />
+                                                Text="Update" CssClass="btn btn-default"  />
                                         </div>
                                     </div>
                                 </div>
@@ -178,7 +177,7 @@
                         <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_list_panel">
                             <ProgressTemplate>
                                 <div class="overlay">
-                                    <img src="../Images/ajax-loader.gif" />
+                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
@@ -254,7 +253,7 @@
                     $(this).removeClass('btn-primary');
                 })
                 $(this).addClass('btn-primary');
-                //$('#company_list_updatePanel').block('<div class="overlay"><img src="../Images/ajax-loader.gif" /></div>');
+                //$('#company_list_updatePanel').block('<div class="overlay"><img src="~/Images/ajax-loader.gif" /></div>');
             })
             $('.company-button').ajaxComplete(function () {
                 //$('#company_list_updatePanel').unblockUI();

@@ -38,7 +38,7 @@ public partial class ManagePartners : BaseMemberPage
         {
             loadPartner(convertedUserid);
             //switchPartner(partner);
-            company_contacts_updatePanel.Update();
+            //company_contacts_updatePanel.Update();
             project_list_panel.Update();
         }
     }

@@ -13,7 +13,7 @@
                 <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="AdminLoginPanel">
                     <ProgressTemplate>
                         <div class="overlay">
-                            <img src="../Images/ajax-loader.gif" />
+                            <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                         </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
