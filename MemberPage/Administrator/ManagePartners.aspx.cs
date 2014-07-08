@@ -15,6 +15,7 @@ public partial class ManagePartners : BaseMemberPage
     {
         if (!IsPostBack)
         {
+            Session["partnerid"] = null;
             loadPartnerList();
         }
     }
@@ -153,11 +154,12 @@ public partial class ManagePartners : BaseMemberPage
         }
         catch (Exception ex)
         {
-            error_modal_control.Show();
+            cancelButton.Text = "Ok";
             error_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
                         + ex.Message
                         + "</div>"));
+            error_modal_control.Show();
         }
         
     }

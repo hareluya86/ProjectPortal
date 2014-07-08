@@ -9,12 +9,12 @@
         <asp:UpdatePanel ID="EntireManagePartnerPage" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row">
-                    <div class="col-lg-3"><!--company list panel-->
+                    <div class="col-lg-3">
+                        <!--company list panel-->
                         <div class="panel panel-primary">
                             <div class="panel-heading">Company Name</div>
                             <div class="panel-body" style="overflow: auto; height: 550px;">
-                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel"
-                                    >
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel">
                                     <ProgressTemplate>
                                         <div class="overlay">
                                             <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
@@ -22,7 +22,7 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                                 <!--dynamically add datasource from codeBehind-->
-                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional" >
+                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="delete_project_button" />
                                     </Triggers>
@@ -40,7 +40,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 myforms"><!--update company contacts panel-->
+                    <div class="col-lg-5 myforms">
+                        <!--update company contacts panel-->
                         <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="company_contacts_updatePanel">
                             <ProgressTemplate>
                                 <div class="overlay">
@@ -48,8 +49,7 @@
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" 
-                            >
+                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server">
                             <ContentTemplate>
                                 <asp:HiddenField ID="company_id" runat="server" />
                                 <div class="row">
@@ -68,8 +68,8 @@
                                         <asp:Label AssociatedControlID="company_reg_no" Text="Company Reg No: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
                                             <ajaxControl:FilteredTextBoxExtender ID="companyRegNoFilter" runat="server"
-                                                            TargetControlID="company_reg_no" 
-                                                            FilterType="Numbers" />
+                                                TargetControlID="company_reg_no"
+                                                FilterType="Numbers" />
                                             <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                                     <div class="form-group">
                                         <asp:Label AssociatedControlID="email" Text="Email: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
-                                            
+
                                             <asp:TextBox ID="email" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -88,8 +88,8 @@
                                         <asp:Label AssociatedControlID="phone" Text="Phone: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
                                             <ajaxControl:FilteredTextBoxExtender ID="phoneFilter" runat="server"
-                                                            TargetControlID="phone" 
-                                                            FilterType="Numbers" />
+                                                TargetControlID="phone"
+                                                FilterType="Numbers" />
                                             <asp:TextBox ID="phone" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -99,8 +99,8 @@
                                         <asp:Label AssociatedControlID="fax" Text="Fax: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
                                             <ajaxControl:FilteredTextBoxExtender ID="faxFilter" runat="server"
-                                                            TargetControlID="fax" 
-                                                            FilterType="Numbers" />
+                                                TargetControlID="fax"
+                                                FilterType="Numbers" />
                                             <asp:TextBox ID="fax" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
@@ -143,8 +143,8 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <ajaxControl:FilteredTextBoxExtender ID="zipcodeFilter" runat="server"
-                                                            TargetControlID="zipcode" 
-                                                            FilterType="Numbers" />
+                                            TargetControlID="zipcode"
+                                            FilterType="Numbers" />
                                         <asp:Label AssociatedControlID="zipcode" Text="Zip Code: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
                                             <asp:TextBox ID="zipcode" CssClass="form-control" runat="server"></asp:TextBox>
@@ -163,7 +163,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-2 col-sm-offset-10">
                                             <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
-                                                Text="Update" CssClass="btn btn-default"  />
+                                                Text="Update" CssClass="btn btn-default" />
                                         </div>
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="well well-sm" style="height: 300px; overflow:auto;">
+                                        <div class="well well-sm" style="height: 300px; overflow: auto;">
 
                                             <asp:Repeater runat="server" ID="project_list">
                                                 <ItemTemplate>
@@ -205,21 +205,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-lg-offset-8">
                                         <asp:Button ID="delete_project_button" runat="server" CssClass="btn btn-default" Text="Delete" OnClick="Delete_Projects" />
-                                        <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
-                                            PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
-                                            CancelControlID="cancelButton" BackgroundCssClass="overlay">
-                                        </ajaxControl:ModalPopupExtender>
-                                        <asp:HiddenField runat="server" ID="hiddenModalTarget" />
-                                        <asp:Panel runat="server" ID="delete_projects_error">
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">Message</div>
-                                                <div class="panel-body" style="overflow: auto;">
-                                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
-                                                    <asp:Button runat="server" ID="cancelButton" />
-                                                </div>
-                                            </div>
 
-                                        </asp:Panel>
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -229,7 +215,24 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-
+    <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
+        PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
+        CancelControlID="cancelButton" BackgroundCssClass="overlay">
+    </ajaxControl:ModalPopupExtender>
+    <asp:HiddenField runat="server" ID="hiddenModalTarget" />
+    <asp:Panel runat="server" ID="delete_projects_error">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Message</div>
+            <div class="panel-body" style="overflow: auto;">
+                <asp:UpdatePanel runat="server" ID="error_update_panel">
+                    <ContentTemplate>
+                        <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
+                        <asp:Button runat="server" ID="cancelButton" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </asp:Panel>
 </asp:Content>
 
 
