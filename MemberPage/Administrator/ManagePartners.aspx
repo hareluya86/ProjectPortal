@@ -161,12 +161,36 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
-                                        <div class="col-sm-2 col-sm-offset-10">
+                                        <div class="col-sm-2 col-sm-offset-9">
                                             <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
                                                 Text="Update" CssClass="btn btn-default" />
                                         </div>
                                     </div>
                                 </div>
+                                <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
+                                    PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
+                                    OkControlID="okButton" BackgroundCssClass="overlay">
+                                </ajaxControl:ModalPopupExtender>
+                                <asp:HiddenField runat="server" ID="hiddenModalTarget" />
+                                <asp:Panel runat="server" ID="delete_projects_error">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">Message</div>
+                                        <div class="panel-body" style="overflow: auto;">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
+                                                    <asp:Label runat="server" ID="error_label"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2 col-sm-offset-9">
+                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </asp:Panel>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -212,27 +236,11 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
+
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
-        PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
-        CancelControlID="cancelButton" BackgroundCssClass="overlay">
-    </ajaxControl:ModalPopupExtender>
-    <asp:HiddenField runat="server" ID="hiddenModalTarget" />
-    <asp:Panel runat="server" ID="delete_projects_error">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Message</div>
-            <div class="panel-body" style="overflow: auto;">
-                <asp:UpdatePanel runat="server" ID="error_update_panel">
-                    <ContentTemplate>
-                        <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
-                        <asp:Button runat="server" ID="cancelButton" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-        </div>
-    </asp:Panel>
+
 </asp:Content>
 
 

@@ -93,12 +93,13 @@ public partial class ManagePartners : BaseMemberPage
             ProjectModule projectModule = new ProjectModule();
             projectModule.deleteProjects(projects);
             error_modal_control.Show();
-            cancelButton.Text = "Ok";
-            string successMessage = projects.Count + " projects deleted successfully!";
+            string successMessage = projects.Count + " project" + (projects.Count > 1 ? "s" : "")
+                +" deleted successfully!";
             error_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
                         + successMessage
                         + "</div>"));
+            okButton.Text = "Ok";
 
             long partnerid;
             if (Session["partnerid"] != null &&
@@ -115,6 +116,7 @@ public partial class ManagePartners : BaseMemberPage
                     "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
                         + ex.Message
                         + "</div>"));
+            okButton.Text = "Ok";
         }
 
     }
@@ -151,15 +153,25 @@ public partial class ManagePartners : BaseMemberPage
         try
         {
             userModule.updateUser(partner);
+            error_message.Controls.Add(new LiteralControl(
+                    "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
+                        + "Partner updated successfully!"
+                        + "</div>"));
+
+            error_modal_control.Show();
+            okButton.Text = "Ok";
         }
         catch (Exception ex)
         {
-            cancelButton.Text = "Ok";
+            
             error_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
                         + ex.Message
                         + "</div>"));
+            
             error_modal_control.Show();
+            okButton.Text = "Ok";
+            //cancelButton.Visible = false;
         }
         
     }
