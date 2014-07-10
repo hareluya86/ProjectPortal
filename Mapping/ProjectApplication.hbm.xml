@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <!--assembly="ProjectPortal"
+  namespace="ProjectPortal.App_Code">-->
+
+  <!-- more mapping info here -->
+  <class name="ProjectApplication, App_Code" abstract="true" table="PROJECTAPPLICATION">
+    <id name="APPLICATION_ID" type="Int64">
+      <generator class="NHibernate.Id.Enhanced.TableGenerator">
+        <param name="table_name">SEQUENCE</param>
+        <param name="segment_value">APPLICATION_ID</param>
+        <param name="initial_value">30000</param>
+      </generator>
+    </id>
+    <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
+    <property name="APPLICATION_STATUS" />
+
+    <many-to-one name="APPLICANT" class="Student"
+                 column="USER_ID" not-null="true"
+                 insert="false" update="false"
+                 cascade="none"/>
+    <many-to-one name="PROJECT" class="Project"
+                 column="PROJECT_ID" not-null="true"
+                 insert="false" update="false"
+                 cascade="none"/>
+  </class>
+
+</hibernate-mapping>

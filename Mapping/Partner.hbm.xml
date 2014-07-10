@@ -11,8 +11,8 @@
     <property name="FAX" />
 
     <bag name="PROJECTS" cascade="none">
-      <cache usage="read-write"/>
-      <key column="USER_ID" not-null="true"></key>
+      <!--<cache usage="read-write"/>-->
+      <key column="PROJECT_OWNER" not-null="true"></key>
       <!--<list-index column="PROJECTS_LIST_POSITION"></list-index>-->
       <one-to-many class="Project" />
       

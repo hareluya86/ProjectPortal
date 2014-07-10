@@ -103,4 +103,9 @@ public class ProjectModule
 
         return results;
     }
+
+    public ProjectApplication ApplyProject(long studentId, long projectId)
+    {
+        return null;
+    }
 }

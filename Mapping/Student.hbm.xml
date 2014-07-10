@@ -9,6 +9,17 @@
     <property name="ROLE" />
     
     <property name="FIRSTNAME" />
+    <property name="LASTNAME" />
+
+    <bag name="PROJECTS_APPLIED" cascade="none">
+      <key column="USER_ID" not-null="true"></key>
+      <one-to-many class="ProjectApplication" />
+    </bag>
+
+    <bag name="COURSE_ENROLLED" cascade="none">
+      <key column="USER_ID" not-null="true"></key>
+      <one-to-many class="Enrollment" />
+    </bag>
     
   </joined-subclass>
 </hibernate-mapping>

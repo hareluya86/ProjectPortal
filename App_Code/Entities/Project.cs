@@ -17,6 +17,7 @@ public class Project
     public virtual string PROJECT_REQUIREMENTS { get; set; }
 
     public virtual Partner PROJECT_OWNER { get; set; }
+    public virtual IList<ProjectApplication> APPLICATIONS { get; set; }
     
 	public Project()
 	{
