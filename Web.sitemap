@@ -7,7 +7,7 @@
     <siteMapNode url="~/LoginPage.aspx" title="Access Project Portal"  description="Access Project Portal by loggin in">
       <siteMapNode url="~/MemberPage/Administrator/Administrator.aspx" title="Administrator" >
         <siteMapNode url="~/MemberPage/Administrator/ManagePartners.aspx" title="Manage Partners" />
-        <siteMapNode title="Manage Students" />
+        <siteMapNode url="~/MemberPage/Administrator/ManageStudents.aspx" title="Manage Students" />
         <siteMapNode title="Manage Unit Coordinators" />
       </siteMapNode>
     </siteMapNode>

@@ -92,6 +92,9 @@ public class UserModule
         {
             session = hibernate.getSession();
         }
+        //do validations here
+        validateEmail(user.EMAIL);
+
         session.BeginTransaction();
         session.Update(user);
         session.Transaction.Commit();

@@ -120,4 +120,9 @@ public partial class Tests_Default : System.Web.UI.Page
             CreatedProjectsTable.DataBind();
         }
     }
+
+    protected void TestApplyProject(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManagePartners.aspx.cs" Inherits="ManagePartners" MasterPageFile="~/MasterPage.master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageStudents.aspx.cs" Inherits="ManageStudents" MasterPageFile="~/MasterPage.master" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
@@ -9,10 +9,10 @@
         <asp:UpdatePanel ID="EntireManagePartnerPage" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <!--company list panel-->
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Company Name</div>
+                            <div class="panel-heading">Student ID</div>
                             <div class="panel-body" style="overflow: auto; height: 550px;">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel">
                                     <ProgressTemplate>
@@ -23,15 +23,12 @@
                                 </asp:UpdateProgress>
                                 <!--dynamically add datasource from codeBehind-->
                                 <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="delete_project_button" />
-                                    </Triggers>
                                     <ContentTemplate>
-                                        <asp:Repeater runat="server" ID="company_list">
+                                        <asp:Repeater runat="server" ID="student_list">
                                             <ItemTemplate>
                                                 <asp:Button CssClass="btn truncate company-button"
-                                                    runat="server" Text='<%# Eval("USERNAME") %>'
-                                                    CommandArgument='<%# Eval("USER_ID") %>' OnClick="loadPartner" />
+                                                    runat="server" Text='<%# Eval("USER_ID") %>'
+                                                    CommandArgument='<%# Eval("USER_ID") %>' OnClick="loadStudent" />
 
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -42,35 +39,32 @@
                     </div>
                     <div class="col-lg-5 myforms">
                         <!--update company contacts panel-->
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="company_contacts_updatePanel">
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="student_contacts_updatePanel">
                             <ProgressTemplate>
                                 <div class="overlay">
                                     <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server">
+                        <asp:UpdatePanel ID="student_contacts_updatePanel" runat="server">
                             <ContentTemplate>
-                                <asp:HiddenField ID="company_id" runat="server" />
+                                <asp:HiddenField ID="student_id" runat="server" />
                                 <div class="row">
-                                    <h2>Company Contacts</h2>
+                                    <h2>Student Contacts</h2>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
-                                        <asp:Label AssociatedControlID="company_name" Text="Company Name: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <asp:Label AssociatedControlID="first_name" Text="First Name: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
-                                            <asp:TextBox ID="company_name" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="first_name" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
-                                        <asp:Label AssociatedControlID="company_reg_no" Text="Company Reg No: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <asp:Label AssociatedControlID="last_name" Text="Last Name: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                         <div class="col-sm-8">
-                                            <ajaxControl:FilteredTextBoxExtender ID="companyRegNoFilter" runat="server"
-                                                TargetControlID="company_reg_no"
-                                                FilterType="Numbers" />
-                                            <asp:TextBox ID="company_reg_no" CssClass="form-control" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="last_name" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -95,18 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="fax" Text="Fax: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
-                                        <div class="col-sm-8">
-                                            <ajaxControl:FilteredTextBoxExtender ID="faxFilter" runat="server"
-                                                TargetControlID="fax"
-                                                FilterType="Numbers" />
-                                            <asp:TextBox ID="fax" CssClass="form-control" runat="server"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h2>Company Address</h2>
+                                    <h2>Student Address</h2>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -162,7 +145,7 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-sm-2 col-sm-offset-9">
-                                            <asp:Button runat="server" ID="UpdateCompanyButton" OnClick="UpdateCompanyContacts"
+                                            <asp:Button runat="server" ID="UpdateStudentButton" OnClick="UpdateStudentContacts"
                                                 Text="Update" CssClass="btn btn-default" />
                                         </div>
                                     </div>
@@ -228,7 +211,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-4 col-lg-offset-8">
-                                        <asp:Button ID="delete_project_button" runat="server" CssClass="btn btn-default" Text="Delete" OnClick="Delete_Projects" />
+                                        
 
                                     </div>
                                 </div>
@@ -301,5 +284,4 @@
             $get(uiId).disabled = false;
         }
     </script>
-    
 </asp:Content>

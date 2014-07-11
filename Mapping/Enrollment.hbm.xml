@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <!--assembly="ProjectPortal"
+  namespace="ProjectPortal.App_Code">-->
+
+  <!-- more mapping info here -->
+  <class name="Enrollment, App_Code" abstract="true" table="ENROLLMENT">
+    <id name="ENROLLMENT_ID" type="Int64">
+      <generator class="NHibernate.Id.Enhanced.TableGenerator">
+        <param name="table_name">SEQUENCE</param>
+        <param name="segment_value">ENROLLMENT_ID</param>
+        <param name="initial_value">40000</param>
+      </generator>
+    </id>
+    <property name="SEMESTER" />
+
+    
+    <many-to-one name="STUDENT" class="Student"
+                 column="STUDENT" not-null="true"
+                 insert="false" update="false"
+                 cascade="none"/>
+    <many-to-one name="COURSE" class="Course"
+                 column="COURSE" not-null="true"
+                 insert="false" update="false"
+                 cascade="none"/>
+
+  </class>
+
+</hibernate-mapping>

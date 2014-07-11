@@ -241,6 +241,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Test application of projects</div>
+                                    <div class="panel-body">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress5" AssociatedUpdatePanelID="TestApplyProjectsPanel">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="TestApplyProjectsPanel" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <asp:Label runat="server" Text="Student ID " />
+                                                        <asp:TextBox ID="StudentIdInput" runat="server" Width="50" />
+                                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender3" runat="server"
+                                                            TargetControlID="StudentIdInput"
+                                                            FilterType="Numbers" />
+                                                        <asp:Label runat="server" Text=" applies for project" />
+                                                        <asp:TextBox ID="ProjectIdInput" runat="server" Width="50" />
+                                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender4" runat="server"
+                                                            TargetControlID="ProjectIdInput"
+                                                            FilterType="Numbers" />
+
+                                                        <asp:Button ID="Button1" runat="server" Text="Apply"
+                                                            OnClick="TestCreateProjects" />
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </ajaxControl:TabPanel>
