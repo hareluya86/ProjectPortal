@@ -252,3 +252,13 @@
 
 
 </asp:Content>
+
+<asp:Content ContentPlaceHolderID="Scripts" runat="server">
+    <script id="TabWidender" type="text/javascript">
+        $(document).ready(function(){
+            $('.ajax__tab_tab').css('height', '20px');
+
+        })
+    </script>
+
+</asp:Content>
