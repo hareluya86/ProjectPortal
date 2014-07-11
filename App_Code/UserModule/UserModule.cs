@@ -130,7 +130,7 @@ public class UserModule
             if (i % 4 == 1)
             {
                 Student student = new Student();
-                student.FIRSTNAME = "Student " + i;
+                student.FIRSTNAME = "Student " + i%10;
                 student.USERNAME = student.FIRSTNAME;
                 student.PASSWORD = this.encodePassword("password"+i);
 
@@ -140,7 +140,7 @@ public class UserModule
             {
                 Admin admin = new Admin();
                 admin.PASSWORD = this.encodePassword("password" + i);
-                admin.USERNAME = "admin" + i;
+                admin.USERNAME = "admin" + i%10;
                 user = admin;
 
             }
@@ -148,13 +148,13 @@ public class UserModule
             {
                 Partner partner = new Partner();
                 partner.PASSWORD = this.encodePassword("password" + i);
-                partner.USERNAME = "company " + i;
+                partner.USERNAME = "company " + i%10;
                 user = partner;
             }
             else
             {
                 Student student = new Student();
-                student.FIRSTNAME = "Student " + i;
+                student.FIRSTNAME = "Student " + i%10;
                 student.PASSWORD = this.encodePassword("password" + i);
 
                 user = student;

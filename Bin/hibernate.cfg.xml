@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-configuration xmlns="urn:nhibernate-configuration-2.2">
+  <session-factory>
+    <property name="connection.provider">NHibernate.Connection.DriverConnectionProvider</property>
+    <property name="dialect">NHibernate.Dialect.MsSql2012Dialect</property>
+    <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
+    <property name="connection.connection_string">
+      Data Source=(LocalDb)\v11.0;
+      Integrated Security=SSPI;
+      AttachDBFilename=|DataDirectory|\Database.mdf</property>
+    <!--<property name="connection.connection_string">
+      Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\vincent.a.lee\Documents\GitHub\ProjectPortal\App_Data\Database.mdf;Integrated Security=True
+    </property>-->
+    <property name="show_sql">true</property>
+    <property name="current_session_context_class">web</property>
+    <!-- mapping files -->
+    <!--<mapping file="Mapping/UserAccount.hbm.xml" />-->
+  </session-factory>
+</hibernate-configuration>

@@ -73,9 +73,10 @@
                                                                 AllowPaging="true" PageSize="10"
                                                                 OnPageIndexChanged="InsertedUserTable_PageIndexChanging"
                                                                 DataKeyField="USER_ID">
+                                                                
                                                                 <Columns>
-                                                                    <asp:BoundColumn DataField="USER_ID" />
-                                                                    <asp:BoundColumn DataField="PASSWORD" />
+                                                                    <asp:BoundColumn DataField="USER_ID" HeaderText="User Id" />
+                                                                    <asp:BoundColumn DataField="PASSWORD" HeaderText="Password = 'password'+[lastdigit of user ID]" />
                                                                 </Columns>
                                                                 <PagerStyle Position="Bottom" CssClass="pagination" />
                                                             </asp:DataGrid>
