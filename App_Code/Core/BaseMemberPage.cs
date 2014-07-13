@@ -17,7 +17,7 @@ public class BaseMemberPage : System.Web.UI.Page
     {
         
         //redirect to the login page if user is not logged in
-        if (Session["Userid"] == null || //Scenario 1 - User navigates to any member pages from non-member pages
+        if (Session["userid"] == null || //Scenario 1 - User navigates to any member pages from non-member pages
             Session.SessionID == null || //Scenario 2 - User navigates to any member pages from external places
             !Session.SessionID.Equals(Request.Cookies["ASP.NET_SessionId"].Value.ToString())) //Scenario 3 - User's session timeout
         {

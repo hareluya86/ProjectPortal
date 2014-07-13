@@ -65,7 +65,7 @@ mais.group=staff(current),other(current)">
 
                     <li>
                         <asp:HyperLink runat="server" ID="home" NavigateUrl="~/Default.aspx">Home</asp:HyperLink></li>
-                    <% if (Session["Userid"] == null)
+                    <% if (Session["userid"] == null)
                        { %>
                     <asp:SiteMapDataSource ID="Menu_Public" runat="server" ShowStartingNode="false" />
                     <asp:Repeater runat="server" ID="menu_public_repeater" DataSourceID="Menu_Public">
@@ -97,10 +97,10 @@ mais.group=staff(current),other(current)">
                 </ul>
 
                 <!--Authenticated user panel-->
-                <% if (Session["Userid"] != null)
+                <% if (Session["userid"] != null)
                    { %>
                 <div class="auth-panel">
-                    <span><%= Session["Username"] %> , </span>
+                    <span><%= Session["username"] %> , </span>
                     <asp:HyperLink runat="server" NavigateUrl="~/Logout.aspx">logout</asp:HyperLink>
                 </div>
                 <% } %>

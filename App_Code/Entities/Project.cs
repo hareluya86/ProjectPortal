@@ -13,6 +13,7 @@ public class Project
     public virtual string CONTACT_NAME { get; set; }
     public virtual string CONTACT_NUMBER { get; set; }
     public virtual string CONTACT_EMAIL { get; set; }
+    public virtual string PROJECT_STATUS { get; set; }
 
     public virtual string PROJECT_REQUIREMENTS { get; set; }
 

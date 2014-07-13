@@ -14,6 +14,7 @@
       <!--Partner-->
       <siteMapNode url="~/MemberPage/Partner/Partner.aspx" title="Partner" >
         <siteMapNode url="~/MemberPage/Partner/SubmitNewProject.aspx" title="Submit New Project" />
+        <siteMapNode url="~/MemberPage/Partner/ProjectStatus.aspx" title="Project Status" />
       </siteMapNode>
     </siteMapNode>
     <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />

@@ -9,8 +9,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(Session["UserRole"] != null){
-            SiteMapDataSource.StartingNodeUrl = "~/"+UserRoleDispatcher.getPageByUserRole(Session["UserRole"].ToString());
+        if(Session["userRole"] != null){
+            SiteMapDataSource.StartingNodeUrl = "~/"+UserRoleDispatcher.getPageByUserRole(Session["userRole"].ToString());
         }
         
     }

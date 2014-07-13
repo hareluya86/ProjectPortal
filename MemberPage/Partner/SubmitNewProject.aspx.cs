@@ -51,7 +51,7 @@ public partial class MemberPage_Partner_NewProject : BaseMemberPage
         
         //Get user ID for project owner
         long ownerId;
-        if(!Int64.TryParse(Session["Userid"].ToString(), out ownerId))
+        if(!Int64.TryParse(Session["userid"].ToString(), out ownerId))
         {
             Messenger.setMessage(error_message,"Error getting user ID, please log out and sign in again, or contact administrator.",LEVEL.DANGER);
             return;
@@ -90,6 +90,7 @@ public partial class MemberPage_Partner_NewProject : BaseMemberPage
             projectModule.registerProjectCategories(newProject, categoryIds);
             Session["projectid"] = null;
             Messenger.setMessage(error_message, "Project registered successfully. You will receive an email to update you of the status.", LEVEL.SUCCESS);
+            clearAllFields();
         }
         catch (ProjectSubmissionException psex)
         {
@@ -117,5 +118,14 @@ public partial class MemberPage_Partner_NewProject : BaseMemberPage
             //SubmitProjectButton.Text = "Update";
             NewProjectUpdatePanel.Update();
         }
+    }
+
+    protected void clearAllFields()
+    {
+        project_title.Text = null;
+        contact_name.Text = null;
+        contact_num.Text = null;
+        contact_email.Text = null;
+        project_requirements.Text = null;
     }
 }

@@ -17,6 +17,7 @@
     <property name="CONTACT_NAME" />
     <property name="CONTACT_NUMBER" />
     <property name="CONTACT_EMAIL" />
+    <property name="PROJECT_STATUS" />
     <property name="PROJECT_REQUIREMENTS" />
   
     <many-to-one name="PROJECT_OWNER" class="Partner"

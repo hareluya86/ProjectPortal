@@ -45,9 +45,9 @@ public partial class LoginPage : System.Web.UI.Page
 
             
 
-            Session["Userid"] = userid;
-            Session["Username"] = authenticatedUser.USERNAME;
-            Session["UserRole"] = authenticatedUser.ROLE;
+            Session["userid"] = userid;
+            Session["username"] = authenticatedUser.USERNAME;
+            Session["userRole"] = authenticatedUser.ROLE;
             //Session["Sessionid"] = Session.SessionID; //Unnecessary
 
             if (Session["previous_url"] != null)

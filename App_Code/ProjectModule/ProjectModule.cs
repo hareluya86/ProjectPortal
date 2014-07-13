@@ -48,6 +48,20 @@ public class ProjectModule
         return projects;
     }
 
+    public IList<Project> getProjectsByOwnerId(long ownerId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        var projects = session.CreateCriteria<Project>()
+            .CreateAlias("PROJECT_OWNER","PROJECT_OWNER")
+            .Add(Restrictions.Eq("PROJECT_OWNER.USER_ID", ownerId))
+            .List<Project>();
+
+        return projects;
+    }
+
     public void deleteProjects(IList<Int64> projectIds)
     {
         if (session == null || !session.IsOpen)
@@ -102,6 +116,7 @@ public class ProjectModule
             Project project = new Project();
             project.PROJECT_TITLE = "Project " + i + " by partner " + partnerId;
             project.PROJECT_OWNER = partner;
+            project.PROJECT_STATUS = APPLICATION_STATUS.PENDING;
             results.Add(project);
             
             session.Save(partner);
@@ -260,8 +275,13 @@ public class ProjectModule
     /**
      * Submits a new project.
      * 
-     * - If project already exists in the database, updates it. A project exist only if a provided PROJECT_ID can be 
-     * found in the database.
+     * - Only creates a new project, existing projects will get thrown out as exceptions.
+     * - Automatically sets Project status to PENDING.
+     * - Checks if Project Title already exists.
+     * - Checks if all Contact info is available.
+     * - Checks if Contact Email is valid.
+     * - Updates the Project Owner of the project with the input ownderId
+     * 
      */
     public Project submitProject(Project project, long ownerId)
     {
@@ -274,27 +294,27 @@ public class ProjectModule
 
         string title = project.PROJECT_TITLE;
         Project foundExistingProject = null;
-        //if (project.PROJECT_ID != null)
-        //{
-        //    foundExistingProject = this.getProjectById(project.PROJECT_ID);
-        //}
 
         //Check if project title is less than required
         if(title.Length < MIN_PROJECT_TITLE_LENGTH)
             throw new ProjectSubmissionException("Project title must be at least " + MIN_PROJECT_TITLE_LENGTH+" char(s).");
 
         //Check if there is already an existing project with the same title, if the project is not an existing project
-        if (foundExistingProject == null)
+
+        IList<Project> existingProjects = session.CreateCriteria<Project>()
+                                        .Add(Restrictions.Or(
+                                            Restrictions.Eq("PROJECT_ID",project.PROJECT_ID),
+                                            Restrictions.Eq("PROJECT_TITLE", title)))
+                                        .List<Project>();
+        foreach (Project existingProject in existingProjects)
         {
-            IList<Project> existingProjects = session.CreateCriteria<Project>()
-                                            .Add(Restrictions.Eq("PROJECT_TITLE", title))
-                                            .List<Project>();
-            foreach (Project existingProject in existingProjects)
+            if (project.PROJECT_ID != existingProject.PROJECT_ID) //if titles are the same but IDs different, then throw exception
             {
-                if (project.PROJECT_ID != existingProject.PROJECT_ID) //if titles are the same but IDs different, then throw exception
-                {
-                //don't check title first for debugging other issues    throw new ProjectSubmissionException("Project title \"" + title + "\" already exists. Please choose a different title.");
-                }
+                throw new ProjectSubmissionException("Project title \"" + title + "\" already exists. Please choose a different title.");
+            }
+            else
+            {
+                throw new ProjectSubmissionException("Project \"" + title + "\" (ID:" + project.PROJECT_ID + ") is already submitted. Please contact administrator to update it.");
             }
         }
 
@@ -327,7 +347,8 @@ public class ProjectModule
         {
             owner = foundExistingProject.PROJECT_OWNER;
         }
-        
+
+        project.PROJECT_STATUS = APPLICATION_STATUS.PENDING; //set to pending
         project.PROJECT_OWNER = owner;
         owner.PROJECTS.Add(project);
 
