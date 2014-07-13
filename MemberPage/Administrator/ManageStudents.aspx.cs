@@ -40,7 +40,7 @@ public partial class ManageStudents : BaseMemberPage
             loadStudent(convertedUserid);
             //switchPartner(partner);
             //company_contacts_updatePanel.Update();
-            //project_list_panel.Update();
+            project_application_list_panel.Update();
         }
     }
 
@@ -63,6 +63,15 @@ public partial class ManageStudents : BaseMemberPage
             state.Text = student.STATE;
             zipcode.Text = student.ZIP_CODE;
             country.Text = student.COUNTRY;
+
+            /*IList<Project> projectAppls = new List<Project>();
+            foreach (ProjectApplication projectAppl in student.PROJECTS_APPLIED)
+            {
+                projectAppls.Add(projectAppl.PROJECT);
+            }*/
+            Session["applied_projects"] = student.PROJECTS_APPLIED;
+            project_application_list.DataSource = Session["applied_projects"];
+            project_application_list.DataBind();
 
             //Session["student"] = student.PROJECTS;
             //project_list.DataSource = Session["projects"];

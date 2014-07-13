@@ -179,29 +179,37 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="row">
-                            <h2>Projects on Portal</h2>
+                            <h2>Projects applied for</h2>
                         </div>
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_list_panel">
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_application_list_panel">
                             <ProgressTemplate>
                                 <div class="overlay">
                                     <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel runat="server" ID="project_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                        <asp:UpdatePanel runat="server" ID="project_application_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="well well-sm" style="height: 300px; overflow: auto;">
 
-                                            <asp:Repeater runat="server" ID="project_list">
+                                            <asp:Repeater runat="server" ID="project_application_list">
                                                 <ItemTemplate>
-                                                    <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;"
-                                                        value="">
-                                                        <%# Eval("PROJECT_TITLE") %>
-                                                    </button>
-                                                    <input type="hidden" runat="server"
-                                                        value='<%# Eval("PROJECT_ID") %>' />
+                                                        <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;"
+                                                          >
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <%# Eval("PROJECT.PROJECT_TITLE") %>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <%# Eval("APPLICATION_STATUS") %>
+                                                                </div>
+                                                            </div>
+                                                        </button>
+                                                        <input type="hidden" runat="server"
+                                                            value='<%# Eval("APPLICATION_ID") %>' />
+                                                    
                                                 </ItemTemplate>
                                             </asp:Repeater>
 
@@ -258,7 +266,7 @@
     <!--for toggling the project button-->
     <script id="toggle-project-button-script" type="text/javascript">
 
-        $(document).on('click', ".project-button", function () {
+        $(document).on('click', ".project-button-2", function () {
 
             if ($(this).hasClass('btn-danger')) {
                 $(this).removeClass('btn-danger');

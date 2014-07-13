@@ -100,7 +100,7 @@ public class UserModule
         session.Transaction.Commit();
     }
 
-    public void validateEmail(string email)
+    public static void validateEmail(string email)
     {
         string[] checkAt = email.Split('@');
         if (checkAt.Length < 2)

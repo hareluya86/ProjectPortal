@@ -18,11 +18,11 @@ public class Project
 
     public virtual Partner PROJECT_OWNER { get; set; }
     public virtual IList<ProjectApplication> APPLICATIONS { get; set; }
-    
-	public Project()
-	{
-		
-	}
+    public virtual IList<ProjectCategory> CATEGORIES { get; set; }
 
-
+    public Project()
+    {
+        APPLICATIONS = new List<ProjectApplication>();
+        CATEGORIES = new List<ProjectCategory>();
+    }
 }

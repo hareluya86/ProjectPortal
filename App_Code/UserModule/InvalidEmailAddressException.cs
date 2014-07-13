@@ -10,8 +10,5 @@ public class InvalidEmailAddressException : Exception
 {
 	public InvalidEmailAddressException(string message) : base(message)
 	{
-		//
-		// TODO: Add constructor logic here
-		//
 	}
 }

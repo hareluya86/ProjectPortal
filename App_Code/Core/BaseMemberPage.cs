@@ -15,6 +15,7 @@ public class BaseMemberPage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         //redirect to the login page if user is not logged in
         if (Session["Userid"] == null || //Scenario 1 - User navigates to any member pages from non-member pages
             Session.SessionID == null || //Scenario 2 - User navigates to any member pages from external places

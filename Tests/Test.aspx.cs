@@ -123,6 +123,58 @@ public partial class Tests_Default : System.Web.UI.Page
 
     protected void TestApplyProject(object sender, EventArgs e)
     {
+        long studentId;
+        long projectId;
+        Int64.TryParse(StudentIdInput.Text,out studentId);
+        Int64.TryParse(ProjectIdInput.Text,out projectId);
 
+        ProjectModule projectModule = new ProjectModule();
+        try
+        {
+            ProjectApplication appl = projectModule.ApplyProject(studentId, projectId);
+            Messenger.setMessage(ApplyProjectResults, 
+                "Application "+appl.APPLICATION_ID+" has been created by student "
+                    +studentId+" for project "+projectId+".", 
+                LEVEL.SUCCESS);
+        }
+        catch (ProjectApplicationException paex)
+        {
+            Messenger.setMessage(ApplyProjectResults, paex.Message, LEVEL.DANGER);
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(ApplyProjectResults, ex.Message, LEVEL.DANGER);
+        }
+
+
+    }
+    protected void CreateCategoriesButton_Click(object sender, EventArgs e)
+    {
+        string stringOfCategories = CategoriesInput.Text;
+        ProjectModule projectModule = new ProjectModule();
+
+        try
+        {
+            IList<Category> results = projectModule.createCategories(stringOfCategories);
+
+            Session["categories"] = results;
+            AddedCategoriesTable.DataSource = Session["categories"];
+            AddedCategoriesTable.DataBind();
+
+            Messenger.setMessage(AddCategoriesMessageBox, "Categories created successfully!", LEVEL.SUCCESS);
+        }
+        catch (CategoryException catex)
+        {
+            Messenger.setMessage(AddCategoriesMessageBox, catex.Message, LEVEL.DANGER);
+        }
+    }
+    protected void AddedCategories_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
+    {
+        if (sender != null)
+        {
+            AddedCategoriesTable.CurrentPageIndex = e.NewPageIndex;
+            AddedCategoriesTable.DataSource = Session["categories"];
+            AddedCategoriesTable.DataBind();
+        }
     }
 }

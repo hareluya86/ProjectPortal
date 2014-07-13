@@ -28,7 +28,7 @@ public class UserRoleDispatcher
         }
         else if ("PARTNER".Equals(userRole))
         {
-            return "Partner.aspx";
+            return "MemberPage/Partner/Partner.aspx";
         }
         else
         {

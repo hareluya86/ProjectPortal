@@ -4,25 +4,27 @@
   namespace="ProjectPortal.App_Code">-->
 
   <!-- more mapping info here -->
-  <class name="ProjectApplication, App_Code" abstract="true" table="PROJECTAPPLICATION">
-    <id name="APPLICATION_ID" type="Int64">
+  <class name="Team, App_Code" abstract="true" table="TEAM">
+    <id name="TEAM_ID" type="Int64">
       <generator class="NHibernate.Id.Enhanced.TableGenerator">
         <param name="table_name">SEQUENCE</param>
-        <param name="segment_value">APPLICATION_ID</param>
-        <param name="initial_value">130000</param>
+        <param name="segment_value">TEAM_ID</param>
+        <param name="initial_value">40000</param>
       </generator>
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
-    <property name="APPLICATION_STATUS" />
+    <property name="TEAM_NAME" />
 
-    <many-to-one name="APPLICANT" class="Student"
-                 column="USER_ID" not-null="true"
-                 insert="false" update="false"
-                 cascade="none"/>
-    <many-to-one name="PROJECT" class="Project"
+    <many-to-one name="ASSIGNED_TO_PROJECT" class="Project"
                  column="PROJECT_ID" not-null="true"
                  insert="false" update="false"
                  cascade="none"/>
+
+    <bag name="TEAM_ASSIGNMENT" cascade="none">
+      <key column="TEAM_ID" not-null="true"></key>
+      <one-to-many class="TeamAssignment" />
+
+    </bag>
   </class>
 
 </hibernate-mapping>

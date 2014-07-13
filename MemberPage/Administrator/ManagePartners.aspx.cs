@@ -153,10 +153,11 @@ public partial class ManagePartners : BaseMemberPage
         try
         {
             userModule.updateUser(partner);
-            error_message.Controls.Add(new LiteralControl(
+            /*error_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
                         + "Partner updated successfully!"
-                        + "</div>"));
+                        + "</div>"));*/
+            Messenger.setMessage(error_message, "Partner updated successfully!", LEVEL.INFO);
 
             error_modal_control.Show();
             okButton.Text = "Ok";

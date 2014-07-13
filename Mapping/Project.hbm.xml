@@ -28,6 +28,11 @@
       <key column="PROJECT_ID" not-null="true"></key>
       <one-to-many class="ProjectApplication" />
     </bag>
+
+    <bag name="CATEGORIES" cascade="none">
+      <key column="PROJECT_ID" not-null="true"></key>
+      <one-to-many class="ProjectCategory"/>
+    </bag>
   </class>
 
 </hibernate-mapping>

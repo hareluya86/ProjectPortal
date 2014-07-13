@@ -5,10 +5,15 @@
         <siteMapNode url="~/Students.aspx" title="Students"  description="" />
         <siteMapNode url="~/UC.aspx" title="Unit Coordinators"  description="" />-->
     <siteMapNode url="~/LoginPage.aspx" title="Access Project Portal"  description="Access Project Portal by loggin in">
+      <!--Administrator-->
       <siteMapNode url="~/MemberPage/Administrator/Administrator.aspx" title="Administrator" >
         <siteMapNode url="~/MemberPage/Administrator/ManagePartners.aspx" title="Manage Partners" />
         <siteMapNode url="~/MemberPage/Administrator/ManageStudents.aspx" title="Manage Students" />
         <siteMapNode title="Manage Unit Coordinators" />
+      </siteMapNode>
+      <!--Partner-->
+      <siteMapNode url="~/MemberPage/Partner/Partner.aspx" title="Partner" >
+        <siteMapNode url="~/MemberPage/Partner/SubmitNewProject.aspx" title="Submit New Project" />
       </siteMapNode>
     </siteMapNode>
     <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />

@@ -13,6 +13,7 @@ public class Student : UserAccount
 
     public virtual IList<ProjectApplication> PROJECTS_APPLIED { get; set; }
     public virtual IList<Enrollment> COURSE_ENROLLED { get; set; }
+    public virtual IList<TeamAssignment> TEAM_ASSIGNMENT { get; set; }
 
     public Student(){
         ROLE = "STUDENT"; //Workaround for Hibernate's limitation

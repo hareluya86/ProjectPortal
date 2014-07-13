@@ -222,7 +222,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-12">
+                                                    <div class="col-lg-12" style="overflow: auto;">
                                                         <div class="panel panel-default">
                                                             <asp:DataGrid ID="CreatedProjectsTable" runat="server" CssClass="table"
                                                                 AllowPaging="true" PageSize="10"
@@ -269,8 +269,61 @@
                                                             FilterType="Numbers" />
 
                                                         <asp:Button ID="Button1" runat="server" Text="Apply"
-                                                            OnClick="TestCreateProjects" />
+                                                            OnClick="TestApplyProject" />
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <asp:PlaceHolder ID="ApplyProjectResults" runat="server"></asp:PlaceHolder>
+                                                    </div>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6"><!--create categories-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Test application of projects</div>
+                                    <div class="panel-body">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress6" AssociatedUpdatePanelID="CreateCategories">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="CreateCategories" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                        <asp:TextBox TextMode="MultiLine" runat="server" ID="CategoriesInput" 
+                                                            CssClass="col-lg-12"/>
+                                                    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-lg-offset-8">
+                                                        <asp:Button ID="CreateCategoriesButton" runat="server" OnClick="CreateCategoriesButton_Click" Text="Create Categories" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-lg-offset-1">
+                                                        <asp:PlaceHolder ID="AddCategoriesMessageBox" runat="server"></asp:PlaceHolder>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <asp:DataGrid ID="AddedCategoriesTable" runat="server" CssClass="table"
+                                                                AllowPaging="true" PageSize="10"
+                                                                OnPageIndexChanged="AddedCategories_PageIndexChanged"
+                                                                DataKeyField="CATEGORY_ID">
+                                                        
+                                                                <Columns>
+                                                                    <asp:BoundColumn DataField="CATEGORY_ID" HeaderText="CATEGORY_ID"/>
+                                                                    <asp:BoundColumn DataField="CATEGORY_NAME" HeaderText="CATEGORY_NAME"/>
+                                                                </Columns>
+                                                                <PagerStyle Position="Bottom" CssClass="pagination" />
+                                                            </asp:DataGrid>
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>

@@ -20,6 +20,11 @@
       <key column="USER_ID" not-null="true"></key>
       <one-to-many class="Enrollment" />
     </bag>
+
+    <bag name="TEAM_ASSIGNMENT" cascade="none">
+      <key column="USER_ID" not-null="true"></key>
+      <one-to-many class="TeamAssignment" />
+    </bag>
     
   </joined-subclass>
 </hibernate-mapping>
