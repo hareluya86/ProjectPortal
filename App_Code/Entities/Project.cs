@@ -15,6 +15,7 @@ public class Project
     public virtual string CONTACT_EMAIL { get; set; }
     public virtual string PROJECT_STATUS { get; set; }
 
+    public virtual string UC_REMARKS { get; set; }
     public virtual string PROJECT_REQUIREMENTS { get; set; }
 
     public virtual Partner PROJECT_OWNER { get; set; }

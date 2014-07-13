@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SubmitNewProject.aspx.cs" Inherits="MemberPage_Partner_NewProject" MasterPageFile="~/MasterPage.master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SubmitNewProject.aspx.cs" Inherits="SubmitNewProject" MasterPageFile="~/MasterPage.master" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
@@ -95,7 +95,7 @@
                     <div class="col-lg-2 col-lg-offset-8" style="margin-top: 5px; text-align: right;">
                         <asp:Button runat="server" ID="SubmitProjectButton" CssClass="btn btn-primary"
                             OnClick="SubmitProjectButton_Click" Text="Submit" />
-                        <asp:Button runat="server" ID="ResetButton" CssClass="btn btn-default"
+                        <asp:Button runat="server" ID="ResetButton" CssClass="btn btn-default" OnClick="ResetButton_Click"
                             Text="Reset" />
                     </div>
                 </div>

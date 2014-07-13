@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class MemberPage_Partner_NewProject : BaseMemberPage
+public partial class SubmitNewProject : BaseMemberPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -127,5 +127,9 @@ public partial class MemberPage_Partner_NewProject : BaseMemberPage
         contact_num.Text = null;
         contact_email.Text = null;
         project_requirements.Text = null;
+    }
+    protected void ResetButton_Click(object sender, EventArgs e)
+    {
+        clearAllFields();
     }
 }
