@@ -113,6 +113,16 @@ public class UserModule
             throw new InvalidEmailAddressException("Email address contains illegal characters.");
     }
 
+    public void setPassword(long userId, string oldPassword, string newPassword)
+    {
+        UserAccount user = this.login(userId.ToString(), oldPassword);
+        if (user == null)
+            throw new LoginException("Invalid credentials");
+
+        user.PASSWORD = this.encodePassword(newPassword);
+        this.updateUser(user);
+    }
+
     /* Testing method */
     public IList<UserAccount> insertUserAccount(int numUsers)
     {

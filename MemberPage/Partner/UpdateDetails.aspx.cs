@@ -51,14 +51,98 @@ public partial class UpdateDetails : BaseMemberPage
         partner.STATE = state.Text;
         partner.ZIP_CODE = zipcode.Text;
         partner.COUNTRY = country.Text;
-
+        
         userModule.updateUser(partner);
-    } 
+            
+        
+    }
+
+    private void updatePassword(long partnerId, string old_password, string new_password)
+    {
+        UserModule userModule = new UserModule();
+        userModule.setPassword(partnerId, old_password, new_password);
+    }
 
     protected void updateDetails(object sender, EventArgs e)
     {
         long partnerid;
-        if (Int64.TryParse(Session["userid"].ToString(), out partnerid))
-            updateDetails(partnerid);//from login
+        System.Threading.Thread.Sleep(3000);
+
+        try
+        {
+            if (Int64.TryParse(Session["userid"].ToString(), out partnerid))
+                updateDetails(partnerid);//from login
+            else
+                throw new Exception("Cannot find user ID, please contact administrator.");
+
+            if (password.Text != null && password.Text.Length > 0)
+            {
+                password_popup.Show();
+                hiddenPassword.Value = password.Text;
+            }
+            else
+            {
+                error_modal_control.Show();
+                Messenger.setMessage(error_message, "Details updated successfully!", LEVEL.SUCCESS);
+            }
+        }
+        catch (InvalidEmailAddressException ieaex)
+        {
+            Messenger.setMessage(error_message, ieaex.Message, LEVEL.DANGER);
+            error_modal_control.Show();
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(error_message, ex.Message, LEVEL.DANGER);
+            error_modal_control.Show();
+        }
+        finally
+        {
+            
+        }
+        
+    }
+
+    protected void ConfirmPasswordChange(object sender, EventArgs e)
+    {
+        long partnerid;
+        try
+        {
+            if (!Int64.TryParse(Session["userid"].ToString(), out partnerid))
+                throw new Exception("Cannot find user ID, please contact administrator.");
+
+            if (!hiddenPassword.Value.Equals(new_password.Text))
+                throw new Exception("Passwords don't match.");
+
+            updatePassword(partnerid,old_password.Text,new_password.Text);//from login
+            error_modal_control.Show();
+            Messenger.setMessage(error_message, "Password updated successfully!", LEVEL.SUCCESS);
+            NewProjectUpdatePanel.Update();
+        }
+        catch (LoginException lex)
+        {
+            Messenger.setMessage(ChangePasswordMessage, lex.Message, LEVEL.DANGER);
+            password_popup.Show();
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(ChangePasswordMessage, ex.Message, LEVEL.DANGER);
+            password_popup.Show();
+        }
+    }
+
+    /**
+     * Clears only required fields like passwords
+     */
+    private void clearFields()
+    {
+        password.Text = "";
+        old_password.Text = "";
+        new_password.Text = "";
+        hiddenPassword.Value = "";
+    }
+    protected void ClearFields(object sender, EventArgs e)
+    {
+        clearFields();
     }
 }

@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Partner : BaseMemberPage
+//this is renamed such that the other pages don't accidentally reference to this when they use Partner
+public partial class PartnerPage : BaseMemberPage 
 {
-    public Partner() : base()
+    public PartnerPage()
+        : base()
     {
         
     }
