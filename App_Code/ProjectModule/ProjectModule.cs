@@ -54,7 +54,7 @@ public class ProjectModule
         {
             session = hibernate.getSession();
         }
-        var projects = session.CreateCriteria<Project>()
+        IList<Project> projects = session.CreateCriteria<Project>()
             .CreateAlias("PROJECT_OWNER","PROJECT_OWNER")
             .Add(Restrictions.Eq("PROJECT_OWNER.USER_ID", ownerId))
             .List<Project>();
@@ -97,6 +97,45 @@ public class ProjectModule
             }
         }
         session.Transaction.Commit();
+    }
+
+    /**
+     * Returns all project applications made by a given studentId.
+     * 
+     */
+    public IList<ProjectApplication> getProjectApplicationsByStudentId(long studentId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        IList<ProjectApplication> projectApplications = session.CreateCriteria<ProjectApplication>()
+                                                .CreateAlias("APPLICANT", "APPLICANT")
+                                                .Add(Restrictions.Eq("APPLICANT.USER_ID", studentId))
+                                                .List<ProjectApplication>();
+
+        return projectApplications;
+    }
+
+    /**
+     * Returns a list of all projects approved by UC starting from index start and maximum limit number of 
+     * results.
+     * 
+     */
+    public IList<Project> getAllOpenedProjects(int start, int limit)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        IList<Project> projects = session.CreateCriteria<Project>()
+            .Add(Restrictions.Eq("PROJECT_STATUS","APPROVED"))
+            .SetFirstResult(start)
+            .SetMaxResults(limit)
+            .List<Project>();
+
+        return projects;
     }
 
     //For testing only!

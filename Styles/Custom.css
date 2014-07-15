@@ -45,3 +45,7 @@ input.truncate {
     margin-top:4px;
 }
 
+.entity-left-panel {
+    overflow: auto; 
+    height: 580px;
+}
