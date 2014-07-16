@@ -39,7 +39,7 @@ public partial class ManagePartners : BaseMemberPage
         {
             loadPartner(convertedUserid);
             //switchPartner(partner);
-            //company_contacts_updatePanel.Update();
+            company_contacts_updatePanel.Update();
             project_list_panel.Update();
         }
     }
@@ -100,23 +100,26 @@ public partial class ManagePartners : BaseMemberPage
                         + successMessage
                         + "</div>"));
             okButton.Text = "Ok";
-
+            company_contacts_updatePanel.Update();
+            /*
             long partnerid;
             if (Session["partnerid"] != null &&
                 Int64.TryParse(Session["partnerid"].ToString(),out partnerid))
             {
                 this.loadPartner(partnerid);
                 project_list_panel.Update();
-            }
+            }*/
         
         }
         catch (Exception ex)
         {
+            error_modal_control.Show();
             error_message.Controls.Add(new LiteralControl(
                     "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
                         + ex.Message
                         + "</div>"));
             okButton.Text = "Ok";
+            company_contacts_updatePanel.Update();
         }
 
     }

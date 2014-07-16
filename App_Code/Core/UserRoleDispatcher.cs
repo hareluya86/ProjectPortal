@@ -24,7 +24,7 @@ public class UserRoleDispatcher
         }
         else if ("STUDENT".Equals(userRole))
         {
-            return "Student.aspx";
+            return "MemberPage/Student/Student.aspx";
         }
         else if ("PARTNER".Equals(userRole))
         {
@@ -32,7 +32,7 @@ public class UserRoleDispatcher
         }
         else
         {
-            return "";//return empty string by default
+            return "Default.aspx";//return homepage by default
         }
     }
 }

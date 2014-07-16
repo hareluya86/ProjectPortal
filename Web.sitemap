@@ -23,6 +23,12 @@
         <siteMapNode url="" title="Listed Projects" />
         <siteMapNode url="" title="Update Details" />
       </siteMapNode>
+    <!--Student-->
+      <siteMapNode url="~/MemberPage/Student/Student.aspx" title="Student" >
+        <siteMapNode url="~/MemberPage/Student/ProjectStatus.aspx" title="Project Status" />
+        <siteMapNode url="~/MemberPage/Student/ListedProjects.aspx" title="Listed Projects" />
+        <siteMapNode url="~/MemberPage/Student/UpdateDetails.aspx" title="Update Details" />
+      </siteMapNode>
     </siteMapNode>
     <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />
   </siteMapNode>

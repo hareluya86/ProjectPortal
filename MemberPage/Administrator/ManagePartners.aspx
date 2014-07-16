@@ -13,7 +13,7 @@
                         <!--company list panel-->
                         <div class="panel panel-primary">
                             <div class="panel-heading">Company Name</div>
-                            <div class="panel-body" style="overflow: auto; height: 550px;">
+                            <div class="panel-body entity-left-panel" style="">
                                 <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel">
                                     <ProgressTemplate>
                                         <div class="overlay">
@@ -49,7 +49,7 @@
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server">
+                        <asp:UpdatePanel ID="company_contacts_updatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                             <ContentTemplate>
                                 <asp:HiddenField ID="company_id" runat="server" />
                                 <div class="row">
