@@ -41,17 +41,18 @@
                     <div class="col-lg-9">
                         <div class="row">
                             <asp:UpdateProgress runat="server" ID="UpdateProgress4" AssociatedUpdatePanelID="project_title_panel">
-                                    <ProgressTemplate>
-                                        <div class="overlay">
-                                            <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
-                                        </div>
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                                <asp:UpdatePanel ID="project_title_panel" runat="server" UpdateMode="Conditional">
-                                    <ContentTemplate>
-                                        <h2><asp:Literal ID="project_title" runat="server" /></h2>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                                <ProgressTemplate>
+                                    <div class="overlay">
+                                        <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                    </div>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                            <asp:UpdatePanel ID="project_title_panel" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <h2>
+                                        <asp:Literal ID="project_title" runat="server" /></h2>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 myforms">
@@ -65,8 +66,8 @@
                                 </asp:UpdateProgress>
                                 <asp:UpdatePanel ID="project_updatePanel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:HiddenField ID="company_id" runat="server" />
-                                        
+                                        <asp:HiddenField ID="project_id" runat="server" />
+
                                         <div class="row">
                                             <div class="form-group">
                                                 <asp:Label AssociatedControlID="company_name" Text="Company Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
@@ -135,7 +136,7 @@
                                 </asp:UpdatePanel>
                             </div>
                             <div class="col-lg-6 ">
-
+                                <!--panel to show categories-->
                                 <div class="row">
                                     <div class="form-group">
                                         <asp:Label Text="Categories: " CssClass="col-lg-2 control-label" runat="server" AssociatedControlID="category_list"></asp:Label>
@@ -168,7 +169,127 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <!--panel to show numbers-->
+                                    <asp:UpdateProgress runat="server" ID="UpdateProgress5" AssociatedUpdatePanelID="numbers_panel">
+                                        <ProgressTemplate>
+                                            <div class="overlay">
+                                                <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                    <asp:UpdatePanel ID="numbers_panel" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <asp:Label AssociatedControlID="allocated_slots" Text="Allocated: " runat="server" CssClass="col-sm-8 control-label"></asp:Label>
+                                                    <asp:Label ID="allocated_slots" AssociatedControlID="allocated_slots" runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <asp:Label AssociatedControlID="num_applications" Text="Applications: " runat="server" CssClass="col-sm-8 control-label"></asp:Label>
+                                                    <asp:Label ID="num_applications" AssociatedControlID="num_applications" runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                                </div>
+                                            </div>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12" style="height: 250px;">
+                                        <!--Applications panel-->
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress6" AssociatedUpdatePanelID="applications_panel">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="applications_panel" runat="server" UpdateMode="Conditional">
+                                            <ContentTemplate>
+                                                <asp:DataGrid ID="project_application_list" runat="server" AllowPaging="true" PageSize="5" GridLines="None"
+                                                    OnPageIndexChanged="project_application_list_PageIndexChanged" DataKeyField="APPLICATION_ID" BorderStyle="None"
+                                                    AllowSorting="true"
+                                                    AutoGenerateColumns="False" CssClass="table">
+                                                    <HeaderStyle CssClass="" Font-Bold="true" />
 
+                                                    <Columns>
+                                                        <asp:BoundColumn DataField="APPLICATION_ID" HeaderText="Application ID" />
+                                                        <asp:TemplateColumn HeaderText="Student ID">
+                                                            <ItemTemplate>
+                                                                <%#DataBinder.Eval(Container.DataItem,"APPLICANT.USER_ID") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateColumn>
+                                                        <asp:TemplateColumn HeaderText="Firstname">
+                                                            <ItemTemplate>
+                                                                <%#DataBinder.Eval(Container.DataItem,"APPLICANT.FIRSTNAME") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateColumn>
+                                                        <asp:TemplateColumn HeaderText="Email">
+                                                            <ItemTemplate>
+                                                                <%#DataBinder.Eval(Container.DataItem,"APPLICANT.EMAIL") %>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateColumn>
+                                                    </Columns>
+                                                </asp:DataGrid>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!--Apply button panel-->
+
+                                    <asp:UpdateProgress runat="server" ID="UpdateProgress7" AssociatedUpdatePanelID="apply_button_panel">
+                                        <ProgressTemplate>
+                                            <div class="overlay">
+                                                <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                    <asp:UpdatePanel ID="apply_button_panel" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <div class="col-lg-3 col-lg-offset-9">
+                                                <asp:Button ID="apply_button" OnClick="apply_project" runat="server"
+                                                    CssClass="btn btn-primary" />
+                                            </div>
+
+
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:UpdateProgress runat="server" ID="UpdateProgress8" AssociatedUpdatePanelID="apply_popup_panel">
+                                        <ProgressTemplate>
+                                            <div class="overlay">
+                                                <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                    <asp:UpdatePanel ID="apply_popup_panel" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <ajaxControl:ModalPopupExtender ID="apply_project_popup" runat="server"
+                                                PopupControlID="apply_project_panel" TargetControlID="HiddenField1"
+                                                OkControlID="okButton" BackgroundCssClass="overlay">
+                                            </ajaxControl:ModalPopupExtender>
+                                            <asp:HiddenField runat="server" ID="HiddenField1" />
+                                            <asp:Panel runat="server" ID="apply_project_panel">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">Message</div>
+                                                    <div class="panel-body" style="overflow: auto;">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <asp:PlaceHolder runat="server" ID="apply_project_message"></asp:PlaceHolder>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2 col-sm-offset-10">
+                                                                <asp:Button runat="server" ID="apply_project_button" CssClass="btn btn-default" Text="Ok"
+                                                                     />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </asp:Panel>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </div>
                             </div>
                         </div>

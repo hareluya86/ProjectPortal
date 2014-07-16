@@ -155,7 +155,8 @@ public class ProjectModule
             Project project = new Project();
             project.PROJECT_TITLE = "Project " + i + " by partner " + partnerId;
             project.PROJECT_OWNER = partner;
-            project.PROJECT_STATUS = APPLICATION_STATUS.PENDING;
+            project.PROJECT_STATUS = APPLICATION_STATUS.APPROVED;
+            project.RECOMMENDED_SIZE = 5;
             results.Add(project);
             
             session.Save(partner);

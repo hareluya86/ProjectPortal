@@ -127,7 +127,7 @@ public partial class SubmitNewProject : BaseMemberPage
         contact_num.Text = null;
         contact_email.Text = null;
         project_requirements.Text = null;
-        recommended_size = null;
+        recommended_size.Text = null;
     }
     protected void ResetButton_Click(object sender, EventArgs e)
     {
