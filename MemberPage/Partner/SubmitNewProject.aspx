@@ -53,6 +53,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <asp:Label AssociatedControlID="recommended_size" Text="Recommended Size: " runat="server" CssClass="col-sm-4 control-label" ></asp:Label>
+                                <div class="col-sm-8">
+                                    <asp:TextBox ID="recommended_size" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
+                                        TargetControlID="recommended_size"
+                                        FilterType="Numbers" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!--categories-->
                     <div class="col-lg-7">

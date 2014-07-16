@@ -130,7 +130,7 @@ public class ProjectModule
             session = hibernate.getSession();
         }
         IList<Project> projects = session.CreateCriteria<Project>()
-            .Add(Restrictions.Eq("PROJECT_STATUS","APPROVED"))
+            .Add(Restrictions.Eq("PROJECT_STATUS",APPLICATION_STATUS.APPROVED))
             .SetFirstResult(start)
             .SetMaxResults(limit)
             .List<Project>();

@@ -29,7 +29,7 @@
                                                 <asp:Button CssClass="btn truncate project-button"
                                                     runat="server" Text='<%# Eval("PROJECT_TITLE") %>'
                                                     ToolTip='<%# Eval("PROJECT_TITLE") %>' OnClick="loadProject"
-                                                    CommandArgument='<%# Eval("PROJECT_ID") %>'  />
+                                                    CommandArgument='<%# Eval("PROJECT_ID") %>' />
 
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -38,90 +38,140 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 myforms">
-                        <!--update company contacts panel-->
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="project_updatePanel">
-                            <ProgressTemplate>
-                                <div class="overlay">
-                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
-                                </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="project_updatePanel" runat="server" UpdateMode="Conditional">
-                            <ContentTemplate>
-                                <asp:HiddenField ID="company_id" runat="server" />
-                                <div class="row">
-                                    <h2><asp:Literal ID="project_title" runat="server" /></h2>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="company_name" Text="Company Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label ID="company_name" AssociatedControlID="company_name" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="contact_name" Text="Contact Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label ID="contact_name" AssociatedControlID="contact_name" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="contact_number" Text="Contact Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label ID="contact_number" AssociatedControlID="contact_number" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="contact_email" Text="Contact Email: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label ID="contact_email" AssociatedControlID="contact_email" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading">Project Requirements</div>
-                                        <div class="panel-body" style="overflow: auto; height:125px;">
-                                            <asp:Literal ID="project_requirements" runat="server" Mode="Encode" ></asp:Literal>
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <asp:UpdateProgress runat="server" ID="UpdateProgress4" AssociatedUpdatePanelID="project_title_panel">
+                                    <ProgressTemplate>
+                                        <div class="overlay">
+                                            <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="panel panel-success">
-                                        <div class="panel-heading">UC comments</div>
-                                        <div class="panel-body" style="overflow: auto; height:125px;">
-                                            <asp:Literal ID="uc_comments" runat="server" Mode="Encode" ></asp:Literal>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                                <asp:UpdatePanel ID="project_title_panel" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <h2><asp:Literal ID="project_title" runat="server" /></h2>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 myforms">
+                                <!--update company contacts panel-->
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="project_updatePanel">
+                                    <ProgressTemplate>
+                                        <div class="overlay">
+                                            <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                         </div>
-                                    </div>
-                                </div>
-                                <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
-                                    PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
-                                    OkControlID="okButton" BackgroundCssClass="overlay">
-                                </ajaxControl:ModalPopupExtender>
-                                <asp:HiddenField runat="server" ID="hiddenModalTarget" />
-                                <asp:Panel runat="server" ID="delete_projects_error">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">Message</div>
-                                        <div class="panel-body" style="overflow: auto;">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
-                                                    <asp:Label runat="server" ID="error_label"></asp:Label>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                                <asp:UpdatePanel ID="project_updatePanel" runat="server" UpdateMode="Conditional">
+                                    <ContentTemplate>
+                                        <asp:HiddenField ID="company_id" runat="server" />
+                                        
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label AssociatedControlID="company_name" Text="Company Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
+                                                <asp:Label ID="company_name" AssociatedControlID="company_name" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label AssociatedControlID="contact_name" Text="Contact Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
+                                                <asp:Label ID="contact_name" AssociatedControlID="contact_name" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label AssociatedControlID="contact_number" Text="Contact Name: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
+                                                <asp:Label ID="contact_number" AssociatedControlID="contact_number" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label AssociatedControlID="contact_email" Text="Contact Email: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
+                                                <asp:Label ID="contact_email" AssociatedControlID="contact_email" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="panel panel-success">
+                                                <div class="panel-heading">Project Requirements</div>
+                                                <div class="panel-body" style="overflow: auto; height: 125px;">
+                                                    <asp:Literal ID="project_requirements" runat="server" Mode="Encode"></asp:Literal>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-2 col-sm-offset-9">
-                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                        </div>
+                                        <div class="row">
+                                            <div class="panel panel-success">
+                                                <div class="panel-heading">UC comments</div>
+                                                <div class="panel-body" style="overflow: auto; height: 125px;">
+                                                    <asp:Literal ID="uc_comments" runat="server" Mode="Encode"></asp:Literal>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
+                                            PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
+                                            OkControlID="okButton" BackgroundCssClass="overlay">
+                                        </ajaxControl:ModalPopupExtender>
+                                        <asp:HiddenField runat="server" ID="hiddenModalTarget" />
+                                        <asp:Panel runat="server" ID="delete_projects_error">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">Message</div>
+                                                <div class="panel-body" style="overflow: auto;">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
+                                                            <asp:Label runat="server" ID="error_label"></asp:Label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2 col-sm-offset-9">
+                                                            <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-lg-6 ">
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <asp:Label Text="Categories: " CssClass="col-lg-2 control-label" runat="server" AssociatedControlID="category_list"></asp:Label>
+                                        <div class="col-lg-12">
+                                            <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_categories_panel">
+                                                <ProgressTemplate>
+                                                    <div class="overlay">
+                                                        <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                                    </div>
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                            <asp:UpdatePanel ID="project_categories_panel" runat="server" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <div class="well well-sm" style="height: 120px; overflow: auto;">
+
+                                                        <asp:Repeater runat="server" ID="category_list">
+                                                            <ItemTemplate>
+                                                                <button class="btn btn-sm btn-default category-button col-sm-6 truncate" style="text-align: left; margin-bottom: 5px;"
+                                                                    title='<%# Eval("CATEGORY_NAME") %>'>
+                                                                    <%# Eval("CATEGORY_NAME") %>
+                                                                </button>
+                                                                <input type="hidden" runat="server"
+                                                                    value='<%# Eval("CATEGORY_ID") %>' />
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </div>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                     </div>
-                                </asp:Panel>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                    <div class="col-lg-5 ">
+                                </div>
+                                <div class="row">
 
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -189,5 +239,5 @@
             $get(uiId).disabled = false;
         }
     </script>
-    
+
 </asp:Content>

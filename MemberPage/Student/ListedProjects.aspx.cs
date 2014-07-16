@@ -17,6 +17,7 @@ public partial class ListedProjects : BaseMemberPage
         {
             Session["partnerid"] = null;
             loadProjects();
+            project_title.Text = "&nbsp;";
 
         }
     }
@@ -42,6 +43,8 @@ public partial class ListedProjects : BaseMemberPage
             //switchPartner(partner);
             //company_contacts_updatePanel.Update();
             project_updatePanel.Update();
+            project_categories_panel.Update();
+            project_title_panel.Update();
         }
     }
 
@@ -55,5 +58,19 @@ public partial class ListedProjects : BaseMemberPage
         contact_name.Text = project.CONTACT_NAME;
         project_requirements.Text = project.PROJECT_REQUIREMENTS;
         uc_comments.Text = project.UC_REMARKS;
+
+        //load categories
+        IList<ProjectCategory> projectCategories = project.CATEGORIES;
+        IList<Category> categories = new List<Category>();
+
+        foreach (ProjectCategory projectCategory in projectCategories)
+        {
+            Category c = projectCategory.CATEGORY;
+            categories.Add(c);
+        }
+
+        category_list.DataSource = categories;
+        category_list.DataBind();
+
     }
 }
