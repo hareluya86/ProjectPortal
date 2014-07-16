@@ -17,6 +17,12 @@
         <siteMapNode url="~/MemberPage/Partner/ProjectStatus.aspx" title="Project Status" />
         <siteMapNode url="~/MemberPage/Partner/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
+      <!--UC-->
+      <siteMapNode url="~/MemberPage/UC/UC.aspx" title="Partner" >
+        <siteMapNode url="~/MemberPage/UC/PendingProjects.aspx" title="Projects awaiting approval" />
+        <siteMapNode url="" title="Listed Projects" />
+        <siteMapNode url="" title="Update Details" />
+      </siteMapNode>
     </siteMapNode>
     <siteMapNode url="~/Tests/Test.aspx" title="Testing page"  description="" />
   </siteMapNode>
