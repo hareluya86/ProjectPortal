@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,15 +42,21 @@ public partial class ListedProjects : BaseMemberPage
 
         if (Int64.TryParse(projectId, out convertedProjectid))
         {
+            Session["projectId"] = projectId; //for later use
             loadProject(convertedProjectid);
             //switchPartner(partner);
             //company_contacts_updatePanel.Update();
-            project_updatePanel.Update();
-            project_categories_panel.Update();
+            //project_updatePanel.Update();
+            //project_categories_panel.Update();
             project_title_panel.Update();
-            numbers_panel.Update();
-            applications_panel.Update();
-            apply_button_panel.Update();
+            //numbers_panel.Update();
+            //applications_panel.Update();
+            //apply_button_panel.Update();
+            project_details_panel.Update();
+        }
+        else
+        {
+            Messenger.setMessage(apply_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
         }
     }
 
@@ -57,7 +64,7 @@ public partial class ListedProjects : BaseMemberPage
     {
         ProjectModule projectModule = new ProjectModule();
         Project project = projectModule.getProjectById(projectId);
-
+        
         project_id.Value = projectId.ToString();
         project_title.Text = project.PROJECT_TITLE;
         company_name.Text = project.PROJECT_OWNER.USERNAME;
@@ -124,12 +131,14 @@ public partial class ListedProjects : BaseMemberPage
         }
         catch (Exception ex)
         {
+            
             Messenger.setMessage(apply_project_message, ex.Message, LEVEL.DANGER);
         }
         finally
         {
-            apply_project_popup.Show();
-            apply_popup_panel.Update();
+            apply_project_popup.Show(); 
+            //apply_popup_panel.Update();
+            project_details_panel.Update();
         }
     }
 
@@ -139,5 +148,21 @@ public partial class ListedProjects : BaseMemberPage
         ProjectApplication projectApplication = projectModule.ApplyProject(studentId, projectId);
 
         return projectApplication;
+    }
+
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        long convertedProjectid;
+
+        if (Int64.TryParse(Session["projectId"].ToString(), out convertedProjectid))
+        {
+            loadProject(convertedProjectid);
+        }
+        else
+        {
+            Messenger.setMessage(apply_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            apply_project_popup.Show();
+            project_details_panel.Update();
+        }
     }
 }
