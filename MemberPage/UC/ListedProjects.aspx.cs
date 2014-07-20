@@ -86,9 +86,15 @@ public partial class ListedProjects : BaseMemberPage
             categories.Add(c);
         }
 
-        //load project applications
-        num_applications.Text = project.APPLICATIONS.Count.ToString();
-        Session["applications"] = project.APPLICATIONS;
+        //load project applications (only pending)
+        IList<ProjectApplication> pendingApplications = new List<ProjectApplication>();
+        foreach (ProjectApplication application in project.APPLICATIONS)
+        {
+            if (application.APPLICATION_STATUS == APPLICATION_STATUS.PENDING)
+                pendingApplications.Add(application);
+        }
+        num_applications.Text = pendingApplications.Count.ToString();
+        Session["applications"] = pendingApplications;
         project_application_list.DataSource = Session["applications"];
         project_application_list.DataBind();
 
@@ -98,6 +104,36 @@ public partial class ListedProjects : BaseMemberPage
         //enable Apply button
         assign_button.Enabled = true;
 
+        //If project has already been assigned, show a disabled overlay and the project members
+        ProjectAssignment projectAssignment = null;
+
+        if(project.ASSIGNED_TEAMS != null && project.ASSIGNED_TEAMS.Count > 0)
+            projectAssignment = project.ASSIGNED_TEAMS.First(); //Because it is many-to-many, we use only the first result and assume that it will always have 1 team
+
+        if (projectAssignment != null)
+        {
+            assigned_project_panel.Visible = true;
+            IList<Student> projectMembers = new List<Student>();
+            Team assignedTeam = projectAssignment.TEAM;
+
+            foreach (TeamAssignment assignment in assignedTeam.TEAM_ASSIGNMENT)
+            {
+                Student member = assignment.STUDENT;
+                projectMembers.Add(member);
+            }
+            assigned_project_members.DataSource = projectMembers;
+            assigned_project_members.DataBind();
+
+            assign_button.Enabled = false;
+        }
+        else
+        {
+            assigned_project_panel.Visible = false;
+        }
+
+        
+
+        
     }
 
     protected void project_application_list_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
@@ -120,6 +156,8 @@ public partial class ListedProjects : BaseMemberPage
         IList<long> selected = new List<long>();
         
         string concatenated = selected_applications.Value;
+        if (concatenated == null || concatenated.Length <= 0)
+            return selected;
         string[] selectedItems = concatenated.Split(',');
         foreach (string selectedItem in selectedItems)
         {
@@ -150,28 +188,27 @@ public partial class ListedProjects : BaseMemberPage
     }
 
 
-    protected void approve_project(object sender, EventArgs e)
+    protected void assign_project(object sender, EventArgs e)
     {
         long convertedProjectid;
-        long convertedStudentid;
         string projectId = project_id.Value;
-        string studentId = Session["userid"].ToString();
+        IList<long> selectedApplications = getSelectedApplications();
+        Team newTeam;
 
         try
         {
-            if (Int64.TryParse(projectId, out convertedProjectid) &&
-                Int64.TryParse(studentId, out convertedStudentid))
-            {
-                
-            }
-            else
-            {
+            if (!Int64.TryParse(projectId, out convertedProjectid))
                 throw new Exception("System error: Cannot find student ID, please contact administrator.");
-            }
+            
+            newTeam = this.assign_project(convertedProjectid, selectedApplications, true);
+            Messenger.setMessage(apply_project_message, "Project has been assigned to team "+newTeam.TEAM_ID+" and email has been sent to the team members and project owner.", LEVEL.SUCCESS);
+        }
+        catch (ProjectAssignmentException paex)
+        {
+            Messenger.setMessage(apply_project_message, paex.Message, LEVEL.DANGER);
         }
         catch (Exception ex)
         {
-            
             Messenger.setMessage(apply_project_message, ex.Message, LEVEL.DANGER);
         }
         finally
@@ -182,12 +219,12 @@ public partial class ListedProjects : BaseMemberPage
         }
     }
 
-    private ProjectApplication assign_project(long studentId, long projectId)
+    private Team assign_project(long projectId, IList<long> applicationIds, bool rejectOthers)
     {
         ProjectModule projectModule = new ProjectModule();
-        ProjectApplication projectApplication = projectModule.ApplyProject(studentId, projectId);
+        Team newTeam = projectModule.assignProject(projectId, applicationIds, rejectOthers);
 
-        return projectApplication;
+        return newTeam;
     }
 
     protected void okButton_Click(object sender, EventArgs e)
@@ -196,7 +233,8 @@ public partial class ListedProjects : BaseMemberPage
 
         if (Int64.TryParse(Session["projectId"].ToString(), out convertedProjectid))
         {
-            loadProject(convertedProjectid);
+            //loadProject(convertedProjectid);
+            loadProjects();
         }
         else
         {

@@ -12,6 +12,7 @@ public class ProjectModule
 {
     private Hibernate hibernate;
     private ISession session;
+    public static int MAX_FLUSH_SIZE = 50;
     public static int MAX_COMMIT_SIZE = 100;
 
     //Business-related numbers
@@ -129,8 +130,9 @@ public class ProjectModule
         {
             session = hibernate.getSession();
         }
+        string[] statuses = { APPLICATION_STATUS.APPROVED, APPLICATION_STATUS.ASSIGNED };
         IList<Project> projects = session.CreateCriteria<Project>()
-            .Add(Restrictions.Eq("PROJECT_STATUS",APPLICATION_STATUS.APPROVED))
+            .Add(Restrictions.In("PROJECT_STATUS", statuses))
             .SetFirstResult(start)
             .SetMaxResults(limit)
             .List<Project>();
@@ -512,6 +514,30 @@ public class ProjectModule
     }
 
     /**
+     * Rejects a project
+     * 
+     */
+    public Project rejectProject(Project project)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        if (project.PROJECT_ID == null || project.PROJECT_ID == 0)
+            throw new ApproveProjectException("Project " + project.PROJECT_TITLE + " is not submitted yet. Please submit project first.");
+
+        //Set to APPROVED
+        project.PROJECT_STATUS = APPLICATION_STATUS.REJECTED;
+
+        //Update project
+        Project approvedProject = this.updateProject(project);
+
+        //send out email
+
+        return approvedProject;
+    }
+
+    /**
      * Validates essential project information
      * 
      * - Validate length of project title
@@ -603,10 +629,132 @@ public class ProjectModule
      * - If rejectOthers is TRUE, set all other Application statuses to REJECTED
      * - Change the application status of all studentIds to APPROVED
      * - Create a Team object with TeamAssignment to the studentIds
-     * - 
+     * - For each student who is assigned to this project, close off 
      */
-    public Project assignProject(long projectId, IList<long> studentIds, bool rejectOthers)
+    public Team assignProject(long projectId, IList<long> applicationIds, bool rejectOthers)
     {
+        Project project = this.getProjectById(projectId);
+        if (project == null)
+            throw new ProjectAssignmentException("Project Id " + projectId + " not found.");
 
+        if(project.PROJECT_STATUS != APPLICATION_STATUS.APPROVED)
+            throw new ProjectAssignmentException("Project Id " + projectId + " is not in the APPROVED status.");
+
+        if(applicationIds.Count <= 0 )
+            throw new ProjectAssignmentException("Please select at least 1 application.");
+
+        IList<ProjectApplication> allApplications = project.APPLICATIONS;
+        IList<ProjectApplication> successfulApplications = new List<ProjectApplication>();
+        IList<ProjectApplication> failedApplications = new List<ProjectApplication>();
+
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        //Update successful applications
+        session.BeginTransaction();
+        foreach (ProjectApplication application in allApplications)
+        {
+            if (applicationIds.Contains(application.APPLICATION_ID))
+            {
+                application.APPLICATION_STATUS = APPLICATION_STATUS.APPROVED;
+                successfulApplications.Add(application);
+                session.Update(application);
+            }
+
+            if (successfulApplications.Count % MAX_FLUSH_SIZE == 0)
+                session.Flush();
+        }
+        session.Flush();
+
+        //If rejectOthers flag is set as true, reject the rest of the applications
+        if (rejectOthers)
+        {
+            foreach (ProjectApplication application in allApplications)
+            {
+                if (!applicationIds.Contains(application.APPLICATION_ID))
+                {
+                    application.APPLICATION_STATUS = APPLICATION_STATUS.REJECTED;
+                    failedApplications.Add(application);
+                    session.Update(application);
+                }
+
+                if (failedApplications.Count % MAX_FLUSH_SIZE == 0)
+                    session.Flush();
+            }
+            session.Flush();
+        }
+
+        //Set Project status to ASSIGNED
+        project.PROJECT_STATUS = APPLICATION_STATUS.ASSIGNED;
+
+        //Create Team first
+        Team newTeam = new Team();
+        session.Save(newTeam);
+
+        //Create ProjectAssignment - relationship between Team and Project
+        ProjectAssignment pAssignment = new ProjectAssignment();
+        pAssignment.PROJECT = project;
+        pAssignment.TEAM = newTeam;
+        project.ASSIGNED_TEAMS.Add(pAssignment);
+        newTeam.ASSIGNED_TO_PROJECT.Add(pAssignment);
+        
+        foreach (ProjectApplication application in successfulApplications)
+        {
+            //set team relationships
+            TeamAssignment tAssignment = new TeamAssignment();
+            Student student = application.APPLICANT;
+            
+            tAssignment.STUDENT = student;
+            tAssignment.TEAM = newTeam;
+
+            //Close off all this student's applications
+            IList<ProjectApplication> existingApplications = student.PROJECTS_APPLIED;
+            foreach(ProjectApplication existingApplication in existingApplications)
+            {
+                if (existingApplication.APPLICATION_ID == application.APPLICATION_ID)
+                    continue;
+                existingApplication.APPLICATION_STATUS = APPLICATION_STATUS.REJECTED;
+                session.Save(existingApplication);
+            }
+
+            //set opposite direction relationships
+            newTeam.TEAM_ASSIGNMENT.Add(tAssignment);
+            student.TEAM_ASSIGNMENT.Add(tAssignment);
+
+            //set assignment attributes
+            tAssignment.ROLE = TEAM_ASSIGNMENT_ROLE.MEMBER;
+
+            session.Save(tAssignment);
+            session.Save(student);
+        }
+
+        session.Save(pAssignment);
+        session.Save(project);
+        session.Save(newTeam);
+        //session.Flush();
+
+        session.Transaction.Commit();
+
+        return newTeam;
     }
+
+    /**
+     * Get the project members for an assigned project
+     * 
+     * - Returns empty list if project has not been assigned.
+     * 
+     */
+    public IList<Student> getProjectMembers(long projectId)
+    {
+        IList<Student> members = new List<Student>();
+
+        return members;
+    }
+
+    /**
+     * 
+     * 
+     */
 }

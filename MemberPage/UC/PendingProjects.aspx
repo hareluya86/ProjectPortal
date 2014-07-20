@@ -164,14 +164,14 @@
                                 </div>
                                 <div class="row">
                                     <!--Apply button panel-->
-                                    <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="project_details_panel">
+                                    <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="approve_button_panel">
                                         <ProgressTemplate>
                                             <div class="overlay">
                                                 <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                             </div>
                                         </ProgressTemplate>
                                     </asp:UpdateProgress>
-                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                                    <asp:UpdatePanel ID="approve_button_panel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                         <ContentTemplate>
                                             <div class="col-lg-3 col-lg-offset-9">
                                                 <asp:Button ID="approve_button" OnClick="approve_project" runat="server"

@@ -41,6 +41,7 @@ public partial class ManageStudents : BaseMemberPage
             //switchPartner(partner);
             //company_contacts_updatePanel.Update();
             project_application_list_panel.Update();
+            assigned_project_panel.Update();
         }
     }
 
@@ -73,9 +74,17 @@ public partial class ManageStudents : BaseMemberPage
             project_application_list.DataSource = Session["applied_projects"];
             project_application_list.DataBind();
 
-            //Session["student"] = student.PROJECTS;
-            //project_list.DataSource = Session["projects"];
-            //project_list.DataBind();
+            //populate assigned project
+            TeamAssignment tAssignment = student.TEAM_ASSIGNMENT.First(); //assume that there will only be 1 assignment per student
+            Team assignedTeam = tAssignment.TEAM;
+            ProjectAssignment pAssignment = assignedTeam.ASSIGNED_TO_PROJECT.First();
+            Project assignedProject = pAssignment.PROJECT;
+
+            project_title.Text = assignedProject.PROJECT_TITLE;
+            project_company.Text = assignedProject.PROJECT_OWNER.USERNAME;
+            contact_person.Text = assignedProject.CONTACT_NAME;
+            contact_number.Text = assignedProject.CONTACT_NUMBER;
+
         }
 
     }

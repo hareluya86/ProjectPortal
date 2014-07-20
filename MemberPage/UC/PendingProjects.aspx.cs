@@ -174,12 +174,68 @@ public partial class PendingProjects : BaseMemberPage
         else
         {
             Messenger.setMessage(approve_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            
+        }
+        //approve_project_popup.Show();
+        //project_details_panel.Update();
+        //project_list_panel.Update();
+        //approve_button_panel.Update();
+        //EntireListedProjectsPage.Update();
+        Response.Redirect(Request.RawUrl);
+    }
+
+    protected void reject_project(object sender, EventArgs e)
+    {
+        long convertedProjectid;
+        ProjectModule projectModule = new ProjectModule();
+
+        try
+        {
+            if (!Int64.TryParse(project_id.Value, out convertedProjectid))
+                throw new Exception("Cannot find project ID, please contact administrator.");
+
+            Project project = projectModule.getProjectById(convertedProjectid);
+
+            //set all inputted variables into the Project object
+            //Only set fields that could be changed in the frontend screen
+            project.PROJECT_TITLE = project_title.Text;
+            project.CONTACT_NAME = contact_name.Text;
+            project.CONTACT_NUMBER = contact_number.Text;
+            project.CONTACT_EMAIL = contact_email.Text;
+            project.PROJECT_REQUIREMENTS = project_requirements.Text;
+            project.UC_REMARKS = uc_comments.Text;
+
+            int convertedAllocatedSize;
+            if (!Int32.TryParse(allocated_size.Text, out convertedAllocatedSize))
+                throw new Exception("Invalid allocated size entered");
+
+            project.ALLOCATED_SIZE = convertedAllocatedSize;
+
+            int convertedRecommendedSize;
+            if (!Int32.TryParse(allocated_size.Text, out convertedRecommendedSize))
+                throw new Exception("Invalid recommended size entered");
+
+            project.RECOMMENDED_SIZE = convertedRecommendedSize;
+
+            projectModule.rejectProject(project);
+
+            //Success
+            Messenger.setMessage(approve_project_message, "Project is rejected! An email notification has been sent to the project owner.", LEVEL.WARNING);
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(approve_project_message, ex.Message, LEVEL.DANGER);
+
+        }
+        finally
+        {
             approve_project_popup.Show();
             project_details_panel.Update();
         }
     }
-    protected void reject_project(object sender, EventArgs e)
-    {
 
+    private void clearFields()
+    {
+        
     }
 }

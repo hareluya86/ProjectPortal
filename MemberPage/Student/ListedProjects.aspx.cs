@@ -86,8 +86,14 @@ public partial class ListedProjects : BaseMemberPage
         }
 
         //load project applications
-        num_applications.Text = project.APPLICATIONS.Count.ToString();
-        Session["applications"] = project.APPLICATIONS;
+        IList<ProjectApplication> pendingApplications = new List<ProjectApplication>();
+        foreach (ProjectApplication application in project.APPLICATIONS)
+        {
+            if (application.APPLICATION_STATUS == APPLICATION_STATUS.PENDING)
+                pendingApplications.Add(application);
+        }
+        num_applications.Text = pendingApplications.Count.ToString();
+        Session["applications"] = pendingApplications;
         project_application_list.DataSource = Session["applications"];
         project_application_list.DataBind();
 
@@ -96,6 +102,33 @@ public partial class ListedProjects : BaseMemberPage
 
         //enable Apply button
         apply_button.Enabled = true;
+
+        //If project has already been assigned, show a disabled overlay and the project members
+        ProjectAssignment projectAssignment = null;
+
+        if (project.ASSIGNED_TEAMS != null && project.ASSIGNED_TEAMS.Count > 0)
+            projectAssignment = project.ASSIGNED_TEAMS.First(); //Because it is many-to-many, we use only the first result and assume that it will always have 1 team
+
+        if (projectAssignment != null)
+        {
+            assigned_project_panel.Visible = true;
+            IList<Student> projectMembers = new List<Student>();
+            Team assignedTeam = projectAssignment.TEAM;
+
+            foreach (TeamAssignment assignment in assignedTeam.TEAM_ASSIGNMENT)
+            {
+                Student member = assignment.STUDENT;
+                projectMembers.Add(member);
+            }
+            assigned_project_members.DataSource = projectMembers;
+            assigned_project_members.DataBind();
+
+            apply_button.Enabled = false;
+        }
+        else
+        {
+            assigned_project_panel.Visible = false;
+        }
 
     }
 

@@ -15,14 +15,15 @@
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
     <property name="TEAM_NAME" />
 
-    <many-to-one name="ASSIGNED_TO_PROJECT" class="Project"
-                 column="PROJECT_ID" not-null="true"
-                 insert="false" update="false"
-                 cascade="none"/>
-
     <bag name="TEAM_ASSIGNMENT" cascade="none">
       <key column="TEAM_ID" not-null="true"></key>
       <one-to-many class="TeamAssignment" />
+
+    </bag>
+
+    <bag name="ASSIGNED_TO_PROJECT" cascade="none">
+      <key column="TEAM_ID" not-null="true"></key>
+      <one-to-many class="ProjectAssignment" />
 
     </bag>
   </class>

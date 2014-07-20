@@ -21,7 +21,10 @@ public class BaseMemberPage : System.Web.UI.Page
             Session.SessionID == null || //Scenario 2 - User navigates to any member pages from external places
             !Session.SessionID.Equals(Request.Cookies["ASP.NET_SessionId"].Value.ToString())) //Scenario 3 - User's session timeout
         {
-            Session.Abandon(); //important!
+            //Session.Remove("userid"); 
+            //Session.Remove("username");
+            //Session.Remove("userRole");
+
             Session["previous_url"] = Request.Url.AbsoluteUri;
             Session["first_timeout"] = "true";
             Response.Redirect("/LoginPage.aspx");

@@ -23,10 +23,12 @@ public class Project
     public virtual Partner PROJECT_OWNER { get; set; }
     public virtual IList<ProjectApplication> APPLICATIONS { get; set; }
     public virtual IList<ProjectCategory> CATEGORIES { get; set; }
+    public virtual IList<ProjectAssignment> ASSIGNED_TEAMS { get; set; }
 
     public Project()
     {
         APPLICATIONS = new List<ProjectApplication>();
         CATEGORIES = new List<ProjectCategory>();
+        ASSIGNED_TEAMS = new List<ProjectAssignment>();
     }
 }

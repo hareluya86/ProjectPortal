@@ -192,24 +192,23 @@
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="well well-sm" style="height: 300px; overflow: auto;">
+                                        <div class="well well-sm" style="height: 200px; overflow: auto;">
 
                                             <asp:Repeater runat="server" ID="project_application_list">
                                                 <ItemTemplate>
-                                                        <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;"
-                                                          >
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <%# Eval("PROJECT.PROJECT_TITLE") %>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <%# Eval("APPLICATION_STATUS") %>
-                                                                </div>
+                                                    <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <%# Eval("PROJECT.PROJECT_TITLE") %>
                                                             </div>
-                                                        </button>
-                                                        <input type="hidden" runat="server"
-                                                            value='<%# Eval("APPLICATION_ID") %>' />
-                                                    
+                                                            <div class="col-sm-6">
+                                                                <%# Eval("APPLICATION_STATUS") %>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                    <input type="hidden" runat="server"
+                                                        value='<%# Eval("APPLICATION_ID") %>' />
+
                                                 </ItemTemplate>
                                             </asp:Repeater>
 
@@ -217,10 +216,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-lg-offset-8">
-                                        
 
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <div class="row">
+                            <h2>Project assigned</h2>
+                        </div>
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress4" AssociatedUpdatePanelID="assigned_project_panel">
+                            <ProgressTemplate>
+                                <div class="overlay">
+                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+                        <asp:UpdatePanel runat="server" ID="assigned_project_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                            <ContentTemplate>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <asp:Label AssociatedControlID="project_title" Text="Project Title: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="project_title" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <asp:Label AssociatedControlID="project_company" Text="Project Company: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="project_company" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <asp:Label AssociatedControlID="contact_person" Text="Contact Person: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="contact_person" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
+                                            TargetControlID="contact_number"
+                                            FilterType="Numbers" />
+                                        <asp:Label AssociatedControlID="contact_number" Text="Contact Number: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="contact_number" CssClass="form-control" runat="server" Enabled="false"></asp:TextBox>
+                                        </div>
                                     </div>
                                 </div>
                             </ContentTemplate>

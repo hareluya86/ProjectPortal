@@ -17,6 +17,9 @@ public class Student : UserAccount
 
     public Student(){
         ROLE = "STUDENT"; //Workaround for Hibernate's limitation
+        PROJECTS_APPLIED = new List<ProjectApplication>();
+        COURSE_ENROLLED = new List<Enrollment>();
+        TEAM_ASSIGNMENT = new List<TeamAssignment>();
     }
     
 }

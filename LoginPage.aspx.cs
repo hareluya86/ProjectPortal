@@ -43,13 +43,21 @@ public partial class LoginPage : System.Web.UI.Page
             SessionIDManager sessionIdManager = new SessionIDManager();
             string newId = sessionIdManager.CreateSessionID(Context);
 
+            string oldUserId = ""; 
+            string oldUsername = ""; 
+            string oldUserRole = "";
+
+            if(Session["userid"] != null) oldUserId = Session["userid"].ToString();
+            if(Session["username"] != null) oldUsername = Session["username"].ToString();
+            if(Session["userRole"] != null) oldUserRole = Session["userRole"].ToString();
 
             Session["userid"] = userid;
             Session["username"] = authenticatedUser.USERNAME;
             Session["userRole"] = authenticatedUser.ROLE;
             //Session["Sessionid"] = Session.SessionID; //Unnecessary
 
-            if (Session["previous_url"] != null)
+            if (Session["previous_url"] != null &&
+                userid.Equals(oldUserId)) //impt! potential security vulnerability
             {
                 string previous_url = Session["previous_url"].ToString();
                 Session["previous_url"] = ""; //Clear session variable just in case

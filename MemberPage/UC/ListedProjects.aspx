@@ -22,6 +22,7 @@
                                         </div>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+
                                 <asp:UpdatePanel ID="project_list_panel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:Repeater runat="server" ID="project_titles">
@@ -33,6 +34,7 @@
 
                                             </ItemTemplate>
                                         </asp:Repeater>
+
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -156,11 +158,31 @@
                                                         </div>
                                                     </ProgressTemplate>
                                                 </asp:UpdateProgress>
+                                                <div class="overlay" runat="server" id="assigned_project_panel" visible="false">
+                                                    <div class="row">
+                                                        <div class="col-lg-10 col-lg-offset-1">
+                                                            <h2>This project is already assigned to: </h2>
+                                                        </div>
+                                                    </div>
+
+                                                    <asp:Repeater runat="server" ID="assigned_project_members">
+                                                        <ItemTemplate>
+                                                            <div class="row">
+                                                                <div class="col-lg-8 col-lg-offset-2">
+                                                                    <strong>
+                                                                        <%# Eval("FIRSTNAME")+" "+Eval("LASTNAME")+" (Student ID: "+Eval("USER_ID")+" Email :"+Eval("EMAIL")+" )"  %>
+                                                                    </strong>
+                                                                </div>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+
+                                                </div>
                                                 <asp:UpdatePanel ID="project_appplications_panel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                                     <ContentTemplate>
                                                         <asp:DataGrid ID="project_application_list" runat="server" AllowPaging="true" PageSize="5" GridLines="None"
                                                             OnPageIndexChanged="project_application_list_PageIndexChanged" DataKeyField="APPLICATION_ID" BorderStyle="None"
-                                                            AllowSorting="true" 
+                                                            AllowSorting="true"
                                                             AutoGenerateColumns="False" CssClass="table">
                                                             <HeaderStyle CssClass="" Font-Bold="true" />
 
@@ -183,10 +205,10 @@
                                                                 </asp:TemplateColumn>
                                                                 <asp:TemplateColumn>
                                                                     <HeaderTemplate>
-                                                                        <input type="checkbox" id="checkAll" runat="server" name="checkAll" class="checkAll" />
+                                                                        Select
                                                                     </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <input type="checkbox" id="appId" onclick="" runat="server" name="appId" 
+                                                                        <input type="checkbox" id="appId" onclick="" runat="server" name="appId"
                                                                             class="checkbox" value='<%# Eval("APPLICATION_ID") %>' />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
@@ -305,7 +327,7 @@
             else {
                 var selected_array = selected.split(',');
                 var removed_array = "";
-                for(var i=0; i<selected_array.length; i++){
+                for (var i = 0; i < selected_array.length; i++) {
                     if (selected_array[i] != this.value) {
                         if (removed_array.length <= 0)
                             removed_array += selected_array[i];
