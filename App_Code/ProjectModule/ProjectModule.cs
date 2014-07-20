@@ -138,6 +138,25 @@ public class ProjectModule
         return projects;
     }
 
+    /**
+     * Returns a list of all PENDING projects starting from index start and maximum limit number of 
+     * results.
+     */
+    public IList<Project> getAllPendingProjects(int start, int limit)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        IList<Project> projects = session.CreateCriteria<Project>()
+            .Add(Restrictions.Eq("PROJECT_STATUS", APPLICATION_STATUS.PENDING))
+            .SetFirstResult(start)
+            .SetMaxResults(limit)
+            .List<Project>();
+
+        return projects;
+    }
+
     //For testing only!
     public IList<Project> createRandomProjects(long partnerId, int numProjects)
     {
@@ -331,7 +350,7 @@ public class ProjectModule
         }
 
         //Do all validations here
-
+        /*
         string title = project.PROJECT_TITLE;
         Project foundExistingProject = null;
 
@@ -372,22 +391,18 @@ public class ProjectModule
 
         //Validate email
         UserModule.validateEmail(contact_email);
+        */
+
+        this.validateProject(project);
 
         //Get owner
         Partner owner;
-        if (foundExistingProject == null)
-        {
-            owner = session.CreateCriteria<Partner>()
-                                .Add(Restrictions.Eq("USER_ID", ownerId))
-                                .UniqueResult<Partner>();
-            if (owner == null || owner.USER_ID == null)
-                throw new ProjectSubmissionException("User ID " + ownerId + " does not already exists.");
-        }
-        else
-        {
-            owner = foundExistingProject.PROJECT_OWNER;
-        }
-
+        owner = session.CreateCriteria<Partner>()
+                            .Add(Restrictions.Eq("USER_ID", ownerId))
+                            .UniqueResult<Partner>();
+        if (owner == null || owner.USER_ID == null || owner.USER_ID == 0)
+            throw new ProjectSubmissionException("User ID " + ownerId + " does not already exists.");
+        
         project.PROJECT_STATUS = APPLICATION_STATUS.PENDING; //set to pending
         project.PROJECT_OWNER = owner;
         owner.PROJECTS.Add(project);
@@ -414,6 +429,7 @@ public class ProjectModule
         {
             session = hibernate.getSession();
         }
+
         if(project.PROJECT_ID == null || project.PROJECT_ID == 0)
             throw new ProjectCategoryRegistrationException("Project "+project.PROJECT_TITLE+" is not submitted yet. Please submit project first.");
 
@@ -448,6 +464,149 @@ public class ProjectModule
         session.Save(existingProject);
         
         session.Transaction.Commit();
+
+    }
+
+    /**
+     * Approve a particular project with a project object
+     * 
+     * - change the status to APPROVED
+     * - validate project atributes
+     * - update the project object
+     * - send out email to project owner
+     * 
+     */
+    public Project approveProject(Project project)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        if (project.PROJECT_ID == null || project.PROJECT_ID == 0)
+            throw new ApproveProjectException("Project " + project.PROJECT_TITLE + " is not submitted yet. Please submit project first.");
+
+        //Set to APPROVED
+        project.PROJECT_STATUS = APPLICATION_STATUS.APPROVED;
+
+        //Update project
+        Project approvedProject = this.updateProject(project);
+
+        //send out email
+
+        return approvedProject;
+    }
+
+    /**
+     * Approve a particular project with just project ID and UC comments
+     * 
+     * - update the project object
+     * - change the status to APPROVED
+     * - send out email to project owner
+     * 
+     */
+    public Project approveProject(long projectId, string UCComments)
+    {
+        Project project = this.getProjectById(projectId);
+        project.UC_REMARKS = UCComments;
+        return this.approveProject(project);
+    }
+
+    /**
+     * Validates essential project information
+     * 
+     * - Validate length of project title
+     * - Validate if project title exists already
+     * - Validate if project contact details are present (mandatory)
+     * - Validate if email address is valid
+     * 
+     */
+    public void validateProject(Project project)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        } 
+        string title = project.PROJECT_TITLE;
+
+        //Check if project title is less than required
+        if (title.Length < MIN_PROJECT_TITLE_LENGTH)
+            throw new ProjectValidationException("Project title must be at least " + MIN_PROJECT_TITLE_LENGTH + " char(s).");
+
+        //Check if there is already an existing project with the same title, if the project is not an existing project
+
+        IList<Project> existingProjects = session.CreateCriteria<Project>()
+                                        .Add(Restrictions.Or(
+                                            Restrictions.Eq("PROJECT_ID", project.PROJECT_ID),
+                                            Restrictions.Eq("PROJECT_TITLE", title)))
+                                        .List<Project>();
+        foreach (Project existingProject in existingProjects)
+        {
+            if (project.PROJECT_ID != existingProject.PROJECT_ID) //if titles are the same but IDs different, then throw exception
+            {
+                throw new ProjectValidationException("Project title \"" + title + "\" already exists. Please choose a different title.");
+            }
+            else
+            {
+                //Do not validate whether a project is submitted or not because this method can be used in both submit and modify project
+                //throw new ProjectValidationException("Project \"" + title + "\" (ID:" + project.PROJECT_ID + ") is already submitted. Please contact administrator to update it.");
+            }
+        }
+
+        //Check if project has a contact name, number and email
+        string contact_name = project.CONTACT_NAME;
+        string contact_number = project.CONTACT_NUMBER;
+        string contact_email = project.CONTACT_EMAIL;
+
+        if (contact_name.Length <= 0)
+            throw new ProjectValidationException("Project contact name cannot be empty.");
+        if (contact_number.Length <= 0)
+            throw new ProjectValidationException("Project contact number cannot be empty.");
+        if (contact_email.Length <= 0)
+            throw new ProjectValidationException("Project contact email cannot be empty.");
+
+        //Validate email
+        UserModule.validateEmail(contact_email);
+
+        //Validate sizing
+        if (project.RECOMMENDED_SIZE <= 0)
+            throw new ProjectValidationException("Recommended Size cannot be less than 1.");
+        if (project.ALLOCATED_SIZE <= 0)
+            throw new ProjectValidationException("Allocated Size cannot be less than 1.");
+    }
+
+    /**
+     * Update project
+     * 
+     * - Calls validation method first before updating to database
+     * 
+     */
+    public Project updateProject(Project project)
+    {
+        //Validate project first
+        this.validateProject(project);
+
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        session.BeginTransaction();
+        session.Save(project);
+        session.Transaction.Commit();
+
+        return project;
+    }
+
+    /**
+     * Assign project to a team of Students
+     * 
+     * - If rejectOthers is TRUE, set all other Application statuses to REJECTED
+     * - Change the application status of all studentIds to APPROVED
+     * - Create a Team object with TeamAssignment to the studentIds
+     * - 
+     */
+    public Project assignProject(long projectId, IList<long> studentIds, bool rejectOthers)
+    {
 
     }
 }

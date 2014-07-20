@@ -18,10 +18,11 @@ public partial class ListedProjects : BaseMemberPage
         {
             Session["partnerid"] = null;
             Session["applications"] = null;
+            Session["selected_applications"] = null;
             loadProjects();
             project_title.Text = "&nbsp;";
-            apply_button.Text = "Apply";
-            apply_button.Enabled = false;
+            assign_button.Text = "Approve";
+            assign_button.Enabled = false;
         }
     }
 
@@ -56,7 +57,7 @@ public partial class ListedProjects : BaseMemberPage
         }
         else
         {
-            Messenger.setMessage(apply_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            Messenger.setMessage(apply_project_message, "System error: Cannot find student ID, please contact administrator.", LEVEL.DANGER);
         }
     }
 
@@ -95,7 +96,7 @@ public partial class ListedProjects : BaseMemberPage
         category_list.DataBind();
 
         //enable Apply button
-        apply_button.Enabled = true;
+        assign_button.Enabled = true;
 
     }
 
@@ -103,13 +104,53 @@ public partial class ListedProjects : BaseMemberPage
     {
         if (sender != null)
         {
+            //get those records with check box selected
+            IList<long> selected = getSelectedApplications();
+            
             project_application_list.CurrentPageIndex = e.NewPageIndex;
             project_application_list.DataSource = Session["applications"];
             project_application_list.DataBind();
+
+            checkSelectedCheckbox(selected, project_application_list, "appId");
         }
     }
 
-    protected void apply_project(object sender, EventArgs e)
+    private IList<long> getSelectedApplications()
+    {
+        IList<long> selected = new List<long>();
+        
+        string concatenated = selected_applications.Value;
+        string[] selectedItems = concatenated.Split(',');
+        foreach (string selectedItem in selectedItems)
+        {
+            long convertedApplicationId;
+            if (!Int64.TryParse(selectedItem, out convertedApplicationId))
+                throw new Exception("System error: Cannot find application ID, please contact administrator.");
+
+            selected.Add(convertedApplicationId);
+        }
+
+        return selected;
+
+    }
+
+    private void checkSelectedCheckbox(IList<long> selectedApplicationIds, DataGrid dataGrid, string checkboxId)
+    {
+        foreach (DataGridItem di in dataGrid.Items)
+        {
+            HtmlInputCheckBox chkBx = (HtmlInputCheckBox)di.FindControl(checkboxId);
+            long convertedApplicationId;
+            if (!Int64.TryParse(chkBx.Value, out convertedApplicationId))
+                throw new Exception("System error: Cannot find application ID, please contact administrator.");
+            
+            if (selectedApplicationIds.Contains(convertedApplicationId))
+                chkBx.Checked = true;
+
+        }
+    }
+
+
+    protected void approve_project(object sender, EventArgs e)
     {
         long convertedProjectid;
         long convertedStudentid;
@@ -121,14 +162,11 @@ public partial class ListedProjects : BaseMemberPage
             if (Int64.TryParse(projectId, out convertedProjectid) &&
                 Int64.TryParse(studentId, out convertedStudentid))
             {
-                ProjectApplication projectApplication = applyProject(convertedStudentid, convertedProjectid);
-                Messenger.setMessage(apply_project_message, "You have applied for project "
-                + projectApplication.PROJECT.PROJECT_TITLE + ". You will be notified by email of the status of your"
-                + " application. Please make sure your email address is valid.", LEVEL.SUCCESS);
+                
             }
             else
             {
-                throw new Exception("Cannot find student ID, please contact administrator.");
+                throw new Exception("System error: Cannot find student ID, please contact administrator.");
             }
         }
         catch (Exception ex)
@@ -144,7 +182,7 @@ public partial class ListedProjects : BaseMemberPage
         }
     }
 
-    private ProjectApplication applyProject(long studentId, long projectId)
+    private ProjectApplication assign_project(long studentId, long projectId)
     {
         ProjectModule projectModule = new ProjectModule();
         ProjectApplication projectApplication = projectModule.ApplyProject(studentId, projectId);
@@ -162,7 +200,7 @@ public partial class ListedProjects : BaseMemberPage
         }
         else
         {
-            Messenger.setMessage(apply_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            Messenger.setMessage(apply_project_message, "System error: Cannot find student ID, please contact administrator.", LEVEL.DANGER);
             apply_project_popup.Show();
             project_details_panel.Update();
         }

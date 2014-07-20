@@ -161,10 +161,19 @@ public class UserModule
                 partner.USERNAME = "company " + i%10;
                 user = partner;
             }
+            else if(i % 4 == 3)
+            {
+                UnitCoordinator uc = new UnitCoordinator();
+                uc.FIRSTNAME = "Unit Coordinator " + i % 10;
+                uc.PASSWORD = this.encodePassword("password" + i);
+
+                user = uc;
+            }
             else
             {
                 Student student = new Student();
-                student.FIRSTNAME = "Student " + i%10;
+                student.FIRSTNAME = "Student " + i % 10;
+                student.USERNAME = student.FIRSTNAME;
                 student.PASSWORD = this.encodePassword("password" + i);
 
                 user = student;

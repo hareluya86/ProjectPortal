@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class ManageStudents : BaseMemberPage
+public partial class PendingProjects : BaseMemberPage
 {
     UserModule userModule = new UserModule();
 
@@ -15,128 +16,170 @@ public partial class ManageStudents : BaseMemberPage
     {
         if (!IsPostBack)
         {
-            Session["studentid"] = null;
-            loadStudentList();
+            Session["partnerid"] = null;
+            Session["projects"] = null;
+            loadPendingProjects();
+            //project_title.Text = "&nbsp;";
+            approve_button.Text = "Approve";
+            approve_button.Enabled = false;
+            reject_button.Text = "Reject";
+            reject_button.Enabled = false;
         }
     }
 
-    protected void loadStudentList()
+    private void loadPendingProjects()
     {
-        UserModule userModule = new UserModule();
-        student_list.DataSource = userModule.getUsersByRole("STUDENT", 0, 9999); //Get it up first before we optimize this
+        ProjectModule projectModule = new ProjectModule();
+        project_titles.DataSource = projectModule.getAllPendingProjects(0, 9999); //Get it up first before we optimize this
 
-        student_list.DataBind();
+        project_titles.DataBind();
     }
 
-    protected void loadStudent(object sender, EventArgs e)
+    protected void loadProject(object sender, EventArgs e)
     {
-        System.Threading.Thread.Sleep(3000);
-        Button studentButton = (Button)sender;
-        string userid = studentButton.CommandArgument;
-        long convertedUserid;
+        Button projectButton = (Button)sender;
+        string projectId = projectButton.CommandArgument;
 
-        if (Int64.TryParse(userid, out convertedUserid))
+        long convertedProjectid;
+
+        if (Int64.TryParse(projectId, out convertedProjectid))
         {
-            loadStudent(convertedUserid);
+            Session["projectId"] = projectId; //for later use
+            loadProject(convertedProjectid);
             //switchPartner(partner);
             //company_contacts_updatePanel.Update();
-            project_application_list_panel.Update();
+            //project_updatePanel.Update();
+            //project_categories_panel.Update();
+            //project_title_panel.Update();
+            //numbers_panel.Update();
+            //applications_panel.Update();
+            //apply_button_panel.Update();
+            project_details_panel.Update();
+        }
+        else
+        {
+            Messenger.setMessage(approve_project_message, "Cannot find project ID, please contact administrator.", LEVEL.DANGER);
         }
     }
 
-    protected void loadStudent(long studentId)
+    private void loadProject(long projectId)
     {
+        ProjectModule projectModule = new ProjectModule();
+        Project project = projectModule.getProjectById(projectId);
         
-        Student student = (Student)userModule.getUserByUserId(studentId);
+        project_id.Value = projectId.ToString();
+        project_title.Text = project.PROJECT_TITLE;
+        company_name.Text = project.PROJECT_OWNER.USERNAME;
+        contact_name.Text = project.CONTACT_NAME;
+        contact_number.Text = project.CONTACT_NUMBER;
+        contact_email.Text = project.CONTACT_EMAIL;
+        project_requirements.Text = project.PROJECT_REQUIREMENTS;
+        uc_comments.Text = project.UC_REMARKS;
+        recommended_size.Text = project.RECOMMENDED_SIZE.ToString();
+        allocated_size.Text = project.ALLOCATED_SIZE.ToString(); //already set to the same value as recommended size
 
-        if (student != null)
+        //load categories
+        IList<ProjectCategory> projectCategories = project.CATEGORIES;
+        IList<Category> categories = new List<Category>();
+
+        foreach (ProjectCategory projectCategory in projectCategories)
         {
-            Session["studentid"] = student.USER_ID;
-
-            first_name.Text = student.FIRSTNAME;
-            last_name.Text = student.LASTNAME;
-            email.Text = student.EMAIL;
-            phone.Text = student.PHONE;
-            address1.Text = student.ADDRESS1;
-            address2.Text = student.ADDRESS2;
-            city_town.Text = student.CITY_TOWN;
-            state.Text = student.STATE;
-            zipcode.Text = student.ZIP_CODE;
-            country.Text = student.COUNTRY;
-
-            /*IList<Project> projectAppls = new List<Project>();
-            foreach (ProjectApplication projectAppl in student.PROJECTS_APPLIED)
-            {
-                projectAppls.Add(projectAppl.PROJECT);
-            }*/
-            Session["applied_projects"] = student.PROJECTS_APPLIED;
-            project_application_list.DataSource = Session["applied_projects"];
-            project_application_list.DataBind();
-
-            //Session["student"] = student.PROJECTS;
-            //project_list.DataSource = Session["projects"];
-            //project_list.DataBind();
+            Category c = projectCategory.CATEGORY;
+            categories.Add(c);
         }
 
+        //load project applications
+
+        category_list.DataSource = categories;
+        category_list.DataBind();
+
+        //enable Apply button
+        approve_button.Enabled = true;
+        reject_button.Enabled = true;
     }
 
-    protected void switchPartner(string prev_id, string current_id)
+    protected void project_application_list_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
     {
-
+        if (sender != null)
+        {
+            //project_application_list.CurrentPageIndex = e.NewPageIndex;
+            //project_application_list.DataSource = Session["projects"];
+            //project_application_list.DataBind();
+        }
     }
 
-    protected void UpdateStudentContacts(object sender, EventArgs e)
+    protected void approve_project(object sender, EventArgs e)
     {
-        //Do validations first
-        if (Session["studentid"] == null)
-        {
-            //EntireManagePartnerPage.Update(); do nothing
-            return;
-        }
-
-        long studentid;
-        if (!Int64.TryParse(Session["studentid"].ToString(), out studentid))
-        {
-            return; //do nothing
-        }
-
-        Student student = (Student)userModule.getUserByUserId(studentid);
-
-        student.FIRSTNAME = first_name.Text;
-        student.LASTNAME = last_name.Text;
-        student.EMAIL = email.Text;
-        student.PHONE = phone.Text;
-        student.ADDRESS1 = address1.Text;
-        student.ADDRESS2 = address2.Text;
-        student.CITY_TOWN = city_town.Text;
-        student.STATE = state.Text;
-        student.ZIP_CODE = zipcode.Text;
-        student.COUNTRY = country.Text;
+        long convertedProjectid;
+        ProjectModule projectModule = new ProjectModule();
 
         try
         {
-            userModule.updateUser(student);
-            error_message.Controls.Add(new LiteralControl(
-                    "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
-                        + "Student updated successfully!"
-                        + "</div>"));
+            if (!Int64.TryParse(project_id.Value, out convertedProjectid))
+                throw new Exception("Cannot find project ID, please contact administrator.");
 
-            error_modal_control.Show();
-            okButton.Text = "Ok";
+            Project project = projectModule.getProjectById(convertedProjectid);
+
+            //set all inputted variables into the Project object
+            //Only set fields that could be changed in the frontend screen
+            project.PROJECT_TITLE = project_title.Text;
+            project.CONTACT_NAME = contact_name.Text;
+            project.CONTACT_NUMBER = contact_number.Text;
+            project.CONTACT_EMAIL = contact_email.Text;
+            project.PROJECT_REQUIREMENTS = project_requirements.Text;
+            project.UC_REMARKS = uc_comments.Text;
+
+            int convertedAllocatedSize;
+            if (!Int32.TryParse(allocated_size.Text, out convertedAllocatedSize))
+                throw new Exception("Invalid allocated size entered");
+
+            project.ALLOCATED_SIZE = convertedAllocatedSize;
+
+            int convertedRecommendedSize;
+            if (!Int32.TryParse(allocated_size.Text, out convertedRecommendedSize))
+                throw new Exception("Invalid recommended size entered");
+
+            project.RECOMMENDED_SIZE = convertedRecommendedSize;
+
+            projectModule.approveProject(project);
+
+            //Success
+            Messenger.setMessage(approve_project_message, "Project is approved! An email notification has been sent to the project owner.", LEVEL.SUCCESS);
         }
         catch (Exception ex)
         {
+            Messenger.setMessage(approve_project_message, ex.Message, LEVEL.DANGER);
             
-            error_message.Controls.Add(new LiteralControl(
-                    "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
-                        + ex.Message
-                        + "</div>"));
-            
-            error_modal_control.Show();
-            okButton.Text = "Ok";
-            //cancelButton.Visible = false;
         }
-        
+        finally
+        {
+            approve_project_popup.Show();
+            project_details_panel.Update();
+        }
     }
 
+    private void approve_project(long projectId)
+    {
+
+    }
+
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        long convertedProjectid;
+
+        if (Int64.TryParse(Session["projectId"].ToString(), out convertedProjectid))
+        {
+            loadProject(convertedProjectid);
+        }
+        else
+        {
+            Messenger.setMessage(approve_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            approve_project_popup.Show();
+            project_details_panel.Update();
+        }
+    }
+    protected void reject_project(object sender, EventArgs e)
+    {
+
+    }
 }

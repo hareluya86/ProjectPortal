@@ -160,7 +160,7 @@
                                                     <ContentTemplate>
                                                         <asp:DataGrid ID="project_application_list" runat="server" AllowPaging="true" PageSize="5" GridLines="None"
                                                             OnPageIndexChanged="project_application_list_PageIndexChanged" DataKeyField="APPLICATION_ID" BorderStyle="None"
-                                                            AllowSorting="true"
+                                                            AllowSorting="true" 
                                                             AutoGenerateColumns="False" CssClass="table">
                                                             <HeaderStyle CssClass="" Font-Bold="true" />
 
@@ -176,22 +176,32 @@
                                                                         <%#DataBinder.Eval(Container.DataItem,"APPLICANT.FIRSTNAME") %>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
-                                                                <asp:TemplateColumn HeaderText="Email">
+                                                                <asp:TemplateColumn HeaderText="Contact">
                                                                     <ItemTemplate>
-                                                                        <%#DataBinder.Eval(Container.DataItem,"APPLICANT.EMAIL") %>
+                                                                        <%#DataBinder.Eval(Container.DataItem,"APPLICANT.PHONE") %>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateColumn>
+                                                                <asp:TemplateColumn>
+                                                                    <HeaderTemplate>
+                                                                        <input type="checkbox" id="checkAll" runat="server" name="checkAll" class="checkAll" />
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <input type="checkbox" id="appId" onclick="" runat="server" name="appId" 
+                                                                            class="checkbox" value='<%# Eval("APPLICATION_ID") %>' />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
                                                             </Columns>
                                                         </asp:DataGrid>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
+                                                <asp:HiddenField ClientIDMode="Static" ID="selected_applications" runat="server" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <!--Apply button panel-->
 
                                             <div class="col-lg-3 col-lg-offset-9">
-                                                <asp:Button ID="apply_button" OnClick="apply_project" runat="server"
+                                                <asp:Button ID="assign_button" OnClick="assign_project" runat="server"
                                                     CssClass="btn btn-primary" />
                                             </div>
                                             <ajaxControl:ModalPopupExtender ID="apply_project_popup" runat="server"
@@ -266,34 +276,47 @@
             return false;
         })
     </script>
-    <!--for toggling the project button-->
-    <script id="toggle-project-button-script" type="text/javascript">
+    <!--for selecting all applications-->
+    <script id="select-all-checkbox-script" type="text/javascript">
+        $(document).on('click', ".checkAll", function () {
 
-        $(document).on('click', ".", function () {
-
-            if ($(this).hasClass('btn-danger')) {
-                $(this).removeClass('btn-danger');
-            } else {
-
-                $(this).addClass('btn-danger');
-                $(this).next().attr('name', 'selected')
+            if (this.checked) {
+                $('.checkbox').each(function () {
+                    this.checked = true;
+                })
             }
-            return false; //very important! if not the container will refresh!
+            else {
+                $('.checkbox').each(function () {
+                    this.checked = false;
+                })
+            }
         });
     </script>
-    <script id="test-blocking" type="text/javascript">
-        var uiId = '';
-
-        function PageRequestManager_beginRequest(sender, args) {
-            var postbackElem = args.get_postBackElement();
-            uiId = postbackElem.id;
-            postbackElem.disabled = true;
-        }
-
-
-        function PageRequestManager_endRequest(sender, args) {
-            $get(uiId).disabled = false;
-        }
+    <!--for passing the selected application IDs-->
+    <script id="select-application-script" type="text/javascript">
+        $(document).on('click', ".checkbox", function () {
+            var selected = $('#selected_applications').val();
+            if (this.checked) {
+                if (selected.length <= 0)
+                    $('#selected_applications').val(this.value);
+                else
+                    $('#selected_applications').val(selected + "," + this.value);
+            }
+            else {
+                var selected_array = selected.split(',');
+                var removed_array = "";
+                for(var i=0; i<selected_array.length; i++){
+                    if (selected_array[i] != this.value) {
+                        if (removed_array.length <= 0)
+                            removed_array += selected_array[i];
+                        else
+                            removed_array += "," + selected_array[i];
+                    }
+                }
+                $('#selected_applications').val(removed_array);
+            }
+            //return false; //very important! if not the container will refresh!
+        });
     </script>
 
 </asp:Content>

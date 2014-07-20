@@ -30,6 +30,10 @@ public class UserRoleDispatcher
         {
             return "MemberPage/Partner/Partner.aspx";
         }
+        else if ("UNITCOORDINATOR".Equals(userRole))
+        {
+            return "MemberPage/UC/UC.aspx";
+        }
         else
         {
             return "Default.aspx";//return homepage by default

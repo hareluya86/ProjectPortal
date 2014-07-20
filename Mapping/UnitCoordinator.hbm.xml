@@ -4,9 +4,12 @@
   namespace="ProjectPortal.App_Code">-->
 
   <!-- more mapping info here -->
-  <joined-subclass name="Admin, App_Code" table="ADMINISTRATOR" extends="UserAccount">
+  <joined-subclass name="UnitCoordinator, App_Code" table="UNITCOORDINATOR" extends="UserAccount">
     <key column="USER_ID" />
     <property name="ROLE" />
+
+    <property name="FIRSTNAME" />
+    <property name="LASTNAME" />
 
   </joined-subclass>
 </hibernate-mapping>

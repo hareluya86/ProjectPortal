@@ -43,7 +43,6 @@ public partial class LoginPage : System.Web.UI.Page
             SessionIDManager sessionIdManager = new SessionIDManager();
             string newId = sessionIdManager.CreateSessionID(Context);
 
-            
 
             Session["userid"] = userid;
             Session["username"] = authenticatedUser.USERNAME;

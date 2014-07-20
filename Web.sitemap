@@ -18,9 +18,9 @@
         <siteMapNode url="~/MemberPage/Partner/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
       <!--UC-->
-      <siteMapNode url="~/MemberPage/UC/UC.aspx" title="Partner" >
+      <siteMapNode url="~/MemberPage/UC/UC.aspx" title="UnitCoordinator" >
         <siteMapNode url="~/MemberPage/UC/PendingProjects.aspx" title="Projects awaiting approval" />
-        <siteMapNode url="" title="Listed Projects" />
+        <siteMapNode url="~/MemberPage/UC/ListedProjects.aspx" title="Listed Projects" />
         <siteMapNode url="" title="Update Details" />
       </siteMapNode>
     <!--Student-->

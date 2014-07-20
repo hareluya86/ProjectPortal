@@ -21,6 +21,7 @@
     <property name="UC_REMARKS" />
     <property name="PROJECT_REQUIREMENTS" length="999" />
     <property name="RECOMMENDED_SIZE" />
+    <property name="ALLOCATED_SIZE" />
 
     <many-to-one name="PROJECT_OWNER" class="Partner"
                  not-null="true"

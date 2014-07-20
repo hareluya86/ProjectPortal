@@ -33,7 +33,7 @@ public partial class SubmitNewProject : BaseMemberPage
         contact_num.Text = project.CONTACT_NUMBER;
         contact_email.Text = project.CONTACT_EMAIL;
         project_requirements.Text = project.PROJECT_REQUIREMENTS;
-
+        
     }
 
     protected void loadCategories()
@@ -85,6 +85,12 @@ public partial class SubmitNewProject : BaseMemberPage
             project.CONTACT_NUMBER = contact_num.Text;
             project.CONTACT_EMAIL = contact_email.Text;
             project.PROJECT_REQUIREMENTS = project_requirements.Text;
+
+            int convertedRecommendedSize;
+            if (!Int32.TryParse(recommended_size.Text, out convertedRecommendedSize))
+                throw new Exception("Invalid project size.");
+            project.RECOMMENDED_SIZE = convertedRecommendedSize;
+            project.ALLOCATED_SIZE = convertedRecommendedSize;
             Project newProject = projectModule.submitProject(project, ownerId);
             Session["projectid"] = newProject.PROJECT_ID;
             projectModule.registerProjectCategories(newProject, categoryIds);
