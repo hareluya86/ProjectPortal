@@ -18,11 +18,11 @@ public partial class ListedProjects : BaseMemberPage
         {
             Session["partnerid"] = null;
             Session["applications"] = null;
-            Session["selected_applications"] = null;
             loadProjects();
             project_title.Text = "&nbsp;";
             assign_button.Text = "Approve";
             assign_button.Enabled = false;
+            selected_applications.Value = "";
         }
     }
 
@@ -107,6 +107,8 @@ public partial class ListedProjects : BaseMemberPage
         //If project has already been assigned, show a disabled overlay and the project members
         ProjectAssignment projectAssignment = null;
 
+        //Clear all selected applications from other projects
+        selected_applications.Value = ""; 
         if(project.ASSIGNED_TEAMS != null && project.ASSIGNED_TEAMS.Count > 0)
             projectAssignment = project.ASSIGNED_TEAMS.First(); //Because it is many-to-many, we use only the first result and assume that it will always have 1 team
 
@@ -197,6 +199,8 @@ public partial class ListedProjects : BaseMemberPage
 
         try
         {
+            //if(selectedApplications.Count <= 0)
+                //throw new Exception("System error: Cannot find student ID, please contact administrator.");
             if (!Int64.TryParse(projectId, out convertedProjectid))
                 throw new Exception("System error: Cannot find student ID, please contact administrator.");
             
@@ -233,8 +237,9 @@ public partial class ListedProjects : BaseMemberPage
 
         if (Int64.TryParse(Session["projectId"].ToString(), out convertedProjectid))
         {
-            //loadProject(convertedProjectid);
-            loadProjects();
+            loadProject(convertedProjectid);
+            //loadProjects();
+
         }
         else
         {

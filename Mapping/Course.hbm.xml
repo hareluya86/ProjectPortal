@@ -9,7 +9,7 @@
       <generator class="NHibernate.Id.Enhanced.TableGenerator">
         <param name="table_name">SEQUENCE</param>
         <param name="segment_value">COURSE_ID</param>
-        <param name="initial_value">10000</param>
+        <param name="initial_value">60000</param>
       </generator>
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->

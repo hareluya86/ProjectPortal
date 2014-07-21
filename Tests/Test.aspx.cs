@@ -10,9 +10,9 @@ public partial class Tests_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack)
+        if (!IsPostBack)
         {
-
+            loadCourses();
         }
     }
 
@@ -175,6 +175,87 @@ public partial class Tests_Default : System.Web.UI.Page
             AddedCategoriesTable.CurrentPageIndex = e.NewPageIndex;
             AddedCategoriesTable.DataSource = Session["categories"];
             AddedCategoriesTable.DataBind();
+        }
+    }
+
+    protected void CreateCoursesButton_Click(object sender, EventArgs e)
+    {
+        string stringOfCourses = Courses.Text;
+        CourseModule courseModule = new CourseModule();
+
+        try
+        {
+            IList<Course> results = courseModule.createCourses(stringOfCourses);
+
+            Session["courses"] = results;
+            AddedCoursesTable.DataSource = Session["courses"];
+            AddedCoursesTable.DataBind();
+
+            Messenger.setMessage(AddedCoursesMessage, "Courses created successfully!", LEVEL.SUCCESS);
+        }
+        catch (CategoryException catex)
+        {
+            Messenger.setMessage(AddedCoursesMessage, catex.Message, LEVEL.DANGER);
+        }
+    }
+
+
+    //Course Module
+
+    private void loadCourses()
+    {
+        CourseModule courseModule = new CourseModule();
+        IList<Course> courses = courseModule.getCourses(0, 9999);
+
+        course_list.DataSource = courses;
+        course_list.DataBind();
+    }
+
+    private IList<long> getSelectedApplications()
+    {
+        IList<long> selected = new List<long>();
+
+        string concatenated = selected_course.Value;
+        if (concatenated == null || concatenated.Length <= 0)
+            return selected;
+        string[] selectedItems = concatenated.Split(',');
+        foreach (string selectedItem in selectedItems)
+        {
+            long convertedApplicationId;
+            if (!Int64.TryParse(selectedItem, out convertedApplicationId))
+                throw new Exception("System error: Cannot find application ID, please contact administrator.");
+
+            selected.Add(convertedApplicationId);
+        }
+
+        return selected;
+
+    }
+
+    protected void course_list_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
+    {
+
+    }
+
+    protected void enroll_course_Click(object sender, EventArgs e)
+    {
+        long convertedStudentId;
+        string studentId = student_id.Text;
+        IList<long> selectedApplications = getSelectedApplications();
+        CourseModule courseModule = new CourseModule();
+
+        try
+        {
+            if (!Int64.TryParse(studentId, out convertedStudentId))
+                throw new Exception("System error: Cannot find student ID, please contact administrator.");
+
+            IList<Enrollment> newEnrollment = courseModule.enrollCourse(convertedStudentId, selectedApplications);
+
+            Messenger.setMessage(enroll_course_message, "Courses enrolled successfully!", LEVEL.SUCCESS);
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(enroll_course_message, ex.Message, LEVEL.DANGER);
         }
     }
 }

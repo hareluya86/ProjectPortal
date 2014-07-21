@@ -148,7 +148,8 @@
                                         <div class="panel panel-success">
                                             <div class="panel-heading">Project Requirements</div>
                                             <div class="panel-body" style="overflow: auto; height: 125px;">
-                                                <asp:Literal ID="project_requirements" runat="server" Mode="Encode"></asp:Literal>
+                                                <asp:TextBox ID="project_requirements" runat="server" TextMode="MultiLine"
+                                                    CssClass="col-lg-12"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -157,7 +158,8 @@
                                         <div class="panel panel-success">
                                             <div class="panel-heading">UC comments</div>
                                             <div class="panel-body" style="overflow: auto; height: 125px;">
-                                                <asp:Literal ID="uc_comments" runat="server" Mode="Encode"></asp:Literal>
+                                                <asp:TextBox ID="uc_comments" runat="server" TextMode="MultiLine"
+                                                    CssClass="col-lg-12"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>

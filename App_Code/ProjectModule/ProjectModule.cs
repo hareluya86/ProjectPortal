@@ -241,6 +241,9 @@ public class ProjectModule
         return appl;
     }
 
+    /**
+     * 
+     */
     public Category createCategory(string categoryName)
     {
         if (session == null || !session.IsOpen)
@@ -267,6 +270,9 @@ public class ProjectModule
 
     }
 
+    /**
+     * Creates Category objects
+     */
     public IList<Category> createCategories(IList<string> categoryNames)
     {
         if (session == null || !session.IsOpen)
@@ -305,6 +311,9 @@ public class ProjectModule
         return categories;
     }
 
+    /**
+     * Creates Category objects
+     */
     public IList<Category> createCategories(string commaDelimitedCategories)
     {
         IList<string> categories = commaDelimitedCategories.Split(new char[] { '\n', ',' });
@@ -350,51 +359,6 @@ public class ProjectModule
         {
             session = hibernate.getSession();
         }
-
-        //Do all validations here
-        /*
-        string title = project.PROJECT_TITLE;
-        Project foundExistingProject = null;
-
-        //Check if project title is less than required
-        if(title.Length < MIN_PROJECT_TITLE_LENGTH)
-            throw new ProjectSubmissionException("Project title must be at least " + MIN_PROJECT_TITLE_LENGTH+" char(s).");
-
-        //Check if there is already an existing project with the same title, if the project is not an existing project
-
-        IList<Project> existingProjects = session.CreateCriteria<Project>()
-                                        .Add(Restrictions.Or(
-                                            Restrictions.Eq("PROJECT_ID",project.PROJECT_ID),
-                                            Restrictions.Eq("PROJECT_TITLE", title)))
-                                        .List<Project>();
-        foreach (Project existingProject in existingProjects)
-        {
-            if (project.PROJECT_ID != existingProject.PROJECT_ID) //if titles are the same but IDs different, then throw exception
-            {
-                throw new ProjectSubmissionException("Project title \"" + title + "\" already exists. Please choose a different title.");
-            }
-            else
-            {
-                throw new ProjectSubmissionException("Project \"" + title + "\" (ID:" + project.PROJECT_ID + ") is already submitted. Please contact administrator to update it.");
-            }
-        }
-
-        //Check if project has a contact name, number and email
-        string contact_name = project.CONTACT_NAME;
-        string contact_number = project.CONTACT_NUMBER;
-        string contact_email = project.CONTACT_EMAIL;
-
-        if (contact_name.Length <= 0)
-            throw new ProjectSubmissionException("Project contact name cannot be empty.");
-        if (contact_number.Length <= 0)
-            throw new ProjectSubmissionException("Project contact number cannot be empty.");
-        if (contact_email.Length <= 0)
-            throw new ProjectSubmissionException("Project contact email cannot be empty.");
-
-        //Validate email
-        UserModule.validateEmail(contact_email);
-        */
-
         this.validateProject(project);
 
         //Get owner
@@ -753,8 +717,4 @@ public class ProjectModule
         return members;
     }
 
-    /**
-     * 
-     * 
-     */
 }

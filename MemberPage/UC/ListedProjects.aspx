@@ -214,6 +214,29 @@
                                                                 </asp:TemplateColumn>
                                                             </Columns>
                                                         </asp:DataGrid>
+                                                        <ajaxControl:ModalPopupExtender ID="student_info_modal_popup" runat="server"
+                                                            PopupControlID="student_info_panel" TargetControlID="HiddenField2"
+                                                            BackgroundCssClass="overlay">
+                                                        </ajaxControl:ModalPopupExtender>
+                                                        <asp:HiddenField runat="server" ID="HiddenField2" />
+                                                        <asp:Panel runat="server" ID="student_info_panel" Width="400px">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading">Message</div>
+                                                                <div class="panel-body" style="overflow: auto;">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <asp:PlaceHolder runat="server" ID="student_info_message"></asp:PlaceHolder>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2 col-sm-offset-10">
+                                                                            <asp:Button ID="Button1" runat="server" CssClass="btn btn-default" Text="Ok"
+                                                                                OnClick="okButton_Click" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </asp:Panel>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                                 <asp:HiddenField ClientIDMode="Static" ID="selected_applications" runat="server" />

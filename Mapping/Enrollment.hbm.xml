@@ -16,11 +16,11 @@
 
     
     <many-to-one name="STUDENT" class="Student"
-                 column="STUDENT" not-null="true"
+                 column="USER_ID" not-null="true"
                  insert="false" update="false"
                  cascade="none"/>
     <many-to-one name="COURSE" class="Course"
-                 column="COURSE" not-null="true"
+                 column="COURSE_ID" not-null="true"
                  insert="false" update="false"
                  cascade="none"/>
 

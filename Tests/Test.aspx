@@ -73,7 +73,7 @@
                                                                 AllowPaging="true" PageSize="10"
                                                                 OnPageIndexChanged="InsertedUserTable_PageIndexChanging"
                                                                 DataKeyField="USER_ID">
-                                                                
+
                                                                 <Columns>
                                                                     <asp:BoundColumn DataField="USER_ID" HeaderText="User Id" />
                                                                     <asp:BoundColumn DataField="PASSWORD" HeaderText="Password = 'password'+[lastdigit of user ID]" />
@@ -173,7 +173,7 @@
                                                         <div class="row" style="margin-top: 5px;">
                                                             <div class="col-lg-6 col-lg-offset-5" style="text-align: right;">
                                                                 <asp:Button ID="login_button" Text="Login" runat="server" OnClick="TestLogin" />
-                                                                <asp:Button ID="clear_button" Text="Clear" runat="server" OnClick="ClearLogin"/>
+                                                                <asp:Button ID="clear_button" Text="Clear" runat="server" OnClick="ClearLogin" />
                                                             </div>
                                                         </div>
                                                     </ContentTemplate>
@@ -186,7 +186,7 @@
                         </div>
                     </ContentTemplate>
                 </ajaxControl:TabPanel>
-                <ajaxControl:TabPanel runat="server" HeaderText="Test Projects">
+                <ajaxControl:TabPanel runat="server" HeaderText="Project Module">
                     <ContentTemplate>
                         <div class="row">
                             <!--Test create project-->
@@ -284,9 +284,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6"><!--create categories-->
+                            <div class="col-sm-6">
+                                <!--create categories-->
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Test application of projects</div>
+                                    <div class="panel-heading">Create Categories</div>
                                     <div class="panel-body">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgress6" AssociatedUpdatePanelID="CreateCategories">
                                             <ProgressTemplate>
@@ -298,9 +299,9 @@
                                         <asp:UpdatePanel ID="CreateCategories" runat="server">
                                             <ContentTemplate>
                                                 <div class="row">
-                                                        <asp:TextBox TextMode="MultiLine" runat="server" ID="CategoriesInput" 
-                                                            CssClass="col-lg-12"/>
-                                                    
+                                                    <asp:TextBox TextMode="MultiLine" runat="server" ID="CategoriesInput"
+                                                        CssClass="col-lg-12" />
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-3 col-lg-offset-8">
@@ -314,16 +315,63 @@
                                                 </div>
                                                 <div class="row">
                                                     <asp:DataGrid ID="AddedCategoriesTable" runat="server" CssClass="table"
-                                                                AllowPaging="true" PageSize="10"
-                                                                OnPageIndexChanged="AddedCategories_PageIndexChanged"
-                                                                DataKeyField="CATEGORY_ID">
-                                                        
-                                                                <Columns>
-                                                                    <asp:BoundColumn DataField="CATEGORY_ID" HeaderText="CATEGORY_ID"/>
-                                                                    <asp:BoundColumn DataField="CATEGORY_NAME" HeaderText="CATEGORY_NAME"/>
-                                                                </Columns>
-                                                                <PagerStyle Position="Bottom" CssClass="pagination" />
-                                                            </asp:DataGrid>
+                                                        AllowPaging="true" PageSize="10"
+                                                        OnPageIndexChanged="AddedCategories_PageIndexChanged"
+                                                        DataKeyField="CATEGORY_ID">
+
+                                                        <Columns>
+                                                            <asp:BoundColumn DataField="CATEGORY_ID" HeaderText="CATEGORY_ID" />
+                                                            <asp:BoundColumn DataField="CATEGORY_NAME" HeaderText="CATEGORY_NAME" />
+                                                        </Columns>
+                                                        <PagerStyle Position="Bottom" CssClass="pagination" />
+                                                    </asp:DataGrid>
+                                                </div>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <!--create courses for students-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Create Courses</div>
+                                    <div class="panel-body">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress7" AssociatedUpdatePanelID="CreateCourses">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="CreateCourses" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                    <asp:TextBox TextMode="MultiLine" runat="server" ID="Courses"
+                                                        CssClass="col-lg-12" />
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-lg-offset-8">
+                                                        <asp:Button ID="CreateCoursesButton" runat="server" OnClick="CreateCoursesButton_Click" Text="Create Courses" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-lg-offset-1">
+                                                        <asp:PlaceHolder ID="AddedCoursesMessage" runat="server"></asp:PlaceHolder>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <asp:DataGrid ID="AddedCoursesTable" runat="server" CssClass="table"
+                                                        AllowPaging="true" PageSize="10"
+                                                        OnPageIndexChanged="AddedCategories_PageIndexChanged"
+                                                        DataKeyField="COURSE_ID">
+
+                                                        <Columns>
+                                                            <asp:BoundColumn DataField="COURSE_ID" HeaderText="COURSE ID" />
+                                                            <asp:BoundColumn DataField="COURSE_NAME" HeaderText="COURSE NAME" />
+                                                        </Columns>
+                                                        <PagerStyle Position="Bottom" CssClass="pagination" />
+                                                    </asp:DataGrid>
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
@@ -333,9 +381,81 @@
                         </div>
                     </ContentTemplate>
                 </ajaxControl:TabPanel>
+                <ajaxControl:TabPanel runat="server" HeaderText="Course Module" OnDemandMode="None">
+                    <ContentTemplate>
+                        <div class="row">
+                            <!--Test assign course to student-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Test creation of projects</div>
+                                    <div class="panel-body">
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress8" AssociatedUpdatePanelID="apply_course_panel">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="apply_course_panel" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <asp:Label Text="Student ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label" AssociatedControlID="student_id"></asp:Label>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="student_id" runat="server" CssClass="form-control" ></asp:TextBox>
+                                                            <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
+                                                                        TargetControlID="student_id"
+                                                                        FilterType="Numbers" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <asp:DataGrid ID="course_list" runat="server" AllowPaging="true" PageSize="10" GridLines="None"
+                                                            OnPageIndexChanged="course_list_PageIndexChanged" DataKeyField="COURSE_ID" BorderStyle="None"
+                                                            AllowSorting="true"
+                                                            AutoGenerateColumns="False" CssClass="table">
+                                                            <HeaderStyle CssClass="" Font-Bold="true" />
+                                                            <Columns>
+                                                                <asp:BoundColumn DataField="COURSE_ID" HeaderText="Course ID" />
+                                                                <asp:BoundColumn DataField="COURSE_NAME" HeaderText="Course Name" />
+                                                                <asp:TemplateColumn>
+                                                                    <HeaderTemplate>
+                                                                        Select
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <input type="checkbox" id="courseId" runat="server" name="courseId"
+                                                                            class="checkbox" value='<%# Eval("COURSE_ID") %>' />
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateColumn>
+                                                            </Columns>
+                                                        </asp:DataGrid>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-2 col-lg-offset-10">
+                                                        <asp:Button ID="enroll_course" runat="server" Text="Enroll"
+                                                             OnClick="enroll_course_Click"/>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-lg-offset-1">
+                                                        <asp:PlaceHolder ID="enroll_course_message" runat="server"></asp:PlaceHolder>
+                                                    </div>
+                                                </div>
+                                                
 
+                                                <asp:HiddenField ClientIDMode="Static" ID="selected_course" runat="server" />
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </ajaxControl:TabPanel>
             </ajaxControl:TabContainer>
-            
+
         </div>
     </div>
 
@@ -344,10 +464,37 @@
 
 <asp:Content ContentPlaceHolderID="Scripts" runat="server">
     <script id="TabWidender" type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ajax__tab_tab').css('height', '20px');
 
         })
+    </script>
+
+        <!--for passing the selected application IDs-->
+    <script id="select-application-script" type="text/javascript">
+        $(document).on('click', ".checkbox", function () {
+            var selected = $('#selected_course').val();
+            if (this.checked) {
+                if (selected.length <= 0)
+                    $('#selected_course').val(this.value);
+                else
+                    $('#selected_course').val(selected + "," + this.value);
+            }
+            else {
+                var selected_array = selected.split(',');
+                var removed_array = "";
+                for (var i = 0; i < selected_array.length; i++) {
+                    if (selected_array[i] != this.value) {
+                        if (removed_array.length <= 0)
+                            removed_array += selected_array[i];
+                        else
+                            removed_array += "," + selected_array[i];
+                    }
+                }
+                $('#selected_course').val(removed_array);
+            }
+            //return false; //very important! if not the container will refresh!
+        });
     </script>
 
 </asp:Content>

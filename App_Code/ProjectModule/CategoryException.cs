@@ -9,7 +9,7 @@ using System.Web;
 public class CategoryException : Exception
 {
     public CategoryException(string message)
-        : base(message)
+        : base("CategoryException"+message)
 	{
 	}
 }
