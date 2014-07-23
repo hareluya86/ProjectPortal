@@ -193,7 +193,12 @@
                                                                 </asp:TemplateColumn>
                                                                 <asp:TemplateColumn HeaderText="Firstname">
                                                                     <ItemTemplate>
-                                                                        <%#DataBinder.Eval(Container.DataItem,"APPLICANT.FIRSTNAME") %>
+                                                                        <asp:HyperLink runat="server" NavigateUrl="#"
+                                                                            onclick='<%# "window.open(\"StudentPopup.aspx?studentid="+DataBinder.Eval(Container.DataItem,"APPLICANT.USER_ID")
+                                                                                            +"\",\"_blank\",\"menubar=no,height=600,width=800\");"%>'>
+                                                                            <%#DataBinder.Eval(Container.DataItem,"APPLICANT.FIRSTNAME") %>
+                                                                        </asp:HyperLink>
+                                                                        
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
                                                                 <asp:TemplateColumn HeaderText="Email">

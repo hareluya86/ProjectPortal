@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="PopupMaster.master.cs" Inherits="PopupMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=400px, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--<link rel="stylesheet" type="text/css" href="http://www.murdoch.edu.au/_stylesheet/thevow/style.css/">-->
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/common.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/promo.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/midyear.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/sayt.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/semester1pg_2014.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/semester1_2014_v2.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/styles.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/Custom.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/flat-ui.css">
+    <link media="all" type="text/css" rel="stylesheet" href="~/Styles/bootstrap.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="homepage" class="page">
+    <div id="popup-body">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</body>
+</html>

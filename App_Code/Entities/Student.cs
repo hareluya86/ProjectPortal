@@ -14,6 +14,7 @@ public class Student : UserAccount
     public virtual IList<ProjectApplication> PROJECTS_APPLIED { get; set; }
     public virtual IList<Enrollment> COURSE_ENROLLED { get; set; }
     public virtual IList<TeamAssignment> TEAM_ASSIGNMENT { get; set; }
+    public virtual string WRITE_UP { get; set; }
 
     public Student(){
         ROLE = "STUDENT"; //Workaround for Hibernate's limitation
@@ -21,5 +22,5 @@ public class Student : UserAccount
         COURSE_ENROLLED = new List<Enrollment>();
         TEAM_ASSIGNMENT = new List<TeamAssignment>();
     }
-    
+
 }

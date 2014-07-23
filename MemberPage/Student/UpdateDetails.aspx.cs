@@ -11,49 +11,54 @@ public partial class UpdateDetails : BaseMemberPage
     {
         if (!IsPostBack)
         {
-            long partnerid;
-            if(Int64.TryParse(Session["userid"].ToString(), out partnerid))
-                loadDetails(partnerid);//from login
+            long convertedStudentId;
+            if (Int64.TryParse(Session["userid"].ToString(), out convertedStudentId))
+                loadDetails(convertedStudentId);//from login
         }
 
     }
 
-    private void loadDetails(long partnerId)
+    private void loadDetails(long studentId)
     {
         UserModule userModule = new UserModule();
-        Partner partner = (Partner)userModule.getUserByUserId(partnerId);
+        Student student = (Student)userModule.getUserByUserId(studentId);
 
-        company_name.Text = partner.USERNAME;
-        email.Text = partner.EMAIL;
-        phone.Text = partner.PHONE;
-        fax.Text = partner.FAX;
-        address1.Text = partner.ADDRESS1;
-        address2.Text = partner.ADDRESS2;
-        city_town.Text = partner.CITY_TOWN;
-        state.Text = partner.STATE;
-        zipcode.Text = partner.ZIP_CODE;
-        country.Text = partner.COUNTRY;
+        //student.Text = partner.USERNAME;
+        student_id.Text = student.USER_ID.ToString();
+        first_name.Text = student.FIRSTNAME;
+        last_name.Text = student.LASTNAME;
+        email.Text = student.EMAIL;
+        phone.Text = student.PHONE;
+        address1.Text = student.ADDRESS1;
+        address2.Text = student.ADDRESS2;
+        city_town.Text = student.CITY_TOWN;
+        state.Text = student.STATE;
+        zipcode.Text = student.ZIP_CODE;
+        country.Text = student.COUNTRY;
+        writeup.Text = student.WRITE_UP;
 
     }
 
-    private void updateDetails(long partnerId)
+    private void updateDetails(long studentId)
     {
         UserModule userModule = new UserModule();
-        Partner partner = (Partner)userModule.getUserByUserId(partnerId);
+        Student student = (Student)userModule.getUserByUserId(studentId);
 
-        partner.USERNAME = company_name.Text;
-        partner.EMAIL = email.Text;
-        partner.PHONE = phone.Text;
-        partner.FAX = fax.Text;
-        partner.ADDRESS1 = address1.Text;
-        partner.ADDRESS2 = address2.Text;
-        partner.CITY_TOWN = city_town.Text;
-        partner.STATE = state.Text;
-        partner.ZIP_CODE = zipcode.Text;
-        partner.COUNTRY = country.Text;
-        
-        userModule.updateUser(partner);
-            
+        student.FIRSTNAME = first_name.Text;
+        student.LASTNAME = last_name.Text;
+        student.EMAIL = email.Text;
+        student.PHONE = phone.Text;
+
+        student.ADDRESS1 = address1.Text;
+        student.ADDRESS2 = address2.Text;
+        student.CITY_TOWN = city_town.Text;
+        student.STATE = state.Text;
+        student.ZIP_CODE = zipcode.Text;
+        student.COUNTRY = country.Text;
+
+        student.WRITE_UP = writeup.Text;
+
+        userModule.updateUser(student);
         
     }
 
@@ -117,7 +122,7 @@ public partial class UpdateDetails : BaseMemberPage
             updatePassword(partnerid,old_password.Text,new_password.Text);//from login
             error_modal_control.Show();
             Messenger.setMessage(error_message, "Password updated successfully!", LEVEL.SUCCESS);
-            NewProjectUpdatePanel.Update();
+            UpdateStudentDetailPanel.Update();
         }
         catch (LoginException lex)
         {

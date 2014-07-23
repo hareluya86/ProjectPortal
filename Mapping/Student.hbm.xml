@@ -10,6 +10,7 @@
     
     <property name="FIRSTNAME" />
     <property name="LASTNAME" />
+    <property name="WRITE_UP" />
 
     <bag name="PROJECTS_APPLIED" cascade="none">
       <key column="USER_ID" not-null="true"></key>

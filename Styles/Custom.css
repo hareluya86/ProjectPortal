@@ -49,3 +49,10 @@ input.truncate {
     overflow: auto; 
     height: 580px;
 }
+
+#popup-body{
+    width:600px;
+    margin: 0px auto;
+    background-color: #FFFFFF;
+}
+

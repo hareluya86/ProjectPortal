@@ -19,4 +19,22 @@ public partial class PromoteProject : BaseMemberPage
 
     }
 
+    protected void UploadButton_Click(object sender, EventArgs e)
+    {
+        if (FileUploader.HasFile)
+        {
+
+        }
+        else
+        {
+            Messenger.setMessage(upload_message, "Please provide a file.", LEVEL.DANGER);
+        }
+
+        UploadFilePanel.Update();
+    }
+
+    protected void SaveFile(HttpPostedFile file)
+    {
+        
+    }
 }

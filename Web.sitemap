@@ -27,6 +27,7 @@
       <siteMapNode url="~/MemberPage/Student/Student.aspx" title="Student" >
         <siteMapNode url="~/MemberPage/Student/ProjectStatus.aspx" title="Project Status" />
         <siteMapNode url="~/MemberPage/Student/ListedProjects.aspx" title="Listed Projects" />
+        <siteMapNode url="~/MemberPage/Student/PromoteProject.aspx" title="Promote Project" />
         <siteMapNode url="~/MemberPage/Student/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
     </siteMapNode>

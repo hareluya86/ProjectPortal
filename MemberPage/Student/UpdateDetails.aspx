@@ -7,27 +7,43 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-lg-12">
-            <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="NewProjectUpdatePanel">
+            <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="UpdateStudentDetailPanel">
                 <ProgressTemplate>
                     <div class="overlay">
                         <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>
-            <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional">
+            <asp:UpdatePanel runat="server" ID="UpdateStudentDetailPanel" UpdateMode="Conditional">
                 <ContentTemplate>
                     <!--main info-->
                     <div class="row">
                         <!--Company Contacts-->
                         <div class="col-lg-6">
                             <div class="row">
-                                <h2>Company Contacts</h2>
+                                <h2>Student Contacts</h2>
                             </div>
                             <div class="row">
                                 <div class="form-group">
-                                    <asp:Label AssociatedControlID="company_name" Text="Company name: " runat="server" CssClass="col-sm-3 control-label"></asp:Label>
+                                    <asp:Label AssociatedControlID="student_id" Text="Student ID: " runat="server" CssClass="col-sm-3 control-label"></asp:Label>
                                     <div class="col-sm-8">
-                                        <asp:TextBox ID="company_name" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <asp:Label ID="student_id" AssociatedControlID="student_id" CssClass="form-control" runat="server" ></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <asp:Label AssociatedControlID="first_name" Text="First Name: " runat="server" CssClass="col-sm-3 control-label"></asp:Label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="first_name" CssClass="form-control" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <asp:Label AssociatedControlID="last_name" Text="Last Name: " runat="server" CssClass="col-sm-3 control-label"></asp:Label>
+                                    <div class="col-sm-8">
+                                        <asp:TextBox ID="last_name" CssClass="form-control" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -58,22 +74,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group">
-                                    <asp:Label AssociatedControlID="fax" Text="Fax: " runat="server" CssClass="col-sm-3 control-label"></asp:Label>
-                                    <div class="col-sm-8">
-                                        <asp:TextBox ID="fax" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
-                                            TargetControlID="fax"
-                                            FilterType="Numbers" />
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <!--Company Address-->
                         <div class="col-lg-6">
                             <div class="row">
-                                <h2>Company Address</h2>
+                                <h2>Student Address</h2>
                             </div>
                             <div class="row">
                                 <div class="form-group">
@@ -126,7 +132,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-2 col-lg-offset-9" style="margin-top: 5px; text-align: right;">
+                        <div class="col-lg-8">
+                            <h2>Brief Self Writeup</h2>
+                            <asp:TextBox ID="writeup" CssClass="form-control col-lg-12" runat="server" TextMode="MultiLine"></asp:TextBox>
+                        </div>
+                        <div class="col-lg-4 " style="margin-top: 5px; text-align: right; vertical-align: middle;">
                             <asp:Button runat="server" ID="UpdateDetailsButton" CssClass="btn btn-primary"
                                 Text="Update" OnClick="updateDetails" />
                             <asp:Button runat="server" ID="ResetButton" CssClass="btn btn-default"
