@@ -10,4 +10,5 @@ public class FILE_TYPE
 {
     public const string ZIP = "ZIP";
     public const string VIDEO = "VIDEO";
+    public const string PROFILE_PIC = "PROFILE_PIC";
 }

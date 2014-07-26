@@ -22,4 +22,11 @@ public abstract class UserAccount
     public virtual string STATE { get; set; }
     public virtual string ZIP_CODE { get; set; }
     public virtual string COUNTRY { get; set; }
+
+    public virtual IList<UploadedFile> FILES { get; set; }
+
+    public UserAccount()
+    {
+        FILES = new List<UploadedFile>();
+    }
 }

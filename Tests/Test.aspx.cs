@@ -12,7 +12,8 @@ public partial class Tests_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            loadCourses();
+            //loadCourses();
+            
         }
     }
 
@@ -185,7 +186,11 @@ public partial class Tests_Default : System.Web.UI.Page
 
         try
         {
-            IList<Course> results = courseModule.createCourses(stringOfCourses);
+            long convertedUCId;
+            if(!Int64.TryParse(uc_id.Text,out convertedUCId))
+                throw new Exception("System error: Cannot find UC ID, please contact administrator.");
+
+            IList<Course> results = courseModule.createCourses(stringOfCourses, convertedUCId);
 
             Session["courses"] = results;
             AddedCoursesTable.DataSource = Session["courses"];
@@ -232,9 +237,17 @@ public partial class Tests_Default : System.Web.UI.Page
 
     }
 
-    protected void course_list_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
+    protected void course_list_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
     {
+        if (sender != null)
+        {
+            CourseModule courseModule = new CourseModule();
+            IList<Course> courses = courseModule.getCourses(0, 9999);
 
+            course_list.CurrentPageIndex = e.NewPageIndex;
+            course_list.DataSource = courses;
+            course_list.DataBind();
+        }
     }
 
     protected void enroll_course_Click(object sender, EventArgs e)
@@ -257,5 +270,42 @@ public partial class Tests_Default : System.Web.UI.Page
         {
             Messenger.setMessage(enroll_course_message, ex.Message, LEVEL.DANGER);
         }
+    }
+    protected void upload_profile_pic_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            long convertedUserId;
+            if (!Int64.TryParse(user_id.Text, out convertedUserId))
+                throw new Exception("System error: Cannot find user ID, please contact administrator.");
+
+            if (!ProfilePicUploader.HasFile)
+                throw new Exception("Please selecte a file.");
+
+            SaveProfilePicFile(convertedUserId, ProfilePicUploader.PostedFile);
+
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(upload_message, ex.Message, LEVEL.DANGER);
+        }
+    }
+
+    private void SaveProfilePicFile(long userId, HttpPostedFile file)
+    {
+        FileModule fileModule = new FileModule();
+        string filename = file.FileName;
+        string extension = System.IO.Path.GetExtension(file.FileName.ToLower());
+
+        if (extension != ".jpeg" &&
+            extension != ".jpg" &&
+            extension != ".png")
+            throw new Exception("You can only upload image files.");
+
+        Session["profile_pic_file"] = fileModule.saveProfilePicForUserId(userId, file.InputStream, file.FileName);
+    }
+    protected void load_course_Click(object sender, EventArgs e)
+    {
+        loadCourses();
     }
 }

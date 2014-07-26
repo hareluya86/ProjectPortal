@@ -18,7 +18,9 @@
     <property name="CONTACT_NUMBER" />
     <property name="CONTACT_EMAIL" />
     <property name="PROJECT_STATUS" />
+    <property name="UC_APPROVER" />
     <property name="UC_REMARKS" />
+    
     <property name="PROJECT_REQUIREMENTS" length="999" />
     <property name="RECOMMENDED_SIZE" />
     <property name="ALLOCATED_SIZE" />

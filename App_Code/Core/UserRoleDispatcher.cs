@@ -20,19 +20,19 @@ public class UserRoleDispatcher
         
         if ("ADMINISTRATOR".Equals(userRole))
         {
-            return "MemberPage/Administrator/Administrator.aspx";
+            return "MemberPage/Administrator/AdministratorPage.aspx";
         }
         else if ("STUDENT".Equals(userRole))
         {
-            return "MemberPage/Student/Student.aspx";
+            return "MemberPage/Student/StudentPage.aspx";
         }
         else if ("PARTNER".Equals(userRole))
         {
-            return "MemberPage/Partner/Partner.aspx";
+            return "MemberPage/Partner/PartnerPage.aspx";
         }
         else if ("UNITCOORDINATOR".Equals(userRole))
         {
-            return "MemberPage/UC/UC.aspx";
+            return "MemberPage/UC/UCPage.aspx";
         }
         else
         {

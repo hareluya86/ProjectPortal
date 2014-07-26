@@ -45,7 +45,7 @@ public class CourseModule
     /**
      * Creates Course objects
      */
-    public IList<Course> createCourses(IList<string> courseNames)
+    public IList<Course> createCourses(IList<string> courseNames, long UCId)
     {
         if (session == null || !session.IsOpen)
         {
@@ -75,6 +75,7 @@ public class CourseModule
         {
             Course course = new Course();
             course.COURSE_NAME = courseName;
+            course.COURSE_COORDINATOR_ID = UCId;
             session.Save(course);
             courses.Add(course);
         }
@@ -86,7 +87,7 @@ public class CourseModule
     /**
      * Creates Course objects
      */
-    public IList<Course> createCourses(string commaDelimitedCourses)
+    public IList<Course> createCourses(string commaDelimitedCourses, long UCId)
     {
         IList<string> categories = commaDelimitedCourses.Split(new char[] { '\n', ',' });
         IList<string> trimmedAndNiceCourses = new List<string>();
@@ -97,7 +98,7 @@ public class CourseModule
             trimmedAndNiceCourses.Insert(i, course.Trim());
 
         }
-        return createCourses(trimmedAndNiceCourses);
+        return createCourses(trimmedAndNiceCourses, UCId);
     }
 
     /**
@@ -156,5 +157,19 @@ public class CourseModule
         session.Transaction.Commit();
 
         return newEnrollments;
+    }
+
+    public IList<Course> getCoursesUnderUC(long UCId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        IList<Course> courses = session.CreateCriteria<Course>()
+                                    .Add(Restrictions.Eq("COURSE_COORDINATOR_ID", UCId))
+                                    .List<Course>();
+
+        return courses;
     }
 }

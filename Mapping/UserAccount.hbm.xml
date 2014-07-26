@@ -24,6 +24,12 @@
     <property name="STATE" />
     <property name="ZIP_CODE" />
     <property name="COUNTRY" />
+
+    <bag name="FILES" cascade="none">
+      <key column="USER_ID" not-null="true"></key>
+      <one-to-many class="UploadedFile" />
+
+    </bag>
   </class>
 
 </hibernate-mapping>

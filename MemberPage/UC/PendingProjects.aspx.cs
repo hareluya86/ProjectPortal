@@ -141,7 +141,11 @@ public partial class PendingProjects : BaseMemberPage
 
             project.RECOMMENDED_SIZE = convertedRecommendedSize;
 
-            projectModule.approveProject(project);
+            long convertedUCId;
+            if (!Int64.TryParse(Session["userid"].ToString(), out convertedUCId))
+                throw new Exception("Cannot find user ID, please contact administrator.");
+
+            projectModule.approveProject(project, convertedUCId);
 
             //Success
             Messenger.setMessage(approve_project_message, "Project is approved! An email notification has been sent to the project owner.", LEVEL.SUCCESS);

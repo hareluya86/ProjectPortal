@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListedProjects.aspx.cs" Inherits="ListedProjects" MasterPageFile="~/MasterPage.master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ApprovedProjects.aspx.cs" Inherits="ApprovedProjects" MasterPageFile="~/MasterPage.master" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
@@ -22,6 +22,7 @@
                                         </div>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+
                                 <asp:UpdatePanel ID="project_list_panel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
                                         <asp:Repeater runat="server" ID="project_titles">
@@ -33,6 +34,7 @@
 
                                             </ItemTemplate>
                                         </asp:Repeater>
+
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -201,22 +203,55 @@
                                                                         
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
-                                                                <asp:TemplateColumn HeaderText="Email">
+                                                                <asp:TemplateColumn HeaderText="Contact">
                                                                     <ItemTemplate>
-                                                                        <%#DataBinder.Eval(Container.DataItem,"APPLICANT.EMAIL") %>
+                                                                        <%#DataBinder.Eval(Container.DataItem,"APPLICANT.PHONE") %>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateColumn>
+                                                                <asp:TemplateColumn>
+                                                                    <HeaderTemplate>
+                                                                        Select
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <input type="checkbox" id="appId" onclick="" runat="server" name="appId"
+                                                                            class="checkbox" value='<%# Eval("APPLICATION_ID") %>' />
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
                                                             </Columns>
                                                         </asp:DataGrid>
+                                                        <ajaxControl:ModalPopupExtender ID="student_info_modal_popup" runat="server"
+                                                            PopupControlID="student_info_panel" TargetControlID="HiddenField2"
+                                                            BackgroundCssClass="overlay">
+                                                        </ajaxControl:ModalPopupExtender>
+                                                        <asp:HiddenField runat="server" ID="HiddenField2" />
+                                                        <asp:Panel runat="server" ID="student_info_panel" Width="400px">
+                                                            <div class="panel panel-primary">
+                                                                <div class="panel-heading">Message</div>
+                                                                <div class="panel-body" style="overflow: auto;">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <asp:PlaceHolder runat="server" ID="student_info_message"></asp:PlaceHolder>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-2 col-sm-offset-10">
+                                                                            <asp:Button ID="Button1" runat="server" CssClass="btn btn-default" Text="Ok"
+                                                                                OnClick="okButton_Click" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </asp:Panel>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
+                                                <asp:HiddenField ClientIDMode="Static" ID="selected_applications" runat="server" />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <!--Apply button panel-->
 
                                             <div class="col-lg-3 col-lg-offset-9">
-                                                <asp:Button ID="apply_button" OnClick="apply_project" runat="server"
+                                                <asp:Button ID="assign_button" OnClick="assign_project" runat="server"
                                                     CssClass="btn btn-primary" />
                                             </div>
                                             <ajaxControl:ModalPopupExtender ID="apply_project_popup" runat="server"
@@ -291,34 +326,47 @@
             return false;
         })
     </script>
-    <!--for toggling the project button-->
-    <script id="toggle-project-button-script" type="text/javascript">
+    <!--for selecting all applications-->
+    <script id="select-all-checkbox-script" type="text/javascript">
+        $(document).on('click', ".checkAll", function () {
 
-        $(document).on('click', ".", function () {
-
-            if ($(this).hasClass('btn-danger')) {
-                $(this).removeClass('btn-danger');
-            } else {
-
-                $(this).addClass('btn-danger');
-                $(this).next().attr('name', 'selected')
+            if (this.checked) {
+                $('.checkbox').each(function () {
+                    this.checked = true;
+                })
             }
-            return false; //very important! if not the container will refresh!
+            else {
+                $('.checkbox').each(function () {
+                    this.checked = false;
+                })
+            }
         });
     </script>
-    <script id="test-blocking" type="text/javascript">
-        var uiId = '';
-
-        function PageRequestManager_beginRequest(sender, args) {
-            var postbackElem = args.get_postBackElement();
-            uiId = postbackElem.id;
-            postbackElem.disabled = true;
-        }
-
-
-        function PageRequestManager_endRequest(sender, args) {
-            $get(uiId).disabled = false;
-        }
+    <!--for passing the selected application IDs-->
+    <script id="select-application-script" type="text/javascript">
+        $(document).on('click', ".checkbox", function () {
+            var selected = $('#selected_applications').val();
+            if (this.checked) {
+                if (selected.length <= 0)
+                    $('#selected_applications').val(this.value);
+                else
+                    $('#selected_applications').val(selected + "," + this.value);
+            }
+            else {
+                var selected_array = selected.split(',');
+                var removed_array = "";
+                for (var i = 0; i < selected_array.length; i++) {
+                    if (selected_array[i] != this.value) {
+                        if (removed_array.length <= 0)
+                            removed_array += selected_array[i];
+                        else
+                            removed_array += "," + selected_array[i];
+                    }
+                }
+                $('#selected_applications').val(removed_array);
+            }
+            //return false; //very important! if not the container will refresh!
+        });
     </script>
 
 </asp:Content>

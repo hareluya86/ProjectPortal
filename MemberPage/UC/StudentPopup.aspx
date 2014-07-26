@@ -46,9 +46,9 @@
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
             <div class="panel panel-success">
-                <div class="panel-heading">Student Writeup</div>
+                <div class="panel-heading">Course Enrolled</div>
                 <div class="panel-body" style="overflow: auto; height: 125px;">
-                    <asp:Literal ID="student_writeup" runat="server" Mode="Encode"></asp:Literal>
+                    <asp:Literal ID="student_writeup" runat="server" Mode="PassThrough"></asp:Literal>
                 </div>
             </div>
         </div>

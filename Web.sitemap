@@ -6,25 +6,25 @@
         <siteMapNode url="~/UC.aspx" title="Unit Coordinators"  description="" />-->
     <siteMapNode url="~/LoginPage.aspx" title="Access Project Portal"  description="Access Project Portal by loggin in">
       <!--Administrator-->
-      <siteMapNode url="~/MemberPage/Administrator/Administrator.aspx" title="Administrator" >
+      <siteMapNode url="~/MemberPage/Administrator/AdministratorPage.aspx" title="Administrator" >
         <siteMapNode url="~/MemberPage/Administrator/ManagePartners.aspx" title="Manage Partners" />
         <siteMapNode url="~/MemberPage/Administrator/ManageStudents.aspx" title="Manage Students" />
-        <siteMapNode title="Manage Unit Coordinators" />
+        <siteMapNode url="~/MemberPage/Administrator/ManageUC.aspx" title="Manage Unit Coordinators" />
       </siteMapNode>
       <!--Partner-->
-      <siteMapNode url="~/MemberPage/Partner/Partner.aspx" title="Partner" >
+      <siteMapNode url="~/MemberPage/Partner/PartnerPage.aspx" title="Partner" >
         <siteMapNode url="~/MemberPage/Partner/SubmitNewProject.aspx" title="Submit New Project" />
         <siteMapNode url="~/MemberPage/Partner/ProjectStatus.aspx" title="Project Status" />
         <siteMapNode url="~/MemberPage/Partner/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
       <!--UC-->
-      <siteMapNode url="~/MemberPage/UC/UC.aspx" title="UnitCoordinator" >
+      <siteMapNode url="~/MemberPage/UC/UCPage.aspx" title="UnitCoordinator" >
         <siteMapNode url="~/MemberPage/UC/PendingProjects.aspx" title="Projects awaiting approval" />
-        <siteMapNode url="~/MemberPage/UC/ListedProjects.aspx" title="Listed Projects" />
-        <siteMapNode url="" title="Update Details" />
+        <siteMapNode url="~/MemberPage/UC/ApprovedProjects.aspx" title="Approved Projects" />
+        <siteMapNode url="~/MemberPage/UC/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
-    <!--Student-->
-      <siteMapNode url="~/MemberPage/Student/Student.aspx" title="Student" >
+      <!--Student-->
+      <siteMapNode url="~/MemberPage/Student/StudentPage.aspx" title="Student" >
         <siteMapNode url="~/MemberPage/Student/ProjectStatus.aspx" title="Project Status" />
         <siteMapNode url="~/MemberPage/Student/ListedProjects.aspx" title="Listed Projects" />
         <siteMapNode url="~/MemberPage/Student/PromoteProject.aspx" title="Promote Project" />

@@ -35,43 +35,110 @@
         </div>
     </div>
     <div class="row">
-        <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="UploadFilePanel">
-            <ProgressTemplate>
-                <div class="overlay">
-                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
-                </div>
-            </ProgressTemplate>
-        </asp:UpdateProgress>
-        <asp:UpdatePanel ID="UploadFilePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
-            <ContentTemplate>
-                <div class="col-lg-6 col-lg-offset-2">
-                    <div class="row">
-                        <div class="form-group" style="margin-top: 5px;">
-                            <asp:Label AssociatedControlID="FileUploader" Text="Files to upload: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+        <div class="col-lg-6 col-lg-offset-2">
+            <div class="row">
+                <div class="form-group" style="margin-top: 5px;">
+                    <asp:Label AssociatedControlID="FileUploader" Text="Files to upload: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                    <div class="col-sm-8">
+                        <div class="row">
                             <div class="col-sm-8">
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                        <asp:FileUpload ID="FileUploader" runat="server" ToolTip="Files must be zipped and less than 50mb." />
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <asp:Button ID="UploadButton"
-                                            Text="Upload file" OnClick="UploadButton_Click"
-                                            runat="server"></asp:Button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <asp:RadioButton
-                                </div>
+                                <asp:FileUpload ID="FileUploader" runat="server" ToolTip="Files must be zipped and less than 50mb." />
+                            </div>
+                            <div class="col-sm-4">
+                                <asp:Button ID="UploadFileButton" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClientClick="this.disabled=true;"
+                                    Text="Upload" OnClick="UploadFileButton_Click"
+                                    runat="server"></asp:Button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <asp:PlaceHolder ID="upload_message" runat="server"></asp:PlaceHolder>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="UploadFilePanel">
+                <ProgressTemplate>
+                    <div class="overlay">
+                        <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+            <asp:UpdatePanel ID="UploadFilePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="upload_file_message" runat="server"></asp:PlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
 
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-lg-offset-2">
+            <div class="row">
+                <div class="form-group" style="margin-top: 5px;">
+                    <asp:Label AssociatedControlID="VideoUploader" Text="Promotional Video: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <asp:FileUpload ID="VideoUploader" runat="server" />
+                            </div>
+                            <div class="col-sm-4">
+                                <asp:Button ID="Button1" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClientClick="this.disabled=true;"
+                                    Text="Upload" OnClick="UploadVideoButton_Click"
+                                    runat="server"></asp:Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="UploadVideoPanel">
+                <ProgressTemplate>
+                    <div class="overlay">
+                        <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
+                    </div>
+                </ProgressTemplate>
+            </asp:UpdateProgress>
+            <asp:UpdatePanel ID="UploadVideoPanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="upload_video_message" runat="server"></asp:PlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-2">
+            <div class="row" style="text-align: center;">
+                <asp:Button runat="server" ID="submit_project_button" Text="Send to Unit Coordinator" CssClass="btn btn-primary"
+                    OnClick="submit_project_button_Click" UseSubmitBehavior="false" OnClientClick="this.disabled=true;" />
+            </div>
+            <div class="row">
+                <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
+                    PopupControlID="submit_new_project_error" TargetControlID="hiddenModalTarget"
+                    OkControlID="okButton" BackgroundCssClass="overlay">
+                </ajaxControl:ModalPopupExtender>
+                <asp:HiddenField runat="server" ID="hiddenModalTarget" />
+                <asp:Panel runat="server" ID="submit_new_project_error">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Message</div>
+                        <div class="panel-body" style="overflow: auto;">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2 col-sm-offset-9">
+                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </asp:Panel>
+            </div>
+        </div>
     </div>
 </asp:Content>
 

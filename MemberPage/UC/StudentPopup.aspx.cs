@@ -34,11 +34,19 @@ public partial class StudentPopup : System.Web.UI.Page
         first_name.Text = student.FIRSTNAME;
         last_name.Text = student.LASTNAME;
         email.Text = student.EMAIL;
-        student_writeup.Text = student.WRITE_UP;
 
         //get profile pic
         string profilePicLocation = fileModule.getProfilePicLocation(studentId);
-        if (profilePicLocation.Length > 0)
+        if(profilePicLocation.Length > 0)
             profile_pic.ImageUrl = "~/" + profilePicLocation;
+
+        //get courses attended
+        IList<Enrollment> courseEnrolled = student.COURSE_ENROLLED;
+        foreach (Enrollment enrollment in courseEnrolled)
+        {
+            Course course = enrollment.COURSE;
+            student_writeup.Text += course.COURSE_NAME + "<br />";
+
+        }
     }
 }

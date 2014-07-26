@@ -63,6 +63,19 @@ public class ProjectModule
         return projects;
     }
 
+    public IList<Project> getProjectsByApproverId(long approverId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        IList<Project> projects = session.CreateCriteria<Project>()
+            .Add(Restrictions.Eq("UC_APPROVER", approverId))
+            .List<Project>();
+
+        return projects;
+    }
+
     public void deleteProjects(IList<Int64> projectIds)
     {
         if (session == null || !session.IsOpen)
@@ -442,7 +455,7 @@ public class ProjectModule
      * - send out email to project owner
      * 
      */
-    public Project approveProject(Project project)
+    public Project approveProject(Project project, long UCId)
     {
         if (session == null || !session.IsOpen)
         {
@@ -454,10 +467,17 @@ public class ProjectModule
         //Set to APPROVED
         project.PROJECT_STATUS = APPLICATION_STATUS.APPROVED;
 
+        //Set approver ID
+        project.UC_APPROVER = UCId;
+
         //Update project
         Project approvedProject = this.updateProject(project);
 
         //send out email
+        string subject = "Congratulations! Your project has been approved!";
+        string message = "Your project " + project.PROJECT_TITLE + " has been approved!";
+        EmailModule emailModule = new EmailModule();
+        emailModule.sendEmail(subject, message, project.PROJECT_OWNER.EMAIL);
 
         return approvedProject;
     }
@@ -466,15 +486,16 @@ public class ProjectModule
      * Approve a particular project with just project ID and UC comments
      * 
      * - update the project object
+     * - update the approver's ID
      * - change the status to APPROVED
      * - send out email to project owner
      * 
      */
-    public Project approveProject(long projectId, string UCComments)
+    public Project approveProject(long projectId, long UCId, string UCComments)
     {
         Project project = this.getProjectById(projectId);
         project.UC_REMARKS = UCComments;
-        return this.approveProject(project);
+        return this.approveProject(project,UCId);
     }
 
     /**
@@ -717,4 +738,26 @@ public class ProjectModule
         return members;
     }
 
+    /**
+     * Creates a promotional project for student
+     * 
+     */
+    public ProjectPromotion promoteProject(long studentId, ProjectPromotion projectPromotion)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        Student student = session.CreateCriteria<Student>()
+                            .Add(Restrictions.Eq("USER_ID", studentId))
+                            .UniqueResult<Student>();
+
+        projectPromotion.PROMOTER_ID = student.USER_ID;
+        session.BeginTransaction();
+        session.Save(projectPromotion);
+        session.Transaction.Commit();
+
+        return projectPromotion;
+    }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageStudents.aspx.cs" Inherits="ManageStudents" MasterPageFile="~/MasterPage.master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ManageUC.aspx.cs" Inherits="ManageUC" MasterPageFile="~/MasterPage.master" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxControl" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
@@ -12,9 +12,9 @@
                     <div class="col-sm-2">
                         <!--company list panel-->
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Student ID</div>
+                            <div class="panel-heading">UC ID</div>
                             <div class="panel-body entity-left-panel" style="">
-                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="company_list_updatePanel">
+                                <asp:UpdateProgress runat="server" ID="UpdateProgress3" AssociatedUpdatePanelID="uc_list_updatePanel">
                                     <ProgressTemplate>
                                         <div class="overlay">
                                             <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
@@ -22,13 +22,13 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                                 <!--dynamically add datasource from codeBehind-->
-                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
+                                <asp:UpdatePanel ID="uc_list_updatePanel" runat="server" UpdateMode="Conditional">
                                     <ContentTemplate>
-                                        <asp:Repeater runat="server" ID="student_list">
+                                        <asp:Repeater runat="server" ID="uc_list">
                                             <ItemTemplate>
                                                 <asp:Button CssClass="btn truncate company-button"
                                                     runat="server" Text='<%# Eval("USER_ID") %>'
-                                                    CommandArgument='<%# Eval("USER_ID") %>' OnClick="loadStudent" />
+                                                    CommandArgument='<%# Eval("USER_ID") %>' OnClick="loadUC" />
 
                                             </ItemTemplate>
                                         </asp:Repeater>
@@ -53,18 +53,18 @@
                     </div>
                     <div class="col-sm-4 myforms">
                         <!--update company contacts panel-->
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="student_contacts_updatePanel">
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress1" AssociatedUpdatePanelID="uc_contacts_updatePanel">
                             <ProgressTemplate>
                                 <div class="overlay">
                                     <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="student_contacts_updatePanel" runat="server">
+                        <asp:UpdatePanel ID="uc_contacts_updatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                             <ContentTemplate>
-                                <asp:HiddenField ID="student_id" runat="server" />
+                                <asp:HiddenField ID="uc_id" runat="server" />
                                 <div class="row">
-                                    <h2>Student Contacts</h2>
+                                    <h2>UC Contacts</h2>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h2>Student Address</h2>
+                                    <h2>UC Address</h2>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
@@ -159,7 +159,7 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <div class="col-sm-2 col-sm-offset-9">
-                                            <asp:Button runat="server" ID="UpdateStudentButton" OnClick="UpdateStudentContacts"
+                                            <asp:Button runat="server" ID="UpdateStudentButton" OnClick="UpdateUCContacts"
                                                 Text="Update" CssClass="btn btn-default" />
                                         </div>
                                     </div>
@@ -193,88 +193,9 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="row">
-                            <h2>Project assigned</h2>
+                            <h2>Courses in Charge</h2>
                         </div>
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress4" AssociatedUpdatePanelID="assigned_project_panel">
-                            <ProgressTemplate>
-                                <div class="overlay">
-                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
-                                </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
-                        <asp:UpdatePanel runat="server" ID="assigned_project_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
-                            <ContentTemplate>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="project_title" Text="Project Title: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label AssociatedControlID="project_title" ID="project_title" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="project_company" Text="Project Company: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label AssociatedControlID="project_company" ID="project_company" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="contact_person" Text="Contact Person: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label AssociatedControlID="contact_person" ID="contact_person" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <asp:Label AssociatedControlID="contact_number" Text="Contact Number: " runat="server" CssClass="col-sm-5 control-label"></asp:Label>
-                                        <asp:Label AssociatedControlID="contact_number" ID="contact_number" runat="server" CssClass="col-sm-7 control-label"></asp:Label>
-                                    </div>
-                                </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                        <div class="row">
-                            <h2>Projects applied for</h2>
-                        </div>
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="project_application_list_panel">
-                            <ProgressTemplate>
-                                <div class="overlay">
-                                    <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
-                                </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>
-                        <asp:UpdatePanel runat="server" ID="project_application_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
-                            <ContentTemplate>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="well well-sm" style="height: 150px; overflow: auto;">
-
-                                            <asp:Repeater runat="server" ID="project_application_list">
-                                                <ItemTemplate>
-                                                    <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;">
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <%#DataBinder.Eval(Container.DataItem,"PROJECT.PROJECT_TITLE") %>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <%# Eval("APPLICATION_STATUS") %>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                    <input type="hidden" runat="server"
-                                                        value='<%# Eval("APPLICATION_ID") %>' />
-
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                        <div class="row">
-                            <h2>Course Enrolled</h2>
-                        </div>
-                        <asp:UpdateProgress runat="server" ID="UpdateProgress6" AssociatedUpdatePanelID="course_list_panel">
+                        <asp:UpdateProgress runat="server" ID="UpdateProgress2" AssociatedUpdatePanelID="course_list_panel">
                             <ProgressTemplate>
                                 <div class="overlay">
                                     <asp:Image runat="server" ImageUrl="~/Images/ajax-loader.gif" />
@@ -285,17 +206,19 @@
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="well well-sm" style="height: 150px; overflow: auto;">
+                                        <div class="well well-sm" style="height: 200px; overflow: auto;">
 
                                             <asp:Repeater runat="server" ID="course_list">
                                                 <ItemTemplate>
                                                     <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;">
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <%# DataBinder.Eval(Container.DataItem,"COURSE.COURSE_NAME") %>
+                                                                <%# Eval("COURSE_NAME") %>
                                                             </div>
                                                         </div>
                                                     </button>
+                                                    <input type="hidden" runat="server"
+                                                        value='<%# Eval("COURSE_ID") %>' />
 
                                                 </ItemTemplate>
                                             </asp:Repeater>
@@ -307,6 +230,7 @@
 
                             </ContentTemplate>
                         </asp:UpdatePanel>
+
                     </div>
                     
                 </div>

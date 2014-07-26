@@ -14,6 +14,7 @@
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
     <property name="COURSE_NAME" />
+    <property name="COURSE_COORDINATOR_ID" />
 
     <bag name="ENROLLMENTS" table="ENROLLMENT">
       <key column="COURSE_ID" not-null="true"></key>

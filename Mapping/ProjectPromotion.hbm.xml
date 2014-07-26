@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <!--assembly="ProjectPortal"
+  namespace="ProjectPortal.App_Code">-->
+
+  <!-- more mapping info here -->
+  <class name="ProjectPromotion, App_Code" abstract="true" table="PROJECTPROMOTION">
+    <id name="PROMOTION_ID" type="Int64">
+      <generator class="NHibernate.Id.Enhanced.TableGenerator">
+        <param name="table_name">SEQUENCE</param>
+        <param name="segment_value">PROMOTION_ID</param>
+        <param name="initial_value">120000</param>
+      </generator>
+    </id>
+
+    <property name="PROMOTION_TITLE" />
+    <property name="PROMOTION_WRITEUP" />
+    <property name="PROMOTION_WEBSITE" />
+    <property name="PROMOTION_ZIPFILE_ID" />
+    <property name="PROMOTION_VIDEOFILE_ID" />
+
+    <property name="PROMOTER_ID" />
+    <!--<many-to-one name="PROMOTER" class="Student"
+                 column="USER_ID" not-null="true"
+                 insert="false" update="false"
+                 cascade="none"/>-->
+    
+  </class>
+
+</hibernate-mapping>

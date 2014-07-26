@@ -52,7 +52,7 @@ mais.group=staff(current),other(current)">
 
 </head>
 <body id="homepage" class="page">
-    <form id="Form1" runat="server">
+    <form id="Form1" runat="server" enctype="multipart/form-data">
         <ajaxControl:ToolkitScriptManager ID="ScriptManager1" runat="server" />
         <div id="body">
             <!--Start Murdoch header-->

@@ -8,7 +8,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-lg-12">
-            <ajaxControl:TabContainer runat="server">
+            <ajaxControl:TabContainer runat="server" ID="tab_container">
                 <ajaxControl:TabPanel runat="server" HeaderText="Hibernate setup">
                     <ContentTemplate>
                         <div class="row">
@@ -346,6 +346,17 @@
                                         <asp:UpdatePanel ID="CreateCourses" runat="server">
                                             <ContentTemplate>
                                                 <div class="row">
+                                                    <div class="form-group">
+                                                        <asp:Label Text="UC ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label" AssociatedControlID="uc_id"></asp:Label>
+                                                        <div class="col-sm-6">
+                                                            <asp:TextBox ID="uc_id" runat="server" CssClass="form-control"></asp:TextBox>
+                                                            <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender7" runat="server"
+                                                                TargetControlID="uc_id"
+                                                                FilterType="Numbers" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
                                                     <asp:TextBox TextMode="MultiLine" runat="server" ID="Courses"
                                                         CssClass="col-lg-12" />
 
@@ -381,13 +392,13 @@
                         </div>
                     </ContentTemplate>
                 </ajaxControl:TabPanel>
-                <ajaxControl:TabPanel runat="server" HeaderText="Course Module" OnDemandMode="None">
+                <ajaxControl:TabPanel runat="server" HeaderText="Course Module" >
                     <ContentTemplate>
                         <div class="row">
                             <!--Test assign course to student-->
                             <div class="col-lg-6">
                                 <div class="panel panel-default">
-                                    <div class="panel-heading">Test creation of projects</div>
+                                    <div class="panel-heading">Test enrollment of courses</div>
                                     <div class="panel-body">
                                         <asp:UpdateProgress runat="server" ID="UpdateProgress8" AssociatedUpdatePanelID="apply_course_panel">
                                             <ProgressTemplate>
@@ -396,16 +407,16 @@
                                                 </div>
                                             </ProgressTemplate>
                                         </asp:UpdateProgress>
-                                        <asp:UpdatePanel ID="apply_course_panel" runat="server">
+                                        <asp:UpdatePanel ID="apply_course_panel" runat="server" UpdateMode="Conditional" >
                                             <ContentTemplate>
                                                 <div class="row">
                                                     <div class="form-group">
                                                         <asp:Label Text="Student ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label" AssociatedControlID="student_id"></asp:Label>
                                                         <div class="col-sm-6">
-                                                            <asp:TextBox ID="student_id" runat="server" CssClass="form-control" ></asp:TextBox>
+                                                            <asp:TextBox ID="student_id" runat="server" CssClass="form-control"></asp:TextBox>
                                                             <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
-                                                                        TargetControlID="student_id"
-                                                                        FilterType="Numbers" />
+                                                                TargetControlID="student_id"
+                                                                FilterType="Numbers" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -433,9 +444,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-2 col-lg-offset-10">
+                                                    <div class="col-lg-4 col-lg-offset-8">
+                                                        <asp:Button ID="load_course" runat="server" Text="Load Courses"
+                                                            OnClick="load_course_Click"/>
                                                         <asp:Button ID="enroll_course" runat="server" Text="Enroll"
-                                                             OnClick="enroll_course_Click"/>
+                                                            OnClick="enroll_course_Click" />
+
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -443,9 +457,62 @@
                                                         <asp:PlaceHolder ID="enroll_course_message" runat="server"></asp:PlaceHolder>
                                                     </div>
                                                 </div>
-                                                
+
 
                                                 <asp:HiddenField ClientIDMode="Static" ID="selected_course" runat="server" />
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </ajaxControl:TabPanel>
+                <ajaxControl:TabPanel runat="server" HeaderText="File Module">
+                    <ContentTemplate>
+                        <div class="row">
+                            <!--Upload photo for student-->
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Test upload of photo for student</div>
+                                    <div class="panel-body">
+
+
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label Text="User ID: " runat="server" CssClass="col-sm-4 col-lg-offset-1 control-label" AssociatedControlID="user_id"></asp:Label>
+                                                <div class="col-sm-6">
+                                                    <asp:TextBox ID="user_id" runat="server" CssClass="form-control"></asp:TextBox>
+                                                    <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender6" runat="server"
+                                                        TargetControlID="user_id"
+                                                        FilterType="Numbers" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <asp:FileUpload ID="ProfilePicUploader" runat="server" />
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <asp:Button ID="upload_profile_pic" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClientClick="this.disabled=true;"
+                                                    Text="Upload" OnClick="upload_profile_pic_Click"
+                                                    runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                        <asp:UpdateProgress runat="server" ID="UpdateProgress9" AssociatedUpdatePanelID="upload_profile_pic_panel">
+                                            <ProgressTemplate>
+                                                <div class="overlay">
+                                                    <img src="../Images/ajax-loader.gif" />
+                                                </div>
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                        <asp:UpdatePanel ID="upload_profile_pic_panel" runat="server">
+                                            <ContentTemplate>
+                                                <div class="row">
+                                                    <div class="col-lg-10 col-lg-offset-1">
+                                                        <asp:PlaceHolder ID="upload_message" runat="server"></asp:PlaceHolder>
+                                                    </div>
+                                                </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
@@ -470,7 +537,7 @@
         })
     </script>
 
-        <!--for passing the selected application IDs-->
+    <!--for passing the selected application IDs-->
     <script id="select-application-script" type="text/javascript">
         $(document).on('click', ".checkbox", function () {
             var selected = $('#selected_course').val();

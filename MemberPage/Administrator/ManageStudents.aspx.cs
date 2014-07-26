@@ -42,6 +42,7 @@ public partial class ManageStudents : BaseMemberPage
             //company_contacts_updatePanel.Update();
             project_application_list_panel.Update();
             assigned_project_panel.Update();
+            course_list_panel.Update();
         }
     }
 
@@ -65,32 +66,41 @@ public partial class ManageStudents : BaseMemberPage
             zipcode.Text = student.ZIP_CODE;
             country.Text = student.COUNTRY;
 
-            /*IList<Project> projectAppls = new List<Project>();
-            foreach (ProjectApplication projectAppl in student.PROJECTS_APPLIED)
-            {
-                projectAppls.Add(projectAppl.PROJECT);
-            }*/
+            //populate projects applied for
             Session["applied_projects"] = student.PROJECTS_APPLIED;
             project_application_list.DataSource = Session["applied_projects"];
             project_application_list.DataBind();
 
             //populate assigned project
-            TeamAssignment tAssignment = student.TEAM_ASSIGNMENT.First(); //assume that there will only be 1 assignment per student
-            Team assignedTeam = tAssignment.TEAM;
-            ProjectAssignment pAssignment = assignedTeam.ASSIGNED_TO_PROJECT.First();
-            Project assignedProject = pAssignment.PROJECT;
+            if (student.TEAM_ASSIGNMENT.Count >= 1)
+            {
+                TeamAssignment tAssignment = student.TEAM_ASSIGNMENT.First(); //assume that there will only be 1 assignment per student
+                Team assignedTeam = tAssignment.TEAM;
+                ProjectAssignment pAssignment = assignedTeam.ASSIGNED_TO_PROJECT.First();
+                Project assignedProject = pAssignment.PROJECT;
 
-            project_title.Text = assignedProject.PROJECT_TITLE;
-            project_company.Text = assignedProject.PROJECT_OWNER.USERNAME;
-            contact_person.Text = assignedProject.CONTACT_NAME;
-            contact_number.Text = assignedProject.CONTACT_NUMBER;
+                project_title.Text = assignedProject.PROJECT_TITLE;
+                project_company.Text = assignedProject.PROJECT_OWNER.USERNAME;
+                contact_person.Text = assignedProject.CONTACT_NAME;
+                contact_number.Text = assignedProject.CONTACT_NUMBER;
+            }
+            
+            //load profile pic
+            FileModule fileModule = new FileModule();
+            string profile_pic_address = fileModule.getProfilePicLocation(student.USER_ID);
+            if (profile_pic_address.Length > 0)
+            {
+                profile_pic.ImageUrl = "~/" + fileModule.getProfilePicLocation(student.USER_ID);
+            }
+            else
+            {
+                profile_pic.ImageUrl = "";
+            }
 
+            //load course enrolled
+            course_list.DataSource = student.COURSE_ENROLLED;
+            course_list.DataBind();
         }
-
-    }
-
-    protected void switchPartner(string prev_id, string current_id)
-    {
 
     }
 

@@ -11,6 +11,7 @@ public class UnitCoordinator : UserAccount
     public virtual string FIRSTNAME { get; set; } //Firstname
     public virtual string LASTNAME { get; set; } //Lastname 
 
+
 	public UnitCoordinator()
 	{
         ROLE = "UNITCOORDINATOR";
