@@ -55,6 +55,7 @@ public partial class ManageStudents : BaseMemberPage
         {
             Session["studentid"] = student.USER_ID;
 
+            student_id_holder.Text = student.USER_ID.ToString();
             first_name.Text = student.FIRSTNAME;
             last_name.Text = student.LASTNAME;
             email.Text = student.EMAIL;
@@ -140,8 +141,12 @@ public partial class ManageStudents : BaseMemberPage
                         + "Student updated successfully!"
                         + "</div>"));
 
+            company_list_updatePanel.Update();
+            student_contacts_updatePanel.Update();
+            //project_list_panel.Update(); 
             error_modal_control.Show();
-            okButton.Text = "Ok";
+            okButton.Visible = true;
+            errorButton.Visible = false;
         }
         catch (Exception ex)
         {
@@ -158,4 +163,15 @@ public partial class ManageStudents : BaseMemberPage
         
     }
 
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        long convertedUserid;
+
+        if (Int64.TryParse(Session["studentid"].ToString(), out convertedUserid))
+        {
+            loadStudent(convertedUserid);
+            loadStudentList();
+            company_list_updatePanel.Update();
+        }
+    }
 }

@@ -123,4 +123,93 @@ public class FileModule
             result = profilePic.UPLOADEDFILE_PATH;
         return result;
     }
+
+    /**
+     * Save file for project
+     * 
+     * - For projects, no project needs to be created yet to upload a file, so a ProjectDocument is first created
+     * without tagging to a project. 
+     * 
+     */
+    public ProjectDocument saveProjectFile(Stream inputStream, string file_type, string file_name)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        //validate file size
+        if (inputStream.Length > MAX_FILE_SIZE)
+            throw new SaveFileException("File size exceeds " + MAX_FILE_SIZE + " bytes.");
+
+        //build save file path by userId
+        string relativeFilePath = "Files" + "\\"
+                                    + "Project" + "\\"
+                                    + file_type + "\\";
+        string saveFilePath = HttpRuntime.AppDomainAppPath + relativeFilePath;
+
+        if (!Directory.Exists(saveFilePath))
+            Directory.CreateDirectory(saveFilePath);
+
+        saveFilePath += file_name;
+        relativeFilePath += file_name;
+
+        //create file stream
+        var saveFileStream = File.Create(saveFilePath);
+        inputStream.Seek(0, SeekOrigin.Begin);
+        inputStream.CopyTo(saveFileStream);
+        saveFileStream.Close();
+
+        //create UploadedFile object
+        ProjectDocument projectDocument = new ProjectDocument();
+        projectDocument.PROJECTFILE_NAME = file_name;
+        projectDocument.PROJECTFILE_PATH = relativeFilePath;
+        projectDocument.PROJECTFILE_TYPE = file_type;
+
+        session.BeginTransaction();
+        session.Save(projectDocument);
+        session.Transaction.Commit();
+
+        return projectDocument;
+    }
+
+    /**
+     * Update project document owner (Project)
+     * 
+     * 
+     */
+    public ProjectDocument updateProjectDocumentOwner(long projectDocumentId, long projectId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        ProjectDocument projectDocument = session.CreateCriteria<ProjectDocument>()
+                                            .Add(Restrictions.Eq("PROJECTFILE_ID", projectDocumentId))
+                                            .UniqueResult<ProjectDocument>();
+
+        projectDocument.PROJECTFILE_OWNER = projectId; //no validations!
+        session.BeginTransaction();
+        session.Update(projectDocument);
+        session.Transaction.Commit();
+
+        return projectDocument;
+    }
+
+    /**
+     * Get project documents by project ID
+     * 
+     */
+    public IList<ProjectDocument> getProjectDocumentByProjectId(long projectId)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+        IList<ProjectDocument> projectDocuments = session.CreateCriteria<ProjectDocument>()
+                                    .Add(Restrictions.Eq("PROJECTFILE_OWNER",projectId))
+                                    .List<ProjectDocument>();
+        return projectDocuments;
+    }
 }

@@ -149,16 +149,26 @@ public partial class PendingProjects : BaseMemberPage
 
             //Success
             Messenger.setMessage(approve_project_message, "Project is approved! An email notification has been sent to the project owner.", LEVEL.SUCCESS);
+            okButton.Visible = true;
+            proceedButton.Visible = false;
+        }
+        catch (EmailSendException esex)
+        {
+            Messenger.setMessage(approve_project_message, "Project is approved but email is not sent successfully: "+esex.Message, LEVEL.WARNING);
+            okButton.Visible = true;
+            proceedButton.Visible = false;
         }
         catch (Exception ex)
         {
             Messenger.setMessage(approve_project_message, ex.Message, LEVEL.DANGER);
-            
+            proceedButton.Visible = true;
+            okButton.Visible = false;
         }
         finally
         {
             approve_project_popup.Show();
-            project_details_panel.Update();
+            //project_details_panel.Update();
+            approve_button_panel.Update();
         }
     }
 
@@ -167,7 +177,7 @@ public partial class PendingProjects : BaseMemberPage
 
     }
 
-    protected void okButton_Click(object sender, EventArgs e)
+    protected void proceedButton_Click(object sender, EventArgs e)
     {
         long convertedProjectid;
 
@@ -177,7 +187,7 @@ public partial class PendingProjects : BaseMemberPage
         }
         else
         {
-            Messenger.setMessage(approve_project_message, "Cannot find student ID, please contact administrator.", LEVEL.DANGER);
+            Messenger.setMessage(approve_project_message, "Cannot find project ID, please contact administrator.", LEVEL.DANGER);
             
         }
         //approve_project_popup.Show();
@@ -225,21 +235,35 @@ public partial class PendingProjects : BaseMemberPage
 
             //Success
             Messenger.setMessage(approve_project_message, "Project is rejected! An email notification has been sent to the project owner.", LEVEL.WARNING);
+            okButton.Visible = true;
+            proceedButton.Visible = false;
+        }
+        catch (EmailSendException esex)
+        {
+            Messenger.setMessage(approve_project_message, "Project is approved but email is not sent successfully: " + esex.Message, LEVEL.WARNING);
+            okButton.Visible = true;
+            proceedButton.Visible = false;
         }
         catch (Exception ex)
         {
             Messenger.setMessage(approve_project_message, ex.Message, LEVEL.DANGER);
-
+            proceedButton.Visible = true;
+            okButton.Visible = false;
         }
         finally
         {
             approve_project_popup.Show();
-            project_details_panel.Update();
+            //project_details_panel.Update();
+            approve_button_panel.Update();
         }
     }
 
     private void clearFields()
     {
         
+    }
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect(Request.RawUrl);
     }
 }

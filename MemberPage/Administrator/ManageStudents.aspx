@@ -48,6 +48,7 @@
                         <asp:UpdatePanel ID="profile_pic_panel" runat="server" UpdateMode="Always">
                             <ContentTemplate>
                                 <asp:Image ID="profile_pic" runat="server" Width="150" />
+                                <strong><asp:Literal ID="student_id_holder" runat="server" ></asp:Literal></strong>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -181,7 +182,10 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-2 col-sm-offset-9">
-                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok"
+                                                        OnClick="okButton_Click" />
+                                                    <asp:Button runat="server" ID="errorButton" CssClass="btn btn-default" Text="Ok"
+                                                        />
                                                 </div>
                                             </div>
 

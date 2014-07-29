@@ -12,4 +12,6 @@ public sealed class APPLICATION_STATUS
     public const string APPROVED = "APPROVED";
     public const string REJECTED = "REJECTED";
     public const string ASSIGNED = "ASSIGNED";
+    public const string TERMINATED = "TERMINATED";
+    public const string COMPLETED = "COMPLETED";
 }

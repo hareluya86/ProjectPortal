@@ -21,6 +21,7 @@
       <siteMapNode url="~/MemberPage/UC/UCPage.aspx" title="UnitCoordinator" >
         <siteMapNode url="~/MemberPage/UC/PendingProjects.aspx" title="Projects awaiting approval" />
         <siteMapNode url="~/MemberPage/UC/ApprovedProjects.aspx" title="Approved Projects" />
+        <siteMapNode url="~/MemberPage/UC/AssignedProjects.aspx" title="Update Project Status" />
         <siteMapNode url="~/MemberPage/UC/UpdateDetails.aspx" title="Update Details" />
       </siteMapNode>
       <!--Student-->

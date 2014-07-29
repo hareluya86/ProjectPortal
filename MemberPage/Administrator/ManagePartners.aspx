@@ -22,7 +22,7 @@
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                                 <!--dynamically add datasource from codeBehind-->
-                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional">
+                                <asp:UpdatePanel ID="company_list_updatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                     <Triggers>
                                         <asp:AsyncPostBackTrigger ControlID="delete_project_button" />
                                     </Triggers>
@@ -169,7 +169,7 @@
                                 </div>
                                 <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
                                     PopupControlID="delete_projects_error" TargetControlID="hiddenModalTarget"
-                                    OkControlID="okButton" BackgroundCssClass="overlay">
+                                    BackgroundCssClass="overlay">
                                 </ajaxControl:ModalPopupExtender>
                                 <asp:HiddenField runat="server" ID="hiddenModalTarget" />
                                 <asp:Panel runat="server" ID="delete_projects_error">
@@ -184,7 +184,10 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-2 col-sm-offset-9">
-                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok"
+                                                        OnClick="okButton_Click" />
+                                                    <asp:Button runat="server" ID="errorButton" CssClass="btn btn-default" Text="Ok"
+                                                        />
                                                 </div>
                                             </div>
 
@@ -249,11 +252,20 @@
         $(document).ready(function () {
             $('.truncate').each(function () {
                 var button_text = $(this).val().trim();
+                if (button_text.length > 20) {
+                    $(this).val(button_text.substring(0, 20) + '...');
+                }
+            })
+        })
+
+        /*$(document).on('ready', ".truncate", function () {
+            $('.truncate').each(function () {
+                var button_text = $(this).val().trim();
                 if (button_text.length > 12) {
                     $(this).val(button_text.substring(0, 12) + '...');
                 }
             })
-        })
+        })*/
     </script>
     <!--for changing the selected button-->
     <script id="change-button-script" type="text/javascript">

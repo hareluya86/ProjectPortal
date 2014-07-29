@@ -39,8 +39,7 @@ public partial class ManagePartners : BaseMemberPage
         {
             loadPartner(convertedUserid);
             //switchPartner(partner);
-            company_contacts_updatePanel.Update();
-            project_list_panel.Update();
+            
         }
     }
 
@@ -68,6 +67,9 @@ public partial class ManagePartners : BaseMemberPage
             Session["projects"] = partner.PROJECTS;
             project_list.DataSource = Session["projects"];
             project_list.DataBind();
+
+            company_contacts_updatePanel.Update();
+            project_list_panel.Update();
         }
 
     }
@@ -121,6 +123,10 @@ public partial class ManagePartners : BaseMemberPage
             okButton.Text = "Ok";
             company_contacts_updatePanel.Update();
         }
+        finally
+        {
+            
+        }
 
     }
 
@@ -156,14 +162,15 @@ public partial class ManagePartners : BaseMemberPage
         try
         {
             userModule.updateUser(partner);
-            /*error_message.Controls.Add(new LiteralControl(
-                    "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
-                        + "Partner updated successfully!"
-                        + "</div>"));*/
             Messenger.setMessage(error_message, "Partner updated successfully!", LEVEL.INFO);
 
+            company_list_updatePanel.Update();
+            company_contacts_updatePanel.Update();
+            project_list_panel.Update(); 
             error_modal_control.Show();
-            okButton.Text = "Ok";
+            okButton.Visible = true;
+            errorButton.Visible = false;
+            
         }
         catch (Exception ex)
         {
@@ -174,10 +181,23 @@ public partial class ManagePartners : BaseMemberPage
                         + "</div>"));
             
             error_modal_control.Show();
-            okButton.Text = "Ok";
+            okButton.Visible = false;
+            errorButton.Visible = true;
             //cancelButton.Visible = false;
         }
         
     }
 
+    protected void okButton_Click(object sender, EventArgs e)
+    {
+        long convertedUserid;
+
+        if (Int64.TryParse(Session["partnerid"].ToString(), out convertedUserid))
+        {
+            loadPartner(convertedUserid);
+            loadPartnerList();
+            company_list_updatePanel.Update();
+        }
+
+    }
 }

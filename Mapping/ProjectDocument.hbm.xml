@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+
+  <!-- more mapping info here -->
+  <class name="ProjectDocument, App_Code" abstract="true" table="PROJECTDOCUMENT">
+    <id name="PROJECTFILE_ID" type="Int64">
+      <generator class="NHibernate.Id.Enhanced.TableGenerator">
+        <param name="table_name">SEQUENCE</param>
+        <param name="segment_value">UPLOADEDFILE_ID</param>
+        <param name="initial_value">80000</param>
+      </generator>
+    </id>
+    <property name="PROJECTFILE_NAME" />
+    <property name="PROJECTFILE_TYPE" />
+    <property name="PROJECTFILE_PATH" />
+    <property name="PROJECTFILE_OWNER" />
+  </class>
+
+</hibernate-mapping>

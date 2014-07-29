@@ -183,7 +183,7 @@
                                             </div>
                                             <ajaxControl:ModalPopupExtender ID="approve_project_popup" runat="server"
                                                 PopupControlID="apply_project_panel" TargetControlID="HiddenField1"
-                                                BackgroundCssClass="overlay">
+                                                BackgroundCssClass="overlay" >
                                             </ajaxControl:ModalPopupExtender>
                                             <asp:HiddenField runat="server" ID="HiddenField1" />
                                             <asp:Panel runat="server" ID="apply_project_panel" Width="400px">
@@ -197,10 +197,10 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-2 col-sm-offset-10">
-                                                                <!--<asp:Button ID="okButton" runat="server" CssClass="btn btn-default" Text="Ok"
-                                                                    OnClick="okButton_Click" />-->
-                                                                <asp:Button ID="anotherButton" runat="server" CssClass="btn btn-default" Text="Ok"
-                                                                    OnClick="okButton_Click" />
+                                                                <asp:Button ID="proceedButton" runat="server" CssClass="btn btn-default" Text="Ok"
+                                                                    />
+                                                                <asp:Button ID="okButton" runat="server" CssClass="btn btn-default" Text="Ok"
+                                                                    OnClick="okButton_Click"/>
                                                             </div>
                                                         </div>
                                                     </div>

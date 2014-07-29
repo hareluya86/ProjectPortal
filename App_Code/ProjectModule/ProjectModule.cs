@@ -189,7 +189,7 @@ public class ProjectModule
             Project project = new Project();
             project.PROJECT_TITLE = "Project " + i + " by partner " + partnerId;
             project.PROJECT_OWNER = partner;
-            project.PROJECT_STATUS = APPLICATION_STATUS.APPROVED;
+            project.PROJECT_STATUS = APPLICATION_STATUS.PENDING;
             project.RECOMMENDED_SIZE = 5;
             results.Add(project);
             
@@ -518,6 +518,11 @@ public class ProjectModule
         Project approvedProject = this.updateProject(project);
 
         //send out email
+        string subject = "Sorry your project has been rejected.";
+        string message = "Your project " + project.PROJECT_TITLE + " has been rejected.<br/>";
+        message += "Reason: " + project.UC_REMARKS;
+        EmailModule emailModule = new EmailModule();
+        emailModule.sendEmail(subject, message, project.PROJECT_OWNER.EMAIL);
 
         return approvedProject;
     }
@@ -722,6 +727,33 @@ public class ProjectModule
 
         session.Transaction.Commit();
 
+        //send emails to:
+        //1. Project Owner
+        //2. Project members
+        EmailModule emailModule = new EmailModule();
+        string ownerSubject = "Congratulations! Your project has been assigned!";
+        string ownerMessage = "Your project " + project.PROJECT_TITLE + " has been assigned to the following students: <br />";
+        foreach(TeamAssignment ta in newTeam.TEAM_ASSIGNMENT)
+        {
+            Student member = ta.STUDENT;
+            ownerMessage += "- " + member.FIRSTNAME + " " + member.LASTNAME + " (Student ID: " + member.USER_ID + ", Email: " + member.EMAIL + ") <br />";
+        }
+        emailModule.sendEmail(ownerSubject, ownerMessage, project.PROJECT_OWNER.EMAIL);
+
+        foreach (TeamAssignment ta in newTeam.TEAM_ASSIGNMENT)
+        {
+            Student member = ta.STUDENT;
+            string studentSubject = "Congratulations! You have been assigned to a project!";
+            string studentMessage = "You have been assigned to the following project: <br />";
+            studentMessage += "'"+project.PROJECT_TITLE+"' (Project ID: "+project.PROJECT_ID+") <br />" ;
+            studentMessage += "By company: "+project.PROJECT_OWNER.USERNAME+" (Company reg num: "+project.PROJECT_OWNER.COMPANY_REG_NUM+") <br />" ;
+            studentMessage += "Contact person: "+project.CONTACT_NAME+" <br />" ;
+            studentMessage += "Contact email: "+project.CONTACT_EMAIL+" <br />" ;
+            studentMessage += "Contact phone: "+project.CONTACT_NUMBER+" <br />" ;
+
+            emailModule.sendEmail(studentSubject, studentMessage, project.PROJECT_OWNER.EMAIL);
+        }
+
         return newTeam;
     }
 
@@ -759,5 +791,30 @@ public class ProjectModule
         session.Transaction.Commit();
 
         return projectPromotion;
+    }
+
+    /**
+     * Set a collection of projects to given status
+     * 
+     */
+    public IList<Project> changeProjectStatuses(IList<long> projectIds, string status)
+    {
+        if (session == null || !session.IsOpen)
+        {
+            session = hibernate.getSession();
+        }
+
+        IList<Project> updatedProjects = new List<Project>();
+        session.BeginTransaction();
+        foreach (long projectId in projectIds)
+        {
+            Project project = this.getProjectById(projectId);
+            project.PROJECT_STATUS = status;
+            session.Update(project);
+            updatedProjects.Add(project);
+        }
+        session.Transaction.Commit();
+
+        return updatedProjects;
     }
 }

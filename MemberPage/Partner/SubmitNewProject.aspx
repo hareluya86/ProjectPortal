@@ -13,7 +13,10 @@
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
-        <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional">
+        <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+            <Triggers>
+                <asp:PostBackTrigger ControlID="upload_document" />
+            </Triggers>
             <ContentTemplate>
                 <!--main info-->
                 <div class="row">
@@ -55,7 +58,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <asp:Label AssociatedControlID="recommended_size" Text="Recommended Size: " runat="server" CssClass="col-sm-4 control-label" ></asp:Label>
+                                <asp:Label AssociatedControlID="recommended_size" Text="Recommended Size: " runat="server" CssClass="col-sm-4 control-label"></asp:Label>
                                 <div class="col-sm-8">
                                     <asp:TextBox ID="recommended_size" CssClass="form-control" runat="server"></asp:TextBox>
                                     <ajaxControl:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server"
@@ -91,7 +94,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-lg-8">
                         <div class="row">
                             <div class="form-group">
                                 <asp:Label AssociatedControlID="project_requirements" Text="Requirements:" runat="server" CssClass="col-sm-2 control-label"></asp:Label>
@@ -99,6 +102,29 @@
                                     <asp:TextBox ID="project_requirements" CssClass="form-control" runat="server" TextMode="MultiLine" Height="200"></asp:TextBox>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group" style="margin-top: 5px;">
+                            <asp:Label AssociatedControlID="DocumentUploader" Text="Upload Project Document: " runat="server" CssClass="col-sm-12 control-label"></asp:Label>
+                            
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <asp:FileUpload ID="DocumentUploader" runat="server" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <asp:Button ID="upload_document" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClientClick="this.disabled=true;"
+                                        Text="Upload" OnClick="upload_document_Click"
+                                        runat="server"></asp:Button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <asp:HiddenField ID="hidden_uploaded_doc_ID" runat="server" />
+                                    <asp:Literal ID="uploaded_document_info" runat="server" ></asp:Literal>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -127,7 +153,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-2 col-sm-offset-9">
-                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" />
+                                    <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok"/>
                                 </div>
                             </div>
 

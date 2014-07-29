@@ -57,7 +57,7 @@ public partial class PromoteProject : BaseMemberPage
         if (extension != ".zip")
             throw new Exception("You can only upload zip files.");
 
-        Session["zip_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.ZIP, file.FileName);
+        Session["zip_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.ZIP, file.FileName).UPLOADEDFILE_ID;
     }
 
     protected void SaveVideoFile(long userId, HttpPostedFile file)
@@ -69,7 +69,7 @@ public partial class PromoteProject : BaseMemberPage
         if (extension != ".mp4")
             throw new Exception("You can only upload mp4 files.");
 
-        Session["video_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.VIDEO, file.FileName);
+        Session["video_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.VIDEO, file.FileName).UPLOADEDFILE_ID;
     }
 
     protected void UploadVideoButton_Click(object sender, EventArgs e)
@@ -122,13 +122,17 @@ public partial class PromoteProject : BaseMemberPage
 
             if (Session["zip_file"] == null)
                 throw new Exception("Please upload a zip file.");
-            UploadedFile zipFile = (UploadedFile) Session["zip_file"];
-            projectPromotion.PROMOTION_ZIPFILE_ID = zipFile.UPLOADEDFILE_ID;
+            string zipFile = Session["zip_file"].ToString();
+            long convertedZipFileId;
+            Int64.TryParse(zipFile, out convertedZipFileId);
+            projectPromotion.PROMOTION_ZIPFILE_ID = convertedZipFileId;
 
             if (Session["video_file"] == null)
                 throw new Exception("Please upload a video file.");
-            UploadedFile videoFile = (UploadedFile)Session["video_file"];
-            projectPromotion.PROMOTION_VIDEOFILE_ID = videoFile.UPLOADEDFILE_ID;
+            string videoFile = Session["video_file"].ToString();
+            long convertedVideoFileId;
+            Int64.TryParse(zipFile, out convertedVideoFileId);
+            projectPromotion.PROMOTION_VIDEOFILE_ID = convertedVideoFileId;
 
             long convertedStudentId;
             if (!Int64.TryParse(Session["userid"].ToString(), out convertedStudentId))

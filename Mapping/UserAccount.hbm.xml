@@ -13,17 +13,17 @@
       </generator>
     </id>
     <!--<discriminator column="ROLE" type="string" not-null="false" force=""  />-->
-    <property name="USERNAME" />
-    <property name="ROLE" />
-    <property name="PASSWORD" />
-    <property name="EMAIL" />
-    <property name="PHONE" />
-    <property name="ADDRESS1" />
-    <property name="ADDRESS2" />
-    <property name="CITY_TOWN" />
-    <property name="STATE" />
-    <property name="ZIP_CODE" />
-    <property name="COUNTRY" />
+    <property name="USERNAME" type="AnsiString"/>
+    <property name="ROLE" type="AnsiString"/>
+    <property name="PASSWORD" type="AnsiString"/>
+    <property name="EMAIL" type="AnsiString"/>
+    <property name="PHONE" type="AnsiString"/>
+    <property name="ADDRESS1" type="AnsiString"/>
+    <property name="ADDRESS2" type="AnsiString"/>
+    <property name="CITY_TOWN" type="AnsiString"/>
+    <property name="STATE" type="AnsiString"/>
+    <property name="ZIP_CODE" type="AnsiString"/>
+    <property name="COUNTRY" type="AnsiString"/>
 
     <bag name="FILES" cascade="none">
       <key column="USER_ID" not-null="true"></key>

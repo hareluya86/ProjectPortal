@@ -95,6 +95,14 @@ public partial class SubmitNewProject : BaseMemberPage
             Session["projectid"] = newProject.PROJECT_ID;
             projectModule.registerProjectCategories(newProject, categoryIds);
             Session["projectid"] = null;
+
+            //Set projectDocument with projectId
+            FileModule fileModule = new FileModule();
+            long convertedProjectDocumentId;
+            if (!Int64.TryParse(hidden_uploaded_doc_ID.Value.ToString(), out convertedProjectDocumentId))
+                throw new Exception("Cannot find projectDocumentId, please contact administrator.");
+            fileModule.updateProjectDocumentOwner(convertedProjectDocumentId, project.PROJECT_ID);
+
             Messenger.setMessage(error_message, "Project registered successfully. You will receive an email to update you of the status.", LEVEL.SUCCESS);
             clearAllFields();
         }
@@ -134,9 +142,47 @@ public partial class SubmitNewProject : BaseMemberPage
         contact_email.Text = null;
         project_requirements.Text = null;
         recommended_size.Text = null;
+        hidden_uploaded_doc_ID.Value = null;
     }
+
     protected void ResetButton_Click(object sender, EventArgs e)
     {
         clearAllFields();
+    }
+
+    protected void upload_document_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!DocumentUploader.HasFile)
+                throw new Exception("Please provide a file.");
+
+            long convertedStudentId;
+            if (!Int64.TryParse(Session["userid"].ToString(), out convertedStudentId))
+                throw new Exception("Cannot find user ID, please contact administrator.");
+
+            string filename = DocumentUploader.FileName;
+            FileModule fileModule = new FileModule();
+            ProjectDocument projectDocument = fileModule.saveProjectFile(DocumentUploader.PostedFile.InputStream, FILE_TYPE.DOCUMENT,filename);
+            uploaded_document_info.Text = filename;
+
+            //store ID in hidden_uploaded_doc_ID
+            hidden_uploaded_doc_ID.Value = projectDocument.PROJECTFILE_ID.ToString();
+
+            Messenger.setMessage(error_message, "File uploaded successfully.", LEVEL.SUCCESS);
+        }
+        catch (SaveFileException sfex)
+        {
+            Messenger.setMessage(error_message, sfex.Message, LEVEL.DANGER);
+        }
+        catch (Exception ex)
+        {
+            Messenger.setMessage(error_message, ex.Message, LEVEL.DANGER);
+        }
+        finally
+        {
+            error_modal_control.Show();
+            //NewProjectUpdatePanel.Update();
+        }
     }
 }

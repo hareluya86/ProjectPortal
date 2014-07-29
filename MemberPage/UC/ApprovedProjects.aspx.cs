@@ -215,6 +215,10 @@ public partial class ApprovedProjects : BaseMemberPage
         {
             Messenger.setMessage(apply_project_message, paex.Message, LEVEL.DANGER);
         }
+        catch (EmailSendException esex)
+        {
+            Messenger.setMessage(apply_project_message, "Project is approved but email is not sent successfully: " + esex.Message, LEVEL.WARNING);
+        }
         catch (Exception ex)
         {
             Messenger.setMessage(apply_project_message, ex.Message, LEVEL.DANGER);
