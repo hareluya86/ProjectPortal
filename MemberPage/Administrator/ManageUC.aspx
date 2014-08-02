@@ -47,6 +47,7 @@
                         </asp:UpdateProgress>
                         <asp:UpdatePanel ID="profile_pic_panel" runat="server" UpdateMode="Always">
                             <ContentTemplate>
+                                <strong>UC ID: <asp:Literal ID="uc_id_holder" runat="server" ></asp:Literal></strong>
                                 <asp:Image ID="profile_pic" runat="server" Width="150" />
                             </ContentTemplate>
                         </asp:UpdatePanel>

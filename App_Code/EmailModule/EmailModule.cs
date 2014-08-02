@@ -40,25 +40,80 @@ public class EmailModule
     {
         EmailModule.validateEmail(recipientAddress);
 
-        SmtpClient client = new SmtpClient(HOST, PORT);
-        client.Credentials = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
-        client.EnableSsl = true;
-        client.UseDefaultCredentials = false;
-        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        try
+        //SmtpClient client = new SmtpClient(HOST, PORT);
+        
+        using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(HOST, PORT))
         {
-            Console.WriteLine("Attempting to send an email through the Amazon SES SMTP interface...");
-            client.Send(ADMIN_ADDRESS, recipientAddress, subject, body);
-            Console.WriteLine("Email sent!");
+            client.Credentials = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
+            client.EnableSsl = true;
+            //client.UseDefaultCredentials = true;
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            MailMessage mail = new MailMessage(ADMIN_ADDRESS, recipientAddress, subject, body);
+            mail.IsBodyHtml = true;
+
+            try
+            {
+                Console.WriteLine("Attempting to send an email through the Amazon SES SMTP interface...");
+                client.Send(mail);
+                Console.WriteLine("Email sent!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("The email was not sent.");
+                Console.WriteLine("Error message: " + ex.Message);
+                logError("Email " + subject + " was not sent to " + recipientAddress + ". Error message: " + ex.Message);
+                throw new EmailSendException(ex.Message);
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
-        catch (Exception ex)
+    }
+
+    public void sendEmailToMany(string subject, string body, IList<string> addresses)
+    {
+        foreach(string address in addresses)
         {
-            Console.WriteLine("The email was not sent.");
-            Console.WriteLine("Error message: " + ex.Message);
-            logError("Email "+subject+" was not sent to "+recipientAddress+". Error message: "+ex.Message);
-            throw new EmailSendException(ex.Message);
+            validateEmail(address);
         }
 
+        //SmtpClient client = new SmtpClient(HOST, PORT);
+
+        using (System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient(HOST, PORT))
+        {
+            client.Credentials = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
+            client.EnableSsl = true;
+            //client.UseDefaultCredentials = true;
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(ADMIN_ADDRESS);
+            mail.Body = body;
+            mail.Subject = subject;
+            mail.IsBodyHtml = true;
+            foreach (string address in addresses)
+            {
+                mail.To.Add(new MailAddress(address));
+            }
+
+            try
+            {
+                Console.WriteLine("Attempting to send an email through the Amazon SES SMTP interface...");
+                client.Send(mail);
+                Console.WriteLine("Email sent!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("The email was not sent.");
+                Console.WriteLine("Error message: " + ex.Message);
+                logError("Multiple email " + subject + " was not sent due to: " + ex.Message);
+                throw new EmailSendException(ex.Message);
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
     }
 
     public static void validateEmail(string email)

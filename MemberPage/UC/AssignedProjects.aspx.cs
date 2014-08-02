@@ -13,6 +13,7 @@ public partial class ProjectStatus : BaseMemberPage
         {
             //clear all page variables
             Session["projects"] = null;
+            selected_projects.Value = "";
 
             long convertedApproverId;
             if (Int64.TryParse(Session["userid"].ToString(), out convertedApproverId))
@@ -30,17 +31,18 @@ public partial class ProjectStatus : BaseMemberPage
 
         //Only get ASSIGNED and TERMINATED projects
         IList<Project> allProjects = projectModule.getProjectsByApproverId(UCId);
-        IList<Project> assignedAndTerminated = new List<Project>();
+        /*IList<Project> assignedAndTerminated = new List<Project>();
         foreach (Project project in allProjects)
         {
             if (project.PROJECT_STATUS == APPLICATION_STATUS.ASSIGNED ||
                 project.PROJECT_STATUS == APPLICATION_STATUS.TERMINATED)
                 assignedAndTerminated.Add(project);
         }
-
-        Session["projects"] = assignedAndTerminated;
+        */
+        Session["projects"] = allProjects; // assignedAndTerminated;
         project_list.DataSource = Session["projects"];
         project_list.DataBind();
+        selected_projects.Value = "";
     }
 
     protected void project_list_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)
@@ -53,12 +55,8 @@ public partial class ProjectStatus : BaseMemberPage
         }
     }
 
-    protected void complete_button_Click(object sender, EventArgs e)
+    private void reloadProjects()
     {
-        IList<long> selectedProjects = getSelectedProjects();
-        ProjectModule projectModule = new ProjectModule();
-        projectModule.changeProjectStatuses(selectedProjects, APPLICATION_STATUS.COMPLETED);
-
         int currentPage = project_list.CurrentPageIndex;
         long convertedApproverId;
         if (Int64.TryParse(Session["userid"].ToString(), out convertedApproverId))
@@ -68,12 +66,26 @@ public partial class ProjectStatus : BaseMemberPage
             project_list.DataSource = Session["projects"];
             project_list.DataBind();
         }
+        selected_projects.Value = "";
+    }
+
+    protected void complete_button_Click(object sender, EventArgs e)
+    {
+        IList<long> selectedProjects = getSelectedProjects();
+        ProjectModule projectModule = new ProjectModule();
+        projectModule.changeProjectStatuses(selectedProjects, APPLICATION_STATUS.COMPLETED);
+
+        reloadProjects();
 
     }
 
     protected void terminate_button_Click(object sender, EventArgs e)
     {
+        IList<long> selectedProjects = getSelectedProjects();
+        ProjectModule projectModule = new ProjectModule();
+        projectModule.changeProjectStatuses(selectedProjects, APPLICATION_STATUS.TERMINATED);
 
+        reloadProjects();
     }
 
     private IList<long> getSelectedProjects()
@@ -95,5 +107,13 @@ public partial class ProjectStatus : BaseMemberPage
 
         return selected;
 
+    }
+    protected void assigned_button_Click(object sender, EventArgs e)
+    {
+        IList<long> selectedProjects = getSelectedProjects();
+        ProjectModule projectModule = new ProjectModule();
+        projectModule.changeProjectStatuses(selectedProjects, APPLICATION_STATUS.ASSIGNED);
+
+        reloadProjects();
     }
 }

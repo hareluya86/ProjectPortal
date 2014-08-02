@@ -130,6 +130,26 @@ public partial class ListedProjects : BaseMemberPage
             assigned_project_panel.Visible = false;
         }
 
+        //get project documents
+        FileModule fileModule = new FileModule();
+        ProjectDocument projectDocument = fileModule.getProjectDocumentByProjectId(project.PROJECT_ID);
+        if (projectDocument != null)
+        {
+            project_document_link.NavigateUrl = "#";
+            string escapedPath = projectDocument.PROJECTFILE_PATH.Replace("\\","/");
+            project_document_link.Attributes.Add("onclick", "window.open(\"../../" + escapedPath
+                                               + "\",\"_blank\",\"menubar=no,height=600,width=800\");");
+            project_document.Text = projectDocument.PROJECTFILE_NAME;
+            project_document.Visible = true;
+        }
+        else
+        {
+            project_document_link.Attributes.Clear();
+            project_document.Visible = false;
+        }
+        
+
+
     }
 
     protected void project_application_list_PageIndexChanged(object sender, DataGridPageChangedEventArgs e)

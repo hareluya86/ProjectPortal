@@ -475,7 +475,7 @@ public class ProjectModule
 
         //send out email
         string subject = "Congratulations! Your project has been approved!";
-        string message = "Your project " + project.PROJECT_TITLE + " has been approved!";
+        string message = "<h2>Your project " + project.PROJECT_TITLE + " has been approved!</h2>";
         EmailModule emailModule = new EmailModule();
         emailModule.sendEmail(subject, message, project.PROJECT_OWNER.EMAIL);
 
@@ -732,7 +732,7 @@ public class ProjectModule
         //2. Project members
         EmailModule emailModule = new EmailModule();
         string ownerSubject = "Congratulations! Your project has been assigned!";
-        string ownerMessage = "Your project " + project.PROJECT_TITLE + " has been assigned to the following students: <br />";
+        string ownerMessage = "<h2>Your project " + project.PROJECT_TITLE + " has been assigned to the following students:<h2> <br />";
         foreach(TeamAssignment ta in newTeam.TEAM_ASSIGNMENT)
         {
             Student member = ta.STUDENT;
@@ -740,19 +740,21 @@ public class ProjectModule
         }
         emailModule.sendEmail(ownerSubject, ownerMessage, project.PROJECT_OWNER.EMAIL);
 
+        string studentSubject = "Congratulations! You have been assigned to a project!";
+        string studentMessage = "<h2>You have been assigned to the following project:</h2> <br />";
+        studentMessage += "'" + project.PROJECT_TITLE + "' (Project ID: " + project.PROJECT_ID + ") <br />";
+        studentMessage += "By company: " + project.PROJECT_OWNER.USERNAME + " (Company reg num: " + project.PROJECT_OWNER.COMPANY_REG_NUM + ") <br />";
+        studentMessage += "Contact person: " + project.CONTACT_NAME + " <br />";
+        studentMessage += "Contact email: " + project.CONTACT_EMAIL + " <br />";
+        studentMessage += "Contact phone: " + project.CONTACT_NUMBER + " <br />";
+
+        IList<string> addresses = new List<string>();
         foreach (TeamAssignment ta in newTeam.TEAM_ASSIGNMENT)
         {
             Student member = ta.STUDENT;
-            string studentSubject = "Congratulations! You have been assigned to a project!";
-            string studentMessage = "You have been assigned to the following project: <br />";
-            studentMessage += "'"+project.PROJECT_TITLE+"' (Project ID: "+project.PROJECT_ID+") <br />" ;
-            studentMessage += "By company: "+project.PROJECT_OWNER.USERNAME+" (Company reg num: "+project.PROJECT_OWNER.COMPANY_REG_NUM+") <br />" ;
-            studentMessage += "Contact person: "+project.CONTACT_NAME+" <br />" ;
-            studentMessage += "Contact email: "+project.CONTACT_EMAIL+" <br />" ;
-            studentMessage += "Contact phone: "+project.CONTACT_NUMBER+" <br />" ;
-
-            emailModule.sendEmail(studentSubject, studentMessage, project.PROJECT_OWNER.EMAIL);
+            addresses.Add(member.EMAIL);
         }
+        emailModule.sendEmailToMany(studentSubject, studentMessage,addresses);
 
         return newTeam;
     }

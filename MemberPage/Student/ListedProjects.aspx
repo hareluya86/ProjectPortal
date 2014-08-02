@@ -49,8 +49,11 @@
                             </asp:UpdateProgress>
                             <asp:UpdatePanel ID="project_title_panel" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <h2>
-                                        <asp:Literal ID="project_title" runat="server" /></h2>
+                                    <div class="col-sm-12">
+                                        <h2>
+                                            <asp:Literal ID="project_title" runat="server" /></h2>
+                                    </div>
+
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -95,7 +98,7 @@
                                         <div class="row">
                                             <div class="panel panel-success">
                                                 <div class="panel-heading">Project Requirements</div>
-                                                <div class="panel-body" style="overflow: auto; height: 125px;">
+                                                <div class="panel-body" style="overflow: auto; height: 120px;">
                                                     <asp:Literal ID="project_requirements" runat="server" Mode="Encode"></asp:Literal>
                                                 </div>
                                             </div>
@@ -103,7 +106,7 @@
                                         <div class="row">
                                             <div class="panel panel-success">
                                                 <div class="panel-heading">UC comments</div>
-                                                <div class="panel-body" style="overflow: auto; height: 125px;">
+                                                <div class="panel-body" style="overflow: auto; height: 120px;">
                                                     <asp:Literal ID="uc_comments" runat="server" Mode="Encode"></asp:Literal>
                                                 </div>
                                             </div>
@@ -112,6 +115,12 @@
                                     <div class="col-lg-6 ">
                                         <!--panel to show categories-->
                                         <div class="row">
+                                            <div class="form-group">
+                                                <asp:Label AssociatedControlID="project_document" Text="Project Document Link: " runat="server" CssClass="col-sm-6 control-label"></asp:Label>
+                                                <asp:HyperLink ID="project_document_link" runat="server" NavigateUrl="#" >
+                                                    <asp:Label ID="project_document" AssociatedControlID="project_document" Text="Project Document Link: " runat="server" CssClass="col-sm-6 control-label" Visible="false"></asp:Label>
+                                                </asp:HyperLink>
+                                            </div>
                                             <div class="form-group">
                                                 <asp:Label Text="Categories: " CssClass="col-lg-2 control-label" runat="server" AssociatedControlID="category_list"></asp:Label>
                                                 <div class="col-lg-12">
@@ -198,7 +207,7 @@
                                                                                             +"\",\"_blank\",\"menubar=no,height=600,width=800\");"%>'>
                                                                             <%#DataBinder.Eval(Container.DataItem,"APPLICANT.FIRSTNAME") %>
                                                                         </asp:HyperLink>
-                                                                        
+
                                                                     </ItemTemplate>
                                                                 </asp:TemplateColumn>
                                                                 <asp:TemplateColumn HeaderText="Email">

@@ -43,6 +43,7 @@ public partial class ManageStudents : BaseMemberPage
             project_application_list_panel.Update();
             assigned_project_panel.Update();
             course_list_panel.Update();
+            student_contacts_updatePanel.Update();
         }
     }
 
@@ -136,29 +137,19 @@ public partial class ManageStudents : BaseMemberPage
         try
         {
             userModule.updateUser(student);
-            error_message.Controls.Add(new LiteralControl(
-                    "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
-                        + "Student updated successfully!"
-                        + "</div>"));
-
-            company_list_updatePanel.Update();
-            student_contacts_updatePanel.Update();
-            //project_list_panel.Update(); 
             error_modal_control.Show();
             okButton.Visible = true;
             errorButton.Visible = false;
+            Messenger.setMessage(error_message, "Student updated successfully!", LEVEL.SUCCESS);
+
         }
         catch (Exception ex)
         {
-            
-            error_message.Controls.Add(new LiteralControl(
-                    "<div class='alert alert-danger col-sm-10 col-sm-offset-1'>"
-                        + ex.Message
-                        + "</div>"));
+            Messenger.setMessage(error_message, ex.Message, LEVEL.DANGER);
             
             error_modal_control.Show();
-            okButton.Text = "Ok";
-            //cancelButton.Visible = false;
+            okButton.Visible = true;
+            errorButton.Visible = false;
         }
         
     }
@@ -172,6 +163,7 @@ public partial class ManageStudents : BaseMemberPage
             loadStudent(convertedUserid);
             loadStudentList();
             company_list_updatePanel.Update();
+            student_contacts_updatePanel.Update();
         }
     }
 }

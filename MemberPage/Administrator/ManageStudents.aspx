@@ -47,8 +47,9 @@
                         </asp:UpdateProgress>
                         <asp:UpdatePanel ID="profile_pic_panel" runat="server" UpdateMode="Always">
                             <ContentTemplate>
+                                <strong>Student ID: <asp:Literal ID="student_id_holder" runat="server" ></asp:Literal></strong>
                                 <asp:Image ID="profile_pic" runat="server" Width="150" />
-                                <strong><asp:Literal ID="student_id_holder" runat="server" ></asp:Literal></strong>
+                                
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -61,7 +62,7 @@
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel ID="student_contacts_updatePanel" runat="server">
+                        <asp:UpdatePanel ID="student_contacts_updatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                             <ContentTemplate>
                                 <asp:HiddenField ID="student_id" runat="server" />
                                 <div class="row">

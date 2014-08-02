@@ -55,6 +55,7 @@ public partial class ManageUC : BaseMemberPage
         if (uc != null)
         {
             Session["ucid"] = uc.USER_ID;
+            uc_id_holder.Text = uc.USER_ID.ToString();
 
             first_name.Text = uc.FIRSTNAME;
             last_name.Text = uc.LASTNAME;

@@ -41,7 +41,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-8">
+        <div class="col-sm-6 col-sm-offset-6" style="text-align: right;">
+            <asp:Button ID="assigned_button" runat="server" CssClass="btn btn-success" Text="Mark as Assigned" OnClick="assigned_button_Click" />
             <asp:Button ID="complete_button" runat="server" CssClass="btn btn-primary" Text="Mark as Completed" OnClick="complete_button_Click" />
             <asp:Button ID="terminate_button" runat="server" CssClass="btn btn-danger" Text="Mark as Terminated" OnClick="terminate_button_Click"/>
         </div>

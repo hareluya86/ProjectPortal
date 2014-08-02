@@ -200,16 +200,20 @@ public class FileModule
     /**
      * Get project documents by project ID
      * 
+     * - only return the first one
+     * 
      */
-    public IList<ProjectDocument> getProjectDocumentByProjectId(long projectId)
+    public ProjectDocument getProjectDocumentByProjectId(long projectId)
     {
         if (session == null || !session.IsOpen)
         {
             session = hibernate.getSession();
         }
         IList<ProjectDocument> projectDocuments = session.CreateCriteria<ProjectDocument>()
-                                    .Add(Restrictions.Eq("PROJECTFILE_OWNER",projectId))
+                                    .Add(Restrictions.Eq("PROJECTFILE_OWNER", projectId))
                                     .List<ProjectDocument>();
-        return projectDocuments;
+        if (projectDocuments.Count > 0)
+            return projectDocuments.First();
+        return null;
     }
 }
