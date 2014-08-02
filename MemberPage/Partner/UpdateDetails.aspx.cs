@@ -54,7 +54,8 @@ public partial class UpdateDetails : BaseMemberPage
         
         userModule.updateUser(partner);
             
-        
+        //Change username 
+        Session["username"] = partner.USERNAME;
     }
 
     private void updatePassword(long partnerId, string old_password, string new_password)
@@ -66,7 +67,7 @@ public partial class UpdateDetails : BaseMemberPage
     protected void updateDetails(object sender, EventArgs e)
     {
         long partnerid;
-        System.Threading.Thread.Sleep(3000);
+        //System.Threading.Thread.Sleep(3000);
 
         try
         {
@@ -85,6 +86,8 @@ public partial class UpdateDetails : BaseMemberPage
                 error_modal_control.Show();
                 Messenger.setMessage(error_message, "Details updated successfully!", LEVEL.SUCCESS);
             }
+            dummyButton.Visible = false;
+
         }
         catch (InvalidEmailAddressException ieaex)
         {
@@ -98,7 +101,7 @@ public partial class UpdateDetails : BaseMemberPage
         }
         finally
         {
-            
+            NewProjectUpdatePanel.Update();
         }
         
     }

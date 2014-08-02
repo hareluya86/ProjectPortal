@@ -14,7 +14,7 @@
                     </div>
                 </ProgressTemplate>
             </asp:UpdateProgress>
-            <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional">
+            <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="true">
                 <ContentTemplate>
                     <!--main info-->
                     <div class="row">
@@ -127,15 +127,15 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-2 col-lg-offset-9" style="margin-top: 5px; text-align: right;">
-                            <asp:Button runat="server" ID="UpdateDetailsButton" CssClass="btn btn-primary"
-                                Text="Update" OnClick="updateDetails" />
+                            <asp:Button runat="server" ID="UpdateDetailsButton" CssClass="btn btn-primary" OnClick="updateDetails"
+                                Text="Update"/>
                             <asp:Button runat="server" ID="ResetButton" CssClass="btn btn-default"
                                 Text="Reset" OnClick="ResetButton_Click"/>
                         </div>
                     </div>
                     <ajaxControl:ModalPopupExtender ID="error_modal_control" runat="server"
                         PopupControlID="submit_new_project_error" TargetControlID="hiddenModalTarget"
-                        OkControlID="okButton" BackgroundCssClass="overlay">
+                        BackgroundCssClass="overlay" >
                     </ajaxControl:ModalPopupExtender>
                     <asp:HiddenField runat="server" ID="hiddenModalTarget" />
                     <asp:Panel runat="server" ID="submit_new_project_error">
@@ -149,7 +149,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 col-sm-offset-9">
-                                        <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok" />
+                                        <asp:Button runat="server" ID="okButton" CssClass="btn btn-default" Text="Ok" OnClick="ResetButton_Click" />
+                                        <asp:Button runat="server" ID="dummyButton" CssClass="btn btn-default" Text="Ok"/>
                                     </div>
                                 </div>
 
@@ -158,7 +159,7 @@
                     </asp:Panel>
                     <ajaxControl:ModalPopupExtender ID="password_popup" runat="server"
                         PopupControlID="PasswordPopup" TargetControlID="HiddenField1"
-                        OkControlID="okButton" BackgroundCssClass="overlay">
+                        BackgroundCssClass="overlay" >
                     </ajaxControl:ModalPopupExtender>
                     <asp:HiddenField runat="server" ID="HiddenField1" />
                     <asp:HiddenField runat="server" ID="hiddenPassword" />
