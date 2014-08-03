@@ -109,10 +109,10 @@ mais.group=staff(current),other(current)">
 
             <!--Start Project Banner-->
             <div id="promo_area" style="width: 100%;">
-                <div class="jumbotron">
-                    <h2>This is the project banner</h2>
-                    <img src="" />
-                </div>
+                <!--<div class="jumbotron">-->
+                    <!--<h2>This is the project banner</h2>-->
+                    <asp:Image ImageUrl="~/Images/webanner.jpg" runat="server" />
+                <!--</div>-->
             </div>
             <!--End Project Banner-->
 

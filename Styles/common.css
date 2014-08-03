@@ -82,7 +82,7 @@ div#header
 }
 
 #murdoch_header_logo{
-	background: transparent url('http://www.murdoch.edu.au/_image/HDR/murdoch_external_site/murdoch_external_header_logo_146x34.png/?mode=s ') no-repeat top left;
+	background: transparent url('../Images/logo.png') no-repeat top left;
 	top:35px;
 	left: 20px;
 	width: 146px;
