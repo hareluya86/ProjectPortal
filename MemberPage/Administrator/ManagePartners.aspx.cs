@@ -85,12 +85,18 @@ public partial class ManagePartners : BaseMemberPage
         try
         {
             string collectionProjectIds = Request.Form["selected"];
-            string[] projectIdsStrings = collectionProjectIds.Split(',');
-            foreach (string projectIdString in projectIdsStrings)
+            string[] projectIdsStrings;
+            if (collectionProjectIds.Length > 0)
             {
-                long longValue = Convert.ToInt64(projectIdString);
-                projects.Add(longValue);
+                projectIdsStrings = collectionProjectIds.Split(',');
+
+                foreach (string projectIdString in projectIdsStrings)
+                {
+                    long longValue = Convert.ToInt64(projectIdString);
+                    projects.Add(longValue);
+                }
             }
+           
 
             ProjectModule projectModule = new ProjectModule();
             projectModule.deleteProjects(projects);
@@ -101,7 +107,8 @@ public partial class ManagePartners : BaseMemberPage
                     "<div class='alert alert-success col-sm-10 col-sm-offset-1'>"
                         + successMessage
                         + "</div>"));
-            okButton.Text = "Ok";
+            okButton.Visible = true;
+            errorButton.Visible = false;
             company_contacts_updatePanel.Update();
             /*
             long partnerid;
@@ -113,6 +120,14 @@ public partial class ManagePartners : BaseMemberPage
             }*/
         
         }
+        catch (ApproveProjectException apex)
+        {
+            Messenger.setMessage(error_message, apex.Message, LEVEL.DANGER);
+            company_contacts_updatePanel.Update();
+            okButton.Visible = false;
+            errorButton.Visible = true;
+            
+        }
         catch (Exception ex)
         {
             error_modal_control.Show();
@@ -122,10 +137,12 @@ public partial class ManagePartners : BaseMemberPage
                         + "</div>"));
             okButton.Text = "Ok";
             company_contacts_updatePanel.Update();
+            okButton.Visible = false;
+            errorButton.Visible = true;
         }
         finally
         {
-            
+            error_modal_control.Show();
         }
 
     }
