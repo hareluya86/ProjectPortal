@@ -24,7 +24,7 @@ public class EmailModule
     private const int PORT = 587;
     //private const int PORT = 465;
 
-    private const string ADMIN_ADDRESS = "hareluya86@hotmail.com";
+    private const string ADMIN_ADDRESS = "murdochstudentportal@gmail.com";
 
     private const string ERROR_LOG_DIR = "Logs";
     private const string ERROR_LOG_FILE = "email_error.txt";

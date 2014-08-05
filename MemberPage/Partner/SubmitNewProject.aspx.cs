@@ -133,12 +133,14 @@ public partial class SubmitNewProject : BaseMemberPage
             okButton.Text = "Ok";
 
             //SubmitProjectButton.Text = "Update";
-            NewProjectUpdatePanel.Update();
+            //NewProjectUpdatePanel.Update();
+            //selected_categories.Value = "";
         }
     }
 
     protected void clearAllFields()
     {
+        selected_categories.Value = "";
         project_title.Text = null;
         contact_name.Text = null;
         contact_num.Text = null;

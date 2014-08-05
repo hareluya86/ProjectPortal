@@ -13,7 +13,7 @@
                 </div>
             </ProgressTemplate>
         </asp:UpdateProgress>
-        <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+        <asp:UpdatePanel runat="server" ID="NewProjectUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="false">
             <Triggers>
                 <asp:PostBackTrigger ControlID="upload_document" />
             </Triggers>

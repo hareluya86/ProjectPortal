@@ -143,7 +143,7 @@ public partial class ManagePartners : BaseMemberPage
         finally
         {
             error_modal_control.Show();
-            selected_projects.Value = "";
+            //selected_projects.Value = "";
         }
 
     }
