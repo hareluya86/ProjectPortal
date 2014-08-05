@@ -84,7 +84,7 @@ public partial class ManagePartners : BaseMemberPage
         IList<Int64> projects = new List<Int64>();
         try
         {
-            string collectionProjectIds = Request.Form["selected"];
+            string collectionProjectIds = selected_projects.Value;// Request.Form["selected"];
             string[] projectIdsStrings = {};
             if (collectionProjectIds != null && collectionProjectIds.Length > 0)
             {
@@ -143,6 +143,7 @@ public partial class ManagePartners : BaseMemberPage
         finally
         {
             error_modal_control.Show();
+            selected_projects.Value = "";
         }
 
     }

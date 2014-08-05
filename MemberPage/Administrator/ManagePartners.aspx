@@ -208,7 +208,7 @@
                                 </div>
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                        <asp:UpdatePanel runat="server" ID="project_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="true">
+                        <asp:UpdatePanel runat="server" ID="project_list_panel" UpdateMode="Conditional" ChildrenAsTriggers="false">
                             <ContentTemplate>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -217,7 +217,7 @@
                                             <asp:Repeater runat="server" ID="project_list">
                                                 <ItemTemplate>
                                                     <button class="btn btn-sm btn-default project-button" style="width: 100%; text-align: left; margin-bottom: 5px;"
-                                                        value="">
+                                                        value='<%# Eval("PROJECT_ID") %>'>
                                                         <%# Eval("PROJECT_TITLE") %>
                                                     </button>
                                                     <input type="hidden" runat="server"
