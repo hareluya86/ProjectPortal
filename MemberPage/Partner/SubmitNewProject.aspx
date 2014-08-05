@@ -77,7 +77,7 @@
 
                                     <div class="well well-sm" style="height: 200px; overflow: auto;">
 
-                                        <asp:Repeater runat="server" ID="category_list">
+                                        <asp:Repeater runat="server" ID="category_list" >
                                             <ItemTemplate>
                                                 <button class="btn btn-sm btn-default category-button col-sm-6 truncate " style="text-align: left; margin-bottom: 5px;"
                                                     title='<%# Eval("CATEGORY_NAME") %>' value='<%# Eval("CATEGORY_ID") %>'>
@@ -197,16 +197,9 @@
     <!--for passing the selected application IDs-->
     <script id="select-application-script" type="text/javascript">
         $(document).on('click', ".category-button", function () {
-
+            
             var selected = $('#selected_categories').val();
-            var selected_array = selected.split(',');
-            var found = 0;
-            for (var i = 0; i < selected_array.length; i++) {
-                if (selected_array[i] == this.valueOf())
-                    found = 1;
-            }
-            //if(found)
-            if (this.checked) {
+            if ($(this).hasClass('btn-danger')) {
                 if (selected.length <= 0)
                     $('#selected_categories').val(this.value);
                 else

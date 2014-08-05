@@ -61,7 +61,7 @@ public partial class SubmitNewProject : BaseMemberPage
         {
             //Get all chosen category IDs
             IList<Int64> categoryIds = new List<Int64>();
-            string collectionCategoryIds = Request.Form["selected"];
+            string collectionCategoryIds = selected_categories.Value;// Request.Form["selected"];
             string[] categoryIdsStrings = new string[]{}; //an empty array
             if (collectionCategoryIds != null && collectionCategoryIds.Count() > 0)
             {
@@ -170,6 +170,7 @@ public partial class SubmitNewProject : BaseMemberPage
             hidden_uploaded_doc_ID.Value = projectDocument.PROJECTFILE_ID.ToString();
 
             Messenger.setMessage(error_message, "File uploaded successfully.", LEVEL.SUCCESS);
+            refreshCategoryList();
         }
         catch (SaveFileException sfex)
         {
@@ -183,6 +184,15 @@ public partial class SubmitNewProject : BaseMemberPage
         {
             error_modal_control.Show();
             //NewProjectUpdatePanel.Update();
+        }
+    }
+
+    private void refreshCategoryList()
+    {
+        for (int i = 0; i < category_list.Items.Count; i++)
+        {
+            Button button = (Button)category_list.Items[i].FindControl("button");
+            
         }
     }
 }
