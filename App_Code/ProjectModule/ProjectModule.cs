@@ -101,6 +101,8 @@ public class ProjectModule
         for (int i = 0; i < projects.Count; i++ )
         {
             Project project = projects.ElementAt(i);
+            if (project.PROJECT_STATUS != APPLICATION_STATUS.PENDING)
+                throw new ApproveProjectException("Project " + project.PROJECT_TITLE + " is not in " + APPLICATION_STATUS.PENDING.ToString() + " status");
             session.Delete(project);
 
             if ((i + 1) % MAX_COMMIT_SIZE == 0)
