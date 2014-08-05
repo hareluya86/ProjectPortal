@@ -30,17 +30,17 @@
                  insert="false" update="false"
                  cascade="none"/>
 
-    <bag name="APPLICATIONS" cascade="none">
+    <bag name="APPLICATIONS" cascade="delete">
       <key column="PROJECT_ID" not-null="true"></key>
       <one-to-many class="ProjectApplication" />
     </bag>
 
-    <bag name="CATEGORIES" cascade="none">
+    <bag name="CATEGORIES" cascade="delete">
       <key column="PROJECT_ID" not-null="true"></key>
       <one-to-many class="ProjectCategory"/>
     </bag>
 
-    <bag name="ASSIGNED_TEAMS" cascade="none">
+    <bag name="ASSIGNED_TEAMS" cascade="delete">
       <key column="PROJECT_ID" not-null="true"></key>
       <one-to-many class="ProjectAssignment" />
     </bag>

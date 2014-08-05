@@ -236,6 +236,7 @@
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
+                        <asp:HiddenField ID="selected_projects" runat="server" ClientIDMode="Static" />
                     </div>
                 </div>
 
@@ -311,6 +312,33 @@
         function PageRequestManager_endRequest(sender, args) {
             $get(uiId).disabled = false;
         }
+    </script>
+    <!--for passing the selected application IDs-->
+    <script id="select-application-script" type="text/javascript">
+        $(document).on('click', ".project-button", function () {
+
+            var selected = $('#selected_projects').val();
+            if ($(this).hasClass('btn-danger')) {
+                if (selected.length <= 0)
+                    $('#selected_projects').val(this.value);
+                else
+                    $('#selected_projects').val(selected + "," + this.value);
+            }
+            else {
+                var selected_array = selected.split(',');
+                var removed_array = "";
+                for (var i = 0; i < selected_array.length; i++) {
+                    if (selected_array[i] != this.value) {
+                        if (removed_array.length <= 0)
+                            removed_array += selected_array[i];
+                        else
+                            removed_array += "," + selected_array[i];
+                    }
+                }
+                $('#selected_projects').val(removed_array);
+            }
+            //return false; //very important! if not the container will refresh!
+        });
     </script>
     
 </asp:Content>
