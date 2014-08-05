@@ -110,15 +110,11 @@ public partial class ManagePartners : BaseMemberPage
             okButton.Visible = true;
             errorButton.Visible = false;
             company_contacts_updatePanel.Update();
-            /*
-            long partnerid;
-            if (Session["partnerid"] != null &&
-                Int64.TryParse(Session["partnerid"].ToString(),out partnerid))
-            {
-                this.loadPartner(partnerid);
-                project_list_panel.Update();
-            }*/
-        
+            project_list_panel.Update();
+
+            selected_projects.Value = "";
+            selected_projects_panel.Update();
+            
         }
         catch (ApproveProjectException apex)
         {

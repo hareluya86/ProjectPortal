@@ -236,7 +236,12 @@
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                        <asp:HiddenField ID="selected_projects" runat="server" ClientIDMode="Static" />
+                        <asp:UpdatePanel runat="server" ID="selected_projects_panel" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                            <ContentTemplate>
+                                <asp:HiddenField ID="selected_projects" runat="server" ClientIDMode="Static" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        
                     </div>
                 </div>
 
