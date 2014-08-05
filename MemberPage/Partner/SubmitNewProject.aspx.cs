@@ -63,7 +63,7 @@ public partial class SubmitNewProject : BaseMemberPage
             IList<Int64> categoryIds = new List<Int64>();
             string collectionCategoryIds = Request.Form["selected"];
             string[] categoryIdsStrings = new string[]{}; //an empty array
-            if (collectionCategoryIds != null)
+            if (collectionCategoryIds != null && collectionCategoryIds.Count() > 0)
             {
                 categoryIdsStrings = collectionCategoryIds.Split(',');
             }
