@@ -148,8 +148,13 @@
                         <div class="panel-body" style="overflow: auto;">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
-                                    <asp:Label runat="server" ID="error_label"></asp:Label>
+                                    <asp:UpdatePanel runat="server" ID="error_message_update_panel" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:PlaceHolder runat="server" ID="error_message"></asp:PlaceHolder>
+                                            <asp:Label runat="server" ID="error_label"></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
                                 </div>
                             </div>
                             <div class="row">

@@ -130,7 +130,7 @@ public partial class SubmitNewProject : BaseMemberPage
         finally
         {
             error_modal_control.Show();
-            okButton.Text = "Ok";
+            error_message_update_panel.Update();
 
             //SubmitProjectButton.Text = "Update";
             //NewProjectUpdatePanel.Update();
@@ -175,7 +175,7 @@ public partial class SubmitNewProject : BaseMemberPage
             hidden_uploaded_doc_ID.Value = projectDocument.PROJECTFILE_ID.ToString();
 
             Messenger.setMessage(error_message, "File uploaded successfully.", LEVEL.SUCCESS);
-            refreshCategoryList();
+            //refreshCategoryList();
         }
         catch (SaveFileException sfex)
         {
@@ -189,6 +189,7 @@ public partial class SubmitNewProject : BaseMemberPage
         {
             error_modal_control.Show();
             //NewProjectUpdatePanel.Update();
+            selected_categories.Value = "";
         }
     }
 
