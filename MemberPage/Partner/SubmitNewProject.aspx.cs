@@ -99,10 +99,13 @@ public partial class SubmitNewProject : BaseMemberPage
             //Set projectDocument with projectId
             FileModule fileModule = new FileModule();
             long convertedProjectDocumentId;
-            if (!Int64.TryParse(hidden_uploaded_doc_ID.Value.ToString(), out convertedProjectDocumentId))
-                throw new Exception("Cannot find projectDocumentId, please contact administrator.");
-            fileModule.updateProjectDocumentOwner(convertedProjectDocumentId, project.PROJECT_ID);
-
+            if (hidden_uploaded_doc_ID.Value.Length > 0)
+            {
+                if (!Int64.TryParse(hidden_uploaded_doc_ID.Value.ToString(), out convertedProjectDocumentId))
+                    throw new Exception("Cannot find projectDocumentId, please contact administrator.");
+                fileModule.updateProjectDocumentOwner(convertedProjectDocumentId, project.PROJECT_ID);
+            }
+            
             Messenger.setMessage(error_message, "Project registered successfully. You will receive an email to update you of the status.", LEVEL.SUCCESS);
             clearAllFields();
         }
