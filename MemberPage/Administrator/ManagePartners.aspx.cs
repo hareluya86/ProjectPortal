@@ -85,8 +85,8 @@ public partial class ManagePartners : BaseMemberPage
         try
         {
             string collectionProjectIds = Request.Form["selected"];
-            string[] projectIdsStrings;
-            if (collectionProjectIds.Length > 0)
+            string[] projectIdsStrings = {};
+            if (collectionProjectIds != null && collectionProjectIds.Length > 0)
             {
                 projectIdsStrings = collectionProjectIds.Split(',');
 

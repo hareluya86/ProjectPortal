@@ -67,6 +67,8 @@
                     <asp:PlaceHolder ID="upload_file_message" runat="server"></asp:PlaceHolder>
                 </ContentTemplate>
             </asp:UpdatePanel>
+            <asp:HiddenField ID="hidden_uploaded_file_ID" runat="server" />
+            <asp:HiddenField ID="hidden_uploaded_file_name" runat="server" />
         </div>
 
 
@@ -105,6 +107,8 @@
                     <asp:PlaceHolder ID="upload_video_message" runat="server"></asp:PlaceHolder>
                 </ContentTemplate>
             </asp:UpdatePanel>
+            <asp:HiddenField ID="hidden_uploaded_video_ID" runat="server" />
+            <asp:HiddenField ID="hidden_uploaded_video_name" runat="server" />
         </div>
     </div>
     <div class="row">

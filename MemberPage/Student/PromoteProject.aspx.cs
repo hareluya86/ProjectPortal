@@ -32,7 +32,7 @@ public partial class PromoteProject : BaseMemberPage
 
             string filename = FileUploader.FileName;
             SaveZipFile(convertedStudentId,FileUploader.PostedFile);
-            Messenger.setMessage(upload_file_message, "File uploaded successfully.", LEVEL.SUCCESS);
+            //Messenger.setMessage(upload_file_message, "File uploaded successfully.", LEVEL.SUCCESS);
         }
         catch (SaveFileException sfex)
         {
@@ -44,6 +44,7 @@ public partial class PromoteProject : BaseMemberPage
         }
         finally
         {
+            refreshUploadedFiles();
             UploadFilePanel.Update();
         }
     }
@@ -57,7 +58,8 @@ public partial class PromoteProject : BaseMemberPage
         if (extension != ".zip")
             throw new Exception("You can only upload zip files.");
 
-        Session["zip_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.ZIP, file.FileName).UPLOADEDFILE_ID;
+        hidden_uploaded_file_ID.Value = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.ZIP, file.FileName).UPLOADEDFILE_ID.ToString();
+        hidden_uploaded_file_name.Value = filename;
     }
 
     protected void SaveVideoFile(long userId, HttpPostedFile file)
@@ -69,7 +71,8 @@ public partial class PromoteProject : BaseMemberPage
         if (extension != ".mp4")
             throw new Exception("You can only upload mp4 files.");
 
-        Session["video_file"] = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.VIDEO, file.FileName).UPLOADEDFILE_ID;
+        hidden_uploaded_video_ID.Value = fileModule.saveFileForUserId(userId, file.InputStream, FILE_TYPE.VIDEO, file.FileName).UPLOADEDFILE_ID.ToString();
+        hidden_uploaded_video_name.Value = filename;
     }
 
     protected void UploadVideoButton_Click(object sender, EventArgs e)
@@ -85,7 +88,8 @@ public partial class PromoteProject : BaseMemberPage
 
             string filename = FileUploader.FileName;
             SaveVideoFile(convertedStudentId, VideoUploader.PostedFile);
-            Messenger.setMessage(upload_video_message, "File uploaded successfully.", LEVEL.SUCCESS);
+            
+            //Messenger.setMessage(upload_video_message, "File uploaded successfully.", LEVEL.SUCCESS);
             
         }
         catch (SaveFileException sfex)
@@ -98,6 +102,7 @@ public partial class PromoteProject : BaseMemberPage
         }
         finally
         {
+            refreshUploadedFiles();
             UploadFilePanel.Update();
         }
 
@@ -150,6 +155,20 @@ public partial class PromoteProject : BaseMemberPage
         finally
         {
             error_modal_control.Show();
+            refreshUploadedFiles();
+        }
+    }
+
+    private void refreshUploadedFiles()
+    {
+        if (hidden_uploaded_file_ID.Value != null && hidden_uploaded_file_ID.Value.Length > 0)
+        {
+            Messenger.setMessage(upload_file_message, "File " + hidden_uploaded_file_name.Value + " uploaded successfully.",LEVEL.SUCCESS);
+        }
+
+        if (hidden_uploaded_video_ID.Value != null && hidden_uploaded_video_ID.Value.Length > 0)
+        {
+            Messenger.setMessage(upload_video_message, "File " + hidden_uploaded_video_name.Value + " uploaded successfully.", LEVEL.SUCCESS);
         }
     }
 }
